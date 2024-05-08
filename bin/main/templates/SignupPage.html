@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
+        <link href="./css/main.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
+
+        <title>Document</title>
+        </head>
+<body>
+    <div class="camera_signup"></div>
+    <div class="Locker_signup"></div>
+    <div class="Mrt_signup"> </div>
+    <div class="Gray_signup"></div>
+    <button onclick = "window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
+            type = "button" class="back"  style="background-color: transparent;">
+            <i class="fas fa-chevron-left"></i>Back
+    </button>
+    <span class="signup_p3">
+        SIGN UP
+    </span>
+    <span class="email">
+        E-Mail
+    </span>
+    <span class="password">
+        Password
+    </span>
+    <input type = "email" class="input1" id = "emailinput">
+    <input type = "password" class="input2" id = "passinput">               
+    <button onclick = "getvalue('emailinput');getpass('passinput')
+            ;window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
+            type = "button" class="login_p3"  style="background-color: transparent;" >
+                    SIGN UP And LOGIN→   
+     </button>      
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
