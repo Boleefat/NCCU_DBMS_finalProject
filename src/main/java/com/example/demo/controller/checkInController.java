@@ -10,10 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.model.checkInService;
-import com.example.demo.model.locker;
-import com.example.demo.service.userService;
-import com.example.demo.service.hotelService;
+import com.example.demo.service.CheckInService;
+import com.example.demo.model.Locker;
+import com.example.demo.service.UserService;
+import com.example.demo.service.HotelService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -22,15 +22,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class checkInController {
 
     @Autowired
-    private userService userService;
+    private UserService userService;
 
     @Autowired
-    private hotelService hotelService;
+    private HotelService hotelService;
 
     // 新增一個 checkIn
     @PostMapping("/")
-    public ResponseEntity<checkIn> createCheckIn(@RequestBody checkIn checkIn) {
-        checkIn savedCheckIn = checkInService.save(checkIn);
+    public ResponseEntity<checkIn> createCheckIn(@RequestBody CheckIn checkIn) {
+        CheckIn savedCheckIn = checkInService.save(checkIn);
         return new ResponseEntity<>(savedCheckIn, HttpStatus.CREATED);
     }
 
@@ -44,7 +44,7 @@ public class checkInController {
         }
     }
 
-    // 獲取單個 checkIn
+    // 利用CheckIn_ID 獲取單個 checkIn
     @GetMapping("/{CheckIn_ID}")
     public Optional<checkIn> getCheckInByCheckInID(@PathVariable(value = "CheckIn_ID") Long CheckIn_ID) {
         return CheckInService.findCheckInByCheckInID(CheckIn_ID);
@@ -52,10 +52,10 @@ public class checkInController {
 
     // 更新一個 checkIn
     @PutMapping("/{CheckIn_ID}")
-    public checkIn updateCheckIn(@PathVariable(value = "CheckIn_ID") Long CheckIn_ID,
+    public CheckIn updateCheckIn(@PathVariable(value = "CheckIn_ID") Long CheckIn_ID,
                                @RequestBody checkIn checkInDetails) {
-        Optional<checkIn> checkIn = checkInService.findByCheckInID(CheckIn_ID);
-        checkIn existingcheckIn = checkIn.get();
+        Optional<CheckIn> checkIn = checkInService.findByCheckInID(CheckIn_ID);
+        CheckIn existingcheckIn = checkIn.get();
         existingcheckIn.setUserID(checkInDetails.getUserID());
         existingcheckIn.setHotelID(checkInDetails.getHotelID());
         return checkInService.save(existingcheckIn);

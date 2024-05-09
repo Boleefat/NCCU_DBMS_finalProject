@@ -17,6 +17,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    Optional<Reservation> findReservationByReservationID(Long reservation_ID);
+    Optional<Reservation> getReservationByReservationID(Long reservation_ID);
 }
 

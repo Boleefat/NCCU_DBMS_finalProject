@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.locker;
-import com.example.demo.service.lockerService;
+import com.example.demo.model.Locker;
+import com.example.demo.service.LockerService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -21,18 +21,18 @@ import java.util.Optional;
 public class lockerController {
 
     @Autowired
-    private lockerService lockerService;
+    private LockerService lockerService;
 
     // 新增一個 locker
     @PostMapping("/")
-    public ResponseEntity<locker> createLocker(@RequestBody locker locker) {
-        locker savedLocker = lockerService.save(locker);
+    public ResponseEntity<Locker> createLocker(@RequestBody Locker locker) {
+        Locker savedLocker = lockerService.save(locker);
         return new ResponseEntity<>(savedLocker, HttpStatus.CREATED);
     }
 
     // 獲取所有 lockers
     @GetMapping
-    public List<locker> listAllLocker(@RequestParam(required = false, name = "Locker_ID") Long Locker_ID) {
+    public List<Locker> listAllLocker(@RequestParam(required = false, name = "Locker_ID") Long Locker_ID) {
         if (Locker_ID != null) {
             return lockerService.getLockerByLockerID(Locker_ID);
         } else {

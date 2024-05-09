@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.model.Locker;
-import com.example.demo.model.reservationService;
-import com.example.demo.service.userService;
-import com.example.demo.service.lockerService;
+import com.example.demo.model.Reservation;
+import com.example.demo.service.ReservationService;
+import com.example.demo.service.UserService;
+import com.example.demo.service.LockerService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -32,35 +33,34 @@ public class reservationController {
     // 新增一個 reservation
     @PostMapping("/")
     public ResponseEntity<Reservation> createreservation(@RequestBody Reservation reservation) {
-        Reservation savedReservation = reservationService.save(reservation);
-
+   
         Reservation createdReservation = reservationService.createReservation(reservation);
 
-        return new ResponseEntity<>(savedReservation, HttpStatus.CREATED);
+        return new ResponseEntity<Reservation>(createdReservation, HttpStatus.CREATED);
     }
 
     // 獲取所有 reservations
     @GetMapping
-    public Optional<Reservation> listAllReservation(@RequestParam(required = false, name = "Reservation_ID") Long Reservation_ID) {
+    public List<Reservation> listAllReservation(@RequestParam(required = false, name = "Reservation_ID") Long Reservation_ID) {
         if (Reservation_ID != null) {
-            return ReservationService.getReservationByReservationID(Reservation_ID);
+            return List<Reservation> ReservationService.getAllReservations();
         } else {
-            return ReservationService.getAllReservation();
+            return List<Reservation> ReservationService.getAllReservations();
         }
     }
 
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{Reservation_ID}")
-    public Optional<reservation> getReservationByReservationID(@PathVariable(value = "Reservation_ID") Long Reservation_ID) {
-        return reservationService.findReservationByReservationID(Reservation_ID);
+    public Optional<Reservation> getReservationByReservationID(@PathVariable(value = "Reservation_ID") Long reservation_ID) {
+        return reservationService.getReservationByReservationID(reservation_ID);
     }
 
     // 更新一個 reservation
     @PutMapping("/{Reservation_ID}")
-    public reservation updateReservation(@PathVariable(value = "Reservation_ID") Long Reservation_ID,
+    public Reservation updateReservation(@PathVariable(value = "Reservation_ID") Long reservation_ID,
                                @RequestBody reservation reservationDetails) {
-        Optional<reservation> reservation = reservationService.findByreservationID(reservation_ID);
-        reservation existingreservation = reservation.get();
+        Optional<Reservation> reservation = reservationService.getReservationByReservationID(reservation_ID);
+        Reservation existingreservation = reservation.get();
         existingreservation.setUserID(reservationDetails.getUserID());
         existingreservation.setLockerID(reservationDetails.getLockerID());
         existingreservation.setDepositTimestamp(reservationDetails.getDepositTimestamp());
@@ -72,7 +72,7 @@ public class reservationController {
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{Reservation_ID}")
-    public void deleteReservation(@PathVariable(value = "Reservation_ID") Long Reservation_ID) {
-        reservationService.deleteReservationByReservationID(Reservation_ID);
+    public void deleteReservation(@PathVariable(value = "Reservation_ID") Long reservation_ID) {
+        reservationService.deleteReservationByReservationID(reservation_ID);
     }
 }
