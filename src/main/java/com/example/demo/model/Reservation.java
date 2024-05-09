@@ -42,6 +42,18 @@ public class Reservation {
     public Reservation(){
     }
 
+    public Reservation(Long reservation_id, Long user_id, String name, String category, String description, double price, int quantity, String image,
+            User user) {
+        this.Reservation_ID = reservation_id;
+        this.User_ID = user_id;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+        this.user = user;
+    }
+
     public possessionAreaLockerKey getIDC() {
         return IDC;
     }

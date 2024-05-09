@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locker System</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            /* Set background image */
+            background-image: url('metro_map.jpg');
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Do not repeat the background image */
+            background-position: center; /* Center the background image */
+            background-attachment: local;
+            padding-top: 70px; /* Adjusted to accommodate fixed header */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 30px 30px 30px;
+            position: fixed;
+            top: 0;
+            /*top: 85%;*/
+            left: 0;
+            right: 0;
+            background-color: #D0D3D8;
+            z-index: 1000; /* Added z-index to keep it above other content */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05); /* Added shadow for depth */
+            /*height:10%;*/
+        }
+
+        .logo {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        nav ul li:first-child {
+            margin-left: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        nav ul li a:hover {
+            color: #666;
+        }
+
+        /* Hidden by default */
+        #searchBlock, #reservationInfo, #hotelInfo, #more, .dropdown-menu {
+            display: none;
+            background-color: #616C7A;
+            padding: 20px;
+            border: 1px solid #FFFFFF;
+            position: absolute;
+            top: calc(100%);
+            left: 0;
+            width: 97.3%;
+            z-index: 1;
+            height: 300px; /* Increased height */
+            overflow-y: auto; /* Added to enable scrolling if content exceeds height */
+            color: white; /* Set text color to white */
+        }
+
+        #searchBlock {
+            background-color: transparent;
+        }
+
+        #searchBlock.open, #reservationInfo.open, #hotelInfo.open, #more.open, .dropdown-menu.open {
+            display: block;
+        }
+
+        #searchInput {
+            color: black;
+            border-radius: 25px;
+            height: 20px; /* Increase height */
+            width: 40%;
+            padding: 10px 20px; /* Adjust padding */
+            font-size: 18px; /* Font size for search block */
+            box-shadow: 0px 5px 13px rgba(0, 0, 0, 0.8); /* Shadow */
+            background-color: rgba(255, 255, 255, 0.85)
+        }
+
+
+        
+
+        #searchDropdown {
+            background-color: black;
+            color: white; /* Set text color to white */
+            padding: 10px; /* Add padding for better appearance */
+        }
+
+
+        #reservationInfo, #hotelInfo {
+            font-size: 35px; /* Font size for reservation and hotel info */
+        }
+
+        #reservationDetails, #hotelDetails {
+            margin-top: 37px; /* Add margin for separation */
+            font-size: 20px;
+            line-height: 1.75;
+        }
+
+        #more {
+            color: white; /* Set text color to white */
+            text-align: left; /* Align links to the left */
+            line-height: 2.3;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: #616C7A;
+            min-width: 150px;
+            height: 310px;
+            z-index: 2; /* Set z-index higher than other blocks */
+            left: -100px; /* Adjusted position */
+        }
+
+        .dropdown-menu a {
+            color: white;
+            padding: 12px 13px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Locker System</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="searchLink">Search</a></li>
+                    <li><a href="#" id="reservationLink">Reservation</a></li>
+                    <li><a href="#" id="hotelLink">Deliver-to-Hotel</a></li>
+                    <li><a href="#" id="moreLink">More<svg xmlns="http://www.w3.org/2000/svg" width="20" height="13" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                        </svg></a>
+                    </li>
+                    <li><a href="#" id="dropdown-menu"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                      </svg></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Search Block -->
+            <div id="searchBlock">
+                <input type="text" id="searchInput" placeholder="Search Station" list="stationNames">
+                <!-- Dropdown for suggestions -->
+                <div id="searchDropdown"></div>
+            </div>
+            <!-- Reservation info block -->
+            <div id="reservationInfo">
+              Reservation Info
+              <div id="reservationDetails">
+                Reservation No. #3476IH<br>
+                Date 2024/05/12<br>
+                Start Time 10:00 a.m.<br>
+                End Time 12:00 p.m.<br>
+                Password ******
+              </div>
+            </div>
+            <!-- Hotel info block -->
+            <div id="hotelInfo">
+                Deliver-to-Hotel
+                <div id="hotelDetails">
+                  G Hotel<br>
+                  F Hotel<br>
+                  W Hotel<br>
+                </div>
+            </div>
+            <div id="more">
+                <div><a href="#">HOMEPAGE</a></div>
+                <div><a href="#">ACCOUNT</a></div>
+                <div><a href="#">HISTORY</a></div>
+                <div><a href="#">FAQ</a></div>
+                <div><a href="#">CONTACT US</a></div>
+                <div><a href="#">LOG OUT</a></div>
+            </div>    
+            <div class="dropdown-menu">
+                <a href="#">HOMEPAGE</a>
+                <a href="#">ACCOUNT</a>
+                <a href="#">HISTORY</a>
+                <a href="#">FAQ</a>
+                <a href="#">CONTACT US</a>
+                <a href="#">LOG OUT</a>
+            </div>        
+        </div>
+    </header>
+
+    <!-- Main content goes here -->
+
+    <script>
+
+        // Define the station names grouped by line
+        var stationNames = [
+            { label: "Blue Line", options: ["BL01 DingPu", "BL02 Yongning"] },
+            { label: "Red Line", options: ["R02 XiangShan", "R03 Taipei 101 / World Trade Center", "R04 Xinyi Anhe"] }
+        ];
+
+        var searchInput = document.getElementById("searchInput");
+        var searchDropdown = document.getElementById("searchDropdown");
+
+        // Event listener to update dropdown when input changes
+        searchInput.addEventListener("input", function(event) {
+            var searchValue = event.target.value.trim().toLowerCase();
+            var filteredStations = [];
+
+            // Filter stations based on input
+            stationNames.forEach(function(line) {
+                line.options.forEach(function(station) {
+                    if (station.toLowerCase().includes(searchValue)) {
+                        filteredStations.push({ label: line.label, value: station });
+                    }
+                });
+            });
+
+            // Render dropdown
+            renderDropdown(filteredStations);
+        });
+
+        // Function to render the dropdown
+        function renderDropdown(options) {
+            // Clear previous dropdown
+            searchDropdown.innerHTML = "";
+
+            // Add options to dropdown
+            options.forEach(function(option) {
+                var item = document.createElement("div");
+                item.textContent = option.label + " - " + option.value;
+                item.classList.add("dropdown-item");
+                searchDropdown.appendChild(item);
+            });
+        }
+        // JavaScript to go back to initial homepage when the logo is clicked
+        document.querySelector(".logo").addEventListener("click", function() {
+            window.location.href = "DBMS_Fontend.html"; // Replace "index.html" with the URL of initial homepage
+        });
+    
+        // JavaScript to toggle search block visibility and update search input
+        document.getElementById("searchLink").addEventListener("click", function(event){
+            event.preventDefault(); // Prevent default link behavior
+    
+            var searchBlock = document.getElementById("searchBlock");
+            var reservationInfo = document.getElementById("reservationInfo");
+            var hotelInfo = document.getElementById("hotelInfo");
+            var more = document.getElementById("more");
+            var dropdownMenu = document.querySelector(".dropdown-menu");
+    
+            if (searchBlock.classList.contains("open")) {
+                searchBlock.classList.remove("open");
+            } else {
+                searchBlock.classList.add("open");
+                reservationInfo.classList.remove("open"); // Ensure reservation block is closed
+                hotelInfo.classList.remove("open"); // Ensure hotel info block is closed
+                more.classList.remove("open"); // Close dropdown menu
+                dropdownMenu.classList.remove("open"); // Close dropdown menu
+            }
+        });
+    
+        // JavaScript to toggle reservation info visibility
+        document.getElementById("reservationLink").addEventListener("click", function(event){
+            event.preventDefault(); // Prevent default link behavior
+    
+            var searchBlock = document.getElementById("searchBlock");
+            var reservationInfo = document.getElementById("reservationInfo");
+            var hotelInfo = document.getElementById("hotelInfo");
+            var more = document.getElementById("more");
+            var dropdownMenu = document.querySelector(".dropdown-menu");
+    
+            if (reservationInfo.classList.contains("open")) {
+                reservationInfo.classList.remove("open");
+            } else {
+                reservationInfo.classList.add("open");
+                searchBlock.classList.remove("open"); // Ensure search block is closed
+                hotelInfo.classList.remove("open"); // Ensure hotel info block is closed
+                more.classList.remove("open"); // Close dropdown menu
+                dropdownMenu.classList.remove("open"); // Close dropdown menu
+            }
+        });
+    
+        // JavaScript to toggle hotel info visibility
+        document.getElementById("hotelLink").addEventListener("click", function(event){
+            event.preventDefault(); // Prevent default link behavior
+    
+            var searchBlock = document.getElementById("searchBlock");
+            var reservationInfo = document.getElementById("reservationInfo");
+            var hotelInfo = document.getElementById("hotelInfo");
+            var more = document.getElementById("more");
+            var dropdownMenu = document.querySelector(".dropdown-menu");
+    
+            if (hotelInfo.classList.contains("open")) {
+                hotelInfo.classList.remove("open");
+            } else {
+                hotelInfo.classList.add("open");
+                searchBlock.classList.remove("open"); // Ensure search block is closed
+                reservationInfo.classList.remove("open"); // Ensure reservation block is closed
+                more.classList.remove("open"); // Close dropdown menu
+                dropdownMenu.classList.remove("open"); // Close dropdown menu
+            }
+        });
+    
+        // JavaScript to toggle dropdown menu visibility
+        document.getElementById("moreLink").addEventListener("click", function(event){
+            event.preventDefault(); // Prevent default link behavior
+    
+            var searchBlock = document.getElementById("searchBlock");
+            var reservationInfo = document.getElementById("reservationInfo");
+            var hotelInfo = document.getElementById("hotelInfo");
+            var more = document.getElementById("more");
+            var dropdownMenu = document.querySelector(".dropdown-menu");
+    
+            if (more.classList.contains("open")) {
+                more.classList.remove("open");
+            } else {
+                more.classList.add("open");
+                searchBlock.classList.remove("open"); // Ensure search block is closed
+                reservationInfo.classList.remove("open"); // Ensure reservation block is closed
+                hotelInfo.classList.remove("open"); // Close hotel info block
+                dropdownMenu.classList.remove("open"); // Close dropdown menu
+            }
+        });
+
+    
+    </script>
+    
+</body>
+</html>

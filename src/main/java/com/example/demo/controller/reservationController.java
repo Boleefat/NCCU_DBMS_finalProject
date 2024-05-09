@@ -42,11 +42,7 @@ public class reservationController {
     // 獲取所有 reservations
     @GetMapping
     public List<Reservation> listAllReservation(@RequestParam(required = false, name = "Reservation_ID") Long Reservation_ID) {
-        if (Reservation_ID != null) {
-            return List<Reservation> ReservationService.getAllReservations();
-        } else {
-            return List<Reservation> ReservationService.getAllReservations();
-        }
+        return reservationService.getAllReservations();
     }
 
     // 利用Reservation_ID 獲取單個 reservation
@@ -58,17 +54,26 @@ public class reservationController {
     // 更新一個 reservation
     @PutMapping("/{Reservation_ID}")
     public Reservation updateReservation(@PathVariable(value = "Reservation_ID") Long reservation_ID,
-                               @RequestBody reservation reservationDetails) {
-        Optional<Reservation> reservation = reservationService.getReservationByReservationID(reservation_ID);
-        Reservation existingreservation = reservation.get();
-        existingreservation.setUserID(reservationDetails.getUserID());
-        existingreservation.setLockerID(reservationDetails.getLockerID());
-        existingreservation.setDepositTimestamp(reservationDetails.getDepositTimestamp());
-        existingreservation.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
-        existingreservation.setTotalRentalTime(reservationDetails.getTotalRentalTime());
-        existingreservation.setAmount(reservationDetails.getAmount());
-        return reservationService.save(existingreservation);
+                                     @RequestBody Reservation reservationDetails) {
+    Optional<Reservation> existingReservation = reservationService.getReservationByReservationID(reservation_ID);
+    
+    if (existingReservation.isPresent()) {
+        Reservation existingReservationObj = existingReservation.get();
+        
+        existingReservationObj.setUserID(reservationDetails.getUserID());
+        existingReservationObj.setLockerID(reservationDetails.getLockerID());
+        existingReservationObj.setDepositTimestamp(reservationDetails.getDepositTimestamp());
+        existingReservationObj.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
+        existingReservationObj.setTotalRentalTime(reservationDetails.getTotalRentalTime());
+        existingReservationObj.setAmount(reservationDetails.getAmount());
+        
+        return reservationService.save(existingReservationObj);
+    } else {
+        // Handle case when reservation is not found
+        throw new NullPointerException("Reservation with ID " + reservation_ID + " not found");
     }
+}
+
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{Reservation_ID}")
