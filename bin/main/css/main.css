@@ -927,18 +927,7 @@ body {
   left: 0px;
   overflow: hidden;
 }
-.v4_1028 {
-  width: 103px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 0%;
-  left: 127px;
-  font-family: Belgrano;
-  font-weight: Regular;
-  font-size: 40px;
-  opacity: 1;
-  text-align: right;
-}
+
 .back_station{
   width: 292px;
   color: rgba(0,0,0,1);
@@ -973,16 +962,18 @@ body {
 }
 .navbar-nav {
   text-align: right; /* 将菜单项靠右对齐 */
+  
  
 }
 .nav-item {
   display: inline-block;
   margin-right: 8%; /* 调整菜单项之间的间距 */
 }
+
 .listbtn {
   color: black;
   text-decoration: none;
-  font-size: 120%; /* 调整字体大小 */
+  font-size: 150%; /* 调整字体大小 */
   cursor: pointer !important;/* 改變游標圖案*/
   line-height: 5;
   font-family: Belgrano;
@@ -996,18 +987,21 @@ body {
   padding:10px; 
   font-size: 120%;
   position:absolute;
-  top:85%;
+  top: 86%;
   right:3%;
   font-family: Belgrano;
   cursor:pointer; 
   display:inline-block;
   z-index: 999;
+  user-select: none;
+  font-size: 150%; 
   
  } /* 主選單的樣式 */
 .main-menu:hover {
   color: var(--bs-gray); 
   }
 .sub-menu {
+  display:none;
    color: black;
    background-color:#CCCCCC; 
    margin:5px -5px; 
@@ -1015,12 +1009,13 @@ body {
    list-style-type:none; 
    position:absolute; 
    bottom: 100%; 
-   
+   font-size: 100%; 
    width: 200%;
    right: 0; /* 将下拉菜单向右对齐 */
    
   } /* 下拉清單的樣式 */
 .sub-menu li { 
+  
   padding: 8px 5px;
   text-align:right; 
   } /* 下拉清單每一列的樣式 */
@@ -1036,9 +1031,10 @@ body {
   }
 .sub-menu  a:hover {
    color:black;
-    background-color:rgba(210, 206, 206, 1);
-    text-decoration:none;
+   background-color:rgba(210, 206, 206, 1);
+   text-decoration:none;
   }
+
 
   /* DepositPage*/
   .back1_deposit {
@@ -1076,7 +1072,6 @@ body {
     z-index: 999;
   }
   .back_deposit:hover {                      
-    
     color: var(--bs-gray-800);
     border-radius: 20px;
     opacity: 0.5;                             
@@ -1100,5 +1095,219 @@ body {
     border-radius: 20px;
     opacity: 0.5;                             
   }
+  .date{
+    width: 292px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    font-family: Belgrano;
+    font-weight: Regular;
+    font-size: 15px;
+    opacity: 1;
+    text-align: left;
+    border: none;
+    z-index: 999;
+  }
+  .date:hover {                      
+    color: var(--bs-gray-800);
+    border-radius: 20px;
+    opacity: 0.5;                             
+  }
+  .choose_date{
+    color: rgba(0,0,0,1);
+    position: absolute;
+    width: 305px;
+    height: 4%;
+    padding: 8px;
+    top: 25%;
+    right: 15%;
+    font-family: Belgrano;
+    font-weight: Regular;
+    font-size: 15px;
+    opacity: 1;
+    text-align: left;
+    z-index: 999;
+    background-color: transparent; /* 將背景顏色設置為透明 */
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+  .airdatepicker {
+    z-index: 99; /* 或者其他更高的值，根據你的需要調整 */
+}
 
+  .listmenu{
+    width: 500px;
+    color: rgba(0,0,0,1);
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    font-family: Belgrano;
+    font-weight: Regular;
+    font-size: 30px;
+    opacity: 1;
+    text-align: left;
+    border: none;
+    z-index: 999;
+    background-color:transparent;
+    line-height: 3.5; 
+  }
+  .btn-group-vertical{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 200px; /* 距離頂部的距離 */
+    right: 5%; /* 距離左側的距離 */
+   
+  }
+  .btn-group-vertical .btn {
+    margin-bottom: 100px; /* 按鈕與按鈕之間的距離 */
+    width: 150%; /* 按鈕的寬度 */
+    height: auto; /* 按鈕的高度 */
+    font-size: 30px;
+    background-color:transparent;
+    opacity: 1;
+    color: var(--bs-gray-800);
+    border: none; /* 移除邊框 */
+    border-radius: 0; /* 移除圓角 */
+    outline: none; /* 移除外框線 */
+    padding: 0; /* 移除內邊距 */
+}
+.btn-group-vertical .btn:hover {                      
+  color: var(--bs-gray-800);
+  border-radius: 20px;
+  opacity: 0.5;                             
+}     
+.amount select {
+  background: rgba(255, 255, 255, 0); 
+  color:  rgba(0,0,0,1);
+  margin: 15px;
+  width: 305px;
+  height: 4%;
+  padding: 8px;
+  position: absolute;
+  top:60%;
+  right:14%;
+  font-size: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(#003d79, #003d79);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -webkit-linear-gradient(transparent, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -moz-linear-gradient(#003d79, #003d79);
+  background-position: right 0.5em top 50%, 0 0;
+  background-size: contain, cover;
+  background-repeat: no-repeat, repeat;
+}
+
+option {
+  appearance: none;
+  background: #fff;
+  position: absolute;
+} 
+.start-time select {
+  background: rgba(255, 255, 255, 0); 
+  color:  rgba(0,0,0,1);
+  margin: 15px;
+  width: 305px;
+  height: 4%;
+  padding: 8px;
+  position: absolute;
+  top: 35%;
+  right:14%;
+  font-size: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(#003d79, #003d79);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -webkit-linear-gradient(transparent, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -moz-linear-gradient(#003d79, #003d79);
+  background-position: right 0.5em top 50%, 0 0;
+  background-size: contain, cover;
+  background-repeat: no-repeat, repeat;
+}
+
+
+.End-time select {
+  background: rgba(255, 255, 255, 0); 
+  color:  rgba(0,0,0,1);
+  margin: 15px;
+  width: 305px;
+  height: 4%;
+  padding: 8px;
+  position: absolute;
+  top:47.5%;
+  right:14%;
+  font-size: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(#003d79, #003d79);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -webkit-linear-gradient(transparent, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -moz-linear-gradient(#003d79, #003d79);
+  background-position: right 0.5em top 50%, 0 0;
+  background-size: contain, cover;
+  background-repeat: no-repeat, repeat;
+}
+
+
+.option {
+  width: 300px;
+  height: 40px;
+  position: absolute;
+  top:71%;
+  right: 15.5%; 
+  transform: translateX(20%);
+  transform: translateY(20%);
+  border-top: solid #090a0a 1px;
+  z-index: 999; 
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  padding-top: 5px;
+}
+.k-w-300{
+  position: absolute;
+  top: 35%;
+  margin: 15px;
+  width: 22.5%;
+  height: 6%;
+  padding: 8px;
+  left:62%;
+  z-index: 999;
+}
+.k-w-301{
+  position: absolute;
+  margin: 15px;
+  width: 22.5%;
+  height: 6%;
+  padding: 8px;
+  position: absolute;
+  top:47.5%;
+  left:62%;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0); 
+}
+
+.air-datepicker.-bottom-left-.-from-bottom-.-active- {
+  z-index: 999;
+}
+.bookingID{
+  width: 300px;
+  height: 40px;
+  position: absolute;
+  top:47.5%;
+  right: 15.5%; 
+  transform: translateX(20%);
+  transform: translateY(20%);
+  border-top: solid #090a0a 1px;
+  z-index: 999; 
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  padding-top: 5px;
+ 
+}
 
