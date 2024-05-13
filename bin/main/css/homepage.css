@@ -1,0 +1,226 @@
+/* Your CSS styles here */
+body {
+    margin: 0;
+    font-family: Belgrano;
+    font-weight: regular;
+    font-size: 25px;
+}
+
+
+#BR01 {
+    padding: 35px 28.5px;
+    left: 1005px;
+    top: 1642px;
+}
+#BR02 {
+    padding: 35px 25px;
+    left: 1020px;
+    top: 1642px;
+}
+#BR03 {
+    padding: 35px 50.8px;
+    left: 912.1px;
+    top: 1642px;
+}
+#BR04 {
+    padding: 17px 58.35px;
+    left: 680px;
+    top: 1643px;
+}
+#BR05 {
+    padding: 15px 32.5px;
+    left: 642px;
+    top: 1578px;
+}
+#BR06 {
+    padding: 17px 38px;
+    left: 635px;
+    top: 1517px;
+}
+
+#BR13 {
+    padding: 20px 65px;
+    left: 845px;
+    top: 1026px;
+}
+
+
+.map-button {
+    background-color: #cccccc;
+    /*padding: 20px 65px;*/
+    border: none;
+    position: relative;
+    /*border-radius: 5px;*/
+    /*font-size: 16px;*/
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.6;
+    /*opacity: 0;*/
+}
+
+/*.map-button:hover {
+    background-color: #cccccc;
+    
+}*/
+
+.background-image {
+    /* Set background image */
+    background-image: url("../images/metro_map.png");
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    /*background-position: center; /* Center the background image */
+    position: relative;
+    height: 150vh;
+    z-index: 1;
+}
+
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 30px 30px;
+    position: fixed;
+    /*top: 0;*/
+    top: 85%;
+    left: 0;
+    right: 0;
+    background-color: #D0D3D8;
+    z-index: 1000; /* Added z-index to keep it above other content */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05); /* Added shadow for depth */
+    height:10%;
+}
+
+.logo {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li:first-child {
+    margin-left: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul li a:hover {
+    color: #666;
+}
+
+
+
+/* Hidden by default */
+#searchBlock, #reservationInfo, #hotelInfo, #more, .dropdown-menu {
+    display: none;
+    background-color: #616C7A;
+    padding: 20px;
+    /*border: 1px solid #FFFFFF;*/
+    position: absolute;
+    bottom: calc(100%);
+    left: 0;
+    width: 97.3%;
+    z-index: 999;
+    height: 500px; /* Increased height */
+    overflow-y: auto; /* Added to enable scrolling if content exceeds height */
+    color: white; /* Set text color to white */
+}
+#searchBlock {
+    opacity: 0.8;
+}
+
+#searchBlock.open, #reservationInfo.open, #hotelInfo.open, #more.open, .dropdown-menu.open {
+    display: block;
+}
+
+#searchInput {
+    color: black;
+    border-radius: 25px;
+    height: 46px; /* Increase height */
+    width: 40%;
+    padding: 10px 20px; /* Adjust padding */
+    font-size: 18px; /* Font size for search block */
+    box-shadow: 0px 5px 13px rgba(0, 0, 0, 0.8); /* Shadow */
+    background-color: rgba(255, 255, 255, 0.85)
+}
+
+
+
+
+#searchDropdown {
+    background-color: black;
+    color: white; /* Set text color to white */
+    padding: 10px; /* Add padding for better appearance */
+}
+
+
+#reservationInfo, #hotelInfo {
+    font-size: 35px; /* Font size for reservation and hotel info */
+}
+
+#reservationDetails, #hotelDetails {
+    margin-top: 37px; /* Add margin for separation */
+    font-size: 20px;
+    line-height: 1.75;
+}
+
+#historyBlock {
+    position: absolute;
+    left: -250px; /* Adjust the position as needed */
+    width: 200px; /* Adjust the width as needed */
+    background-color: #616C7A;
+    padding: 20px;
+    z-index: 999; /* Ensure it's above other content */
+}
+
+
+#more a {
+    color: white; /* Set text color to white */
+    text-align: right; /* Align links to the left */
+    line-height: 2.5;
+    text-decoration: none;
+    right: 0;
+    left: 90%;
+}
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #616C7A;
+    min-width: 150px;
+    height: 310px;
+    z-index: 2; /* Set z-index higher than other blocks */
+    left: -100px; /* Adjusted position */
+}
+
+.dropdown-menu a {
+    color: white;
+    padding: 12px 13px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+
