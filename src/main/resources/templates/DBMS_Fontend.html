@@ -22,11 +22,11 @@
                         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
                       </svg></a>
                     </li>
-                    <li><a href="#" id="dropdown-menu"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <!--<li><a href="#" id="dropdown-menu"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                       </svg></a>
-                    </li>
+                    </li>-->
                 </ul>
             </nav>
             <!-- Search Block -->
@@ -79,7 +79,51 @@
                     <a href="#" id="historyLink">HISTORY</a><br>
                     <a href="#" id="faqLink">FAQ</a><br>
                     <a href="#" id="contactLink">CONTACT US</a><br>
-                    <a href="#" id="logoutLink">LOG OUT</a><br>
+                    <a href="#" id="logoutLink">LOG OUT<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                      </svg></a><br>
+                </div>
+                <div id="account" style="display: none;">
+                    <h2>ACCOUNT</h2>
+                    <div id="accountDetail">
+                        <ul style="list-style-type: none;">
+                            <li class="label">Email</li>
+                            <li class="detail">123@gmail.com</li>
+                        
+                            <li class="label">Password</li>
+                            <li class="detail">12345</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="history" style="display: none;">
+                    <h2>HISTORY</h2>
+                    <p class="historyTitle">
+                        <strong>2024/05/12 TAIPEI MAIN STATION</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        </svg>
+                    </p>
+                    <div class="historyDetail" style="display: none;">
+                        Reservation No. #3476IH<br>
+                        Date 2024/05/12<br>
+                        Start Time 10:00 a.m.<br>
+                        End Time 12:00 p.m.<br>
+                        Total Price $40<br>
+                    </div>
+                    <p class="historyTitle">
+                        <strong>2024/04/22 TAIPEI ZOO</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        </svg>
+                    </p>
+                    <div class="historyDetail" style="display: none;">
+                        <p>Reservation No. #123<br>
+                            Date 2024/05/12<br>
+                            Start Time 10:00 a.m.<br>
+                            End Time 12:00 p.m.<br>
+                            Total Price $40<br></p>
+                    </div>
                 </div>
                 <div id="faqContainer" style="display: none;">
                     <h2>FAQ</h2>
@@ -102,6 +146,20 @@
                         <p>You can reset your password by going to the settings page...</p>
                     </div>
                 </div>
+                <div id="contactUs" style="display: none;">
+                    <h2>CONTACT US</h2>
+                    <form action="/action_page.php">
+                        <div class="input-wrapper">
+                            <input type="text" id="contactInput">
+                            <button type="submit" class="icon-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                  <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
                 
                 
                                

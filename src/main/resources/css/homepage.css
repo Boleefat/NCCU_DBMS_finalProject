@@ -698,7 +698,7 @@ body {
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 25px;
     cursor: pointer;
 }
 
@@ -742,6 +742,10 @@ nav ul li a:hover {
     height: 500px; /* Increased height */
     overflow-y: auto; /* Added to enable scrolling if content exceeds height */
     color: white; /* Set text color to white */
+}
+
+.bi-chevron-up {
+    margin-left: 2px;
 }
 #searchBlock {
     
@@ -839,25 +843,33 @@ nav ul li a:hover {
     bottom: 103px;
     right: 0;
     width: 97.3%;
-    height: 500px;
-    padding:20px;
+    height: 460.6px;
+    padding: 60px 20px 20px;
     background-color: #D9D9D9;
     overflow-y: auto;
     z-index: 1001; /* Ensure it appears above other content */
     text-decoration: none;
     color: black;
     
-    
 }
 #accountLink, #historyLink, #faqLink, #contactLink, #logoutLink {
     padding-left: 1300px;
-    
     text-decoration: none;
     color: black;
     line-height: 80px;
 }
 
-#faqContainer {
+/*#logoutLink {
+    line-height: 138px;
+}
+*/
+
+.bi-box-arrow-right {
+    margin-left: 10px;
+}
+
+
+#account, #faqContainer, #contactUs, #history {
     position: fixed;
     bottom: 103px;
     left: 0;
@@ -870,6 +882,19 @@ nav ul li a:hover {
     line-height: 2;
     
 }
+
+.label {
+    margin-bottom: 10px; /* Adds space below each label */
+}
+
+.detail {
+    font-size: 20px;
+    margin-bottom: 20px; /* Adds more space below each detail to separate from the next label */
+    border-bottom: 1px solid black; /* Optional: adds a line below the detail */
+    padding-bottom: 2px; /* Optional: adds padding above the border line */
+}
+
+
 
 .faq-question {
     display: flex;
@@ -896,4 +921,58 @@ nav ul li a:hover {
 .rotated {
     transform: rotate(180deg); /* Rotate the chevron by 180 degrees */
     transition: transform 0.3s ease; /* Smooth transition */
+}
+
+
+#contactInput {
+    position: absolute;
+    top: 70%;
+    width: 1050px;
+    height: 50px;
+    padding: 1px 25px;
+    border-radius: 35px;
+    padding-right: 40px; /* Make space for the icon */
+}
+
+.input-wrapper {
+    position: absolute;
+    top: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.icon-btn {
+    position: absolute;
+    left:1070px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    top:17px;
+}
+
+.historyTitle {
+    cursor: pointer;
+}
+
+.historyDetail {
+    display: none; /* Hidden by default */
+}
+
+.historyDetail.open {
+    display: block; /* Shown when activated */
+}
+
+.backButton {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.bi-chevron-right{
+    margin-left: 15px;
 }

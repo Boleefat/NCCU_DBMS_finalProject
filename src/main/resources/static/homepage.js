@@ -43,6 +43,7 @@ document.querySelector(".logo").addEventListener("click", function() {
 // Toggle search block visibility and update search input
 document.getElementById("searchLink").addEventListener("click", function(event) {
     event.preventDefault();
+    toggleVisibility('searchBlock', true); // true to close linkContainer
     var searchInput = document.getElementById("searchInput");
     var searchBlock = document.getElementById("searchBlock");
     // Display the search input when 'Search' is clicked
@@ -67,46 +68,154 @@ document.getElementById("searchInput").addEventListener("change", function() {
 
 
 // Toggle reservation info visibility
-document.getElementById("reservationLink").addEventListener("click", function(event){
-    event.preventDefault(); // Prevent default link behavior
-    toggleVisibility('reservationInfo');
+document.getElementById('reservationLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleVisibility('reservationInfo', true); // true to close linkContainer
 });
 
-// Toggle hotel info visibility
-document.getElementById("hotelLink").addEventListener("click", function(event){
-    event.preventDefault(); // Prevent default link behavior
-    toggleVisibility('hotelInfo');
+document.getElementById('hotelLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleVisibility('hotelInfo', true); // true to close linkContainer
 });
+
+
 
 // Generic function to toggle visibility of a specific block and hide others
-function toggleVisibility(activeBlockId) {
-    var allBlocks = ['searchBlock', 'reservationInfo', 'hotelInfo', 'faqContainer', 'linkContainer'];
+function toggleVisibility(activeBlockId, closeLinkContainer) {
+    var allBlocks = ['searchBlock', 'reservationInfo', 'hotelInfo', 'account' ,'faqContainer', 'contactUs', 'linkContainer', 'history'];
     var activeBlock = document.getElementById(activeBlockId);
 
     allBlocks.forEach(blockId => {
         var block = document.getElementById(blockId);
-        if (blockId === activeBlockId) {
-            block.classList.toggle('open'); // Toggle only the active block
-            block.style.display = block.classList.contains('open') ? 'block' : 'none';
+        if (blockId === 'linkContainer' && !closeLinkContainer) {
+            // Do not hide linkContainer when closeLinkContainer is false
         } else {
-            block.classList.remove('open'); // Ensure all other blocks are closed
-            block.style.display = 'none';
+            block.style.display = (blockId === activeBlockId || blockId === 'linkContainer' && !closeLinkContainer) ? 
+                                  (block.style.display === 'none' ? 'block' : 'none') : 'none';
         }
     });
 }
 
+
 // JavaScript for More link to toggle linkContainer visibility and hide others
 document.getElementById("moreLink").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent default link behavior
-    toggleVisibility('linkContainer');
+    event.preventDefault();
+    toggleVisibility('linkContainer', true); // Manage linkContainer directly
+    
 });
 
-// Additional handling for FAQ link to toggle the FAQ block
+document.getElementById('accountLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleVisibility('account', false); // false to keep linkContainer open
+});
+
+document.getElementById('historyLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleVisibility('history', false); // false to keep linkContainer open
+});
+
 document.getElementById('faqLink').addEventListener('click', function(event) {
     event.preventDefault();
-    var faqContainer = document.getElementById('faqContainer');
-    faqContainer.style.display = (faqContainer.style.display === 'none' || faqContainer.style.display === '') ? 'block' : 'none';
+    toggleVisibility('faqContainer', false); // false to keep linkContainer open
 });
+
+
+// Additional handling for FAQ link to toggle the FAQ block
+document.getElementById('contactLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    toggleVisibility('contactUs', false); // false to keep linkContainer open
+});
+
+document.querySelectorAll('.historyTitle').forEach(title => {
+    title.addEventListener('click', function() {
+        // Hide all history titles
+        const allTitles = document.querySelectorAll('.historyTitle');
+        allTitles.forEach(t => t.style.display = 'none');
+
+        // Get the history title text to update the header
+        const historyTitleText = this.textContent;
+
+        // Update the history header with this title
+        const historyHeader = document.querySelector('#history h2'); // Ensure you have an <h2> element in your #history div for the title
+        if (historyHeader) {
+            historyHeader.textContent = historyTitleText;
+        }
+
+        // Show the corresponding detail for the clicked title
+        const detail = this.nextElementSibling; // Get the associated detail block
+        detail.style.display = 'block'; // Show the detail block
+
+        // Add a back button if it doesn't exist
+        if (!detail.querySelector('.backButton')) {
+            const backButton = document.createElement('button');
+            backButton.className = 'backButton';
+            backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                    </svg> back`;
+            backButton.onclick = () => {
+                // Hide this detail and show all history titles again
+                detail.style.display = 'none';
+                allTitles.forEach(t => t.style.display = 'block');
+                // Reset the history header to default when going back
+                if (historyHeader) {
+                    historyHeader.textContent = "HISTORY";
+                }
+            };
+            detail.appendChild(backButton);
+        }
+    });
+});
+/*
+document.querySelectorAll('.historyTitle').forEach(title => {
+    title.addEventListener('click', function() {
+        // Hide all history titles
+        const allTitles = document.querySelectorAll('.historyTitle');
+        allTitles.forEach(t => t.style.display = 'none');
+
+        // Get the history title text to update the header
+        const historyTitleText = this.textContent;
+
+        // Ensure the history header container is ready
+        const historyHeaderContainer = document.querySelector('#history h2').parentNode; // Get the parent container of the h2
+        const newHeader = document.createElement('h3');
+        newHeader.textContent = historyTitleText;
+        
+        // Replace the existing h2 header with h3
+        const currentHeader = historyHeaderContainer.querySelector('h2');
+        if (currentHeader) {
+            historyHeaderContainer.replaceChild(newHeader, currentHeader);
+        }
+
+        // Show the corresponding detail for the clicked title
+        const detail = this.nextElementSibling; // Get the associated detail block
+        detail.style.display = 'block'; // Show the detail block
+
+        // Add a back button if it doesn't exist
+        if (!detail.querySelector('.backButton')) {
+            const backButton = document.createElement('button');
+            backButton.className = 'backButton';
+            backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                    </svg> Back`;
+            backButton.onclick = () => {
+                // Hide this detail and show all history titles again
+                detail.style.display = 'none';
+                allTitles.forEach(t => t.style.display = 'block');
+
+                // Replace the h3 header back with an h2
+                const oldHeader = document.createElement('h2');
+                oldHeader.textContent = "HISTORY";
+                historyHeaderContainer.replaceChild(oldHeader, newHeader);
+            };
+            detail.appendChild(backButton);
+        }
+    });
+});
+*/
+
+
+
+
 
 document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', function() {
@@ -117,6 +226,14 @@ document.querySelectorAll('.faq-question').forEach(question => {
         const svg = this.querySelector('svg');
         svg.classList.toggle('rotated');
     });
+});
+
+document.getElementById('logoutLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent any default action
+    // Show a pop-up alert window
+    alert('You have been logged out.');
+    // Redirect to the homepage
+    window.location.href = "DBMS_Fontend.html";
 });
 
 
