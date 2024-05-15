@@ -40,91 +40,164 @@ document.querySelector(".logo").addEventListener("click", function() {
     window.location.href = "DBMS_Fontend.html";
 });
 
-// JavaScript to toggle search block visibility and update search input
-document.getElementById("searchLink").addEventListener("click", function(event){
-    event.preventDefault(); // Prevent default link behavior
-
+// Toggle search block visibility and update search input
+document.getElementById("searchLink").addEventListener("click", function(event) {
+    event.preventDefault();
+    var searchInput = document.getElementById("searchInput");
     var searchBlock = document.getElementById("searchBlock");
-    var reservationInfo = document.getElementById("reservationInfo");
-    var hotelInfo = document.getElementById("hotelInfo");
-    var more = document.getElementById("more");
-    var dropdownMenu = document.querySelector(".dropdown-menu");
-
-    if (searchBlock.classList.contains("open")) {
-        searchBlock.classList.remove("open");
+    // Display the search input when 'Search' is clicked
+    if (searchInput.style.display === "none") {
+        searchInput.style.display = "block";
+        searchBlock.style.display = "block"; // Ensure the container is visible
     } else {
-        searchBlock.classList.add("open");
-        reservationInfo.classList.remove("open"); // Ensure reservation block is closed
-        hotelInfo.classList.remove("open"); // Ensure hotel info block is closed
-        more.classList.remove("open"); // Close dropdown menu
-        dropdownMenu.classList.remove("open"); // Close dropdown menu
+        searchInput.style.display = "none";
+        searchBlock.style.display = "none"; // Hide entire block if clicked again
     }
 });
 
-// JavaScript to toggle reservation info visibility
+document.getElementById("searchInput").addEventListener("change", function() {
+    var stationDetails = document.getElementById("stationDetails");
+    var searchDetails = document.getElementById("searchDetails");
+    // Display additional details when an option is selected
+    if (this.value) {
+        searchDetails.style.display = "block";
+        stationDetails.textContent = "Information for " + this.value;
+    }
+});
+
+
+// Toggle reservation info visibility
 document.getElementById("reservationLink").addEventListener("click", function(event){
     event.preventDefault(); // Prevent default link behavior
-
-    var searchBlock = document.getElementById("searchBlock");
-    var reservationInfo = document.getElementById("reservationInfo");
-    var hotelInfo = document.getElementById("hotelInfo");
-    var more = document.getElementById("more");
-    var dropdownMenu = document.querySelector(".dropdown-menu");
-
-    if (reservationInfo.classList.contains("open")) {
-        reservationInfo.classList.remove("open");
-    } else {
-        reservationInfo.classList.add("open");
-        searchBlock.classList.remove("open"); // Ensure search block is closed
-        hotelInfo.classList.remove("open"); // Ensure hotel info block is closed
-        more.classList.remove("open"); // Close dropdown menu
-        dropdownMenu.classList.remove("open"); // Close dropdown menu
-    }
+    toggleVisibility('reservationInfo');
 });
 
-// JavaScript to toggle hotel info visibility
+// Toggle hotel info visibility
 document.getElementById("hotelLink").addEventListener("click", function(event){
     event.preventDefault(); // Prevent default link behavior
-
-    var searchBlock = document.getElementById("searchBlock");
-    var reservationInfo = document.getElementById("reservationInfo");
-    var hotelInfo = document.getElementById("hotelInfo");
-    var more = document.getElementById("more");
-    var dropdownMenu = document.querySelector(".dropdown-menu");
-
-    if (hotelInfo.classList.contains("open")) {
-        hotelInfo.classList.remove("open");
-    } else {
-        hotelInfo.classList.add("open");
-        searchBlock.classList.remove("open"); // Ensure search block is closed
-        reservationInfo.classList.remove("open"); // Ensure reservation block is closed
-        more.classList.remove("open"); // Close dropdown menu
-        dropdownMenu.classList.remove("open"); // Close dropdown menu
-    }
+    toggleVisibility('hotelInfo');
 });
 
-// JavaScript to toggle dropdown menu visibility
-document.getElementById("moreLink").addEventListener("click", function(event){
+// Generic function to toggle visibility of a specific block and hide others
+function toggleVisibility(activeBlockId) {
+    var allBlocks = ['searchBlock', 'reservationInfo', 'hotelInfo', 'faqContainer', 'linkContainer'];
+    var activeBlock = document.getElementById(activeBlockId);
+
+    allBlocks.forEach(blockId => {
+        var block = document.getElementById(blockId);
+        if (blockId === activeBlockId) {
+            block.classList.toggle('open'); // Toggle only the active block
+            block.style.display = block.classList.contains('open') ? 'block' : 'none';
+        } else {
+            block.classList.remove('open'); // Ensure all other blocks are closed
+            block.style.display = 'none';
+        }
+    });
+}
+
+// JavaScript for More link to toggle linkContainer visibility and hide others
+document.getElementById("moreLink").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent default link behavior
+    toggleVisibility('linkContainer');
+});
 
-    var searchBlock = document.getElementById("searchBlock");
-    var reservationInfo = document.getElementById("reservationInfo");
-    var hotelInfo = document.getElementById("hotelInfo");
-    var more = document.getElementById("more");
-    var dropdownMenu = document.querySelector(".dropdown-menu");
+// Additional handling for FAQ link to toggle the FAQ block
+document.getElementById('faqLink').addEventListener('click', function(event) {
+    event.preventDefault();
+    var faqContainer = document.getElementById('faqContainer');
+    faqContainer.style.display = (faqContainer.style.display === 'none' || faqContainer.style.display === '') ? 'block' : 'none';
+});
 
-    if (more.classList.contains("open")) {
-        more.classList.remove("open");
-    } else {
-        more.classList.add("open");
-        searchBlock.classList.remove("open"); // Ensure search block is closed
-        reservationInfo.classList.remove("open"); // Ensure reservation block is closed
-        hotelInfo.classList.remove("open"); // Close hotel info block
-        dropdownMenu.classList.remove("open"); // Close dropdown menu
-    }
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+        const answer = this.nextElementSibling; // Assuming the answer div directly follows the question
+        answer.style.display = (answer.style.display === 'none') ? 'block' : 'none';
+
+        // Optionally rotate the chevron icon
+        const svg = this.querySelector('svg');
+        svg.classList.toggle('rotated');
+    });
 });
 
 
+
+//新增Buttons
+const container = document.getElementById('buttons-container');
+/*
+// 紅線
+for (let i = 2; i <= 28; i++) {
+    const button = document.createElement('button');
+    button.id = 'R' + (i < 10 ? '0' : '') + i;
+    button.className = 'map-button';
+    container.appendChild(button);
+}
+
+// 棕線
+for (let i = 1; i <= 24; i++) {
+    const button = document.createElement('button');
+    button.id = 'BR' + (i < 10 ? '0' : '') + i; // Ensuring two-digit format
+    button.className = 'map-button';
+    container.appendChild(button);
+}
+*/
+// 藍線
+for (let i = 11; i <= 18; i++) {
+    const button = document.createElement('button');
+    button.id = 'BL' + (i < 10 ? '0' : '') + i;
+    button.className = 'map-button';
+    container.appendChild(button);
+}
+/*
+//綠線
+for (let i = 1; i <= 19; i++) {
+    const button = document.createElement('button');
+    button.id = 'G' + (i < 10 ? '0' : '') + i; // Ensuring two-digit format
+    button.className = 'map-button';
+    container.appendChild(button);
+}
+
+//橘線-新莊
+for (let i = 1; i <= 21; i++) {
+    const button = document.createElement('button');
+    button.id = 'O' + (i < 10 ? '0' : '') + i; // Ensuring two-digit format
+    button.className = 'map-button';
+    container.appendChild(button);
+}
+//橘線-三蘆
+for (let i = 50; i <= 54; i++) {
+    const button = document.createElement('button');
+    button.id = 'O' + i; // Ensuring two-digit format
+    button.className = 'map-button';
+    container.appendChild(button);
+}*/
+
+/*測試*/
+/*
+// Example of adding station codes as button text
+const lines = {
+    'R': 28,
+    'BR': 24,
+    'BL': 23,
+    'G': 19,
+    'O': 21, // Assuming O line goes up to 21
+    'O-Sanlu': 54 // Assuming special case for O line from 50-54
+};
+
+Object.keys(lines).forEach(line => {
+    const count = lines[line];
+    const isSpecial = line.includes('-'); // Check if it's a special naming case
+    const base = isSpecial ? 50 : 1; // Starting index for special cases like 'O-Sanlu'
+
+    for (let i = base; i <= count; i++) {
+        const button = document.createElement('button');
+        const code = `${line.replace('-Sanlu', '')}${i < 10 && base === 1 ? '0' + i : i}`; // Ensuring two-digit format
+        button.id = code;
+        button.className = 'map-button';
+        button.textContent = code; // Set the button text to the station code
+        container.appendChild(button);
+    }
+});
+*/
 
 /*
 //拖拉地圖
@@ -187,79 +260,94 @@ document.addEventListener('mousemove', function(event) {
   }
 });
 */
-// Get the background image element
+// Get the background image container element
 const backgroundImage = document.getElementById('bgImage');
-const button = document.getElementById('BR05');
+// Get all buttons with class 'map-button'
+const buttons = document.querySelectorAll('.map-button');
 
-// Get initial positions from CSS using window.getComputedStyle()
-const buttonStyles = window.getComputedStyle(button);
-const initialLeft = buttonStyles.getPropertyValue('left');
-const initialTop = buttonStyles.getPropertyValue('top');
-
-// Set initial positions obtained from CSS
-button.style.left = initialLeft;
-button.style.top = initialTop;
-
-// Initialize variables for tracking mouse movement
+// Variables to track dragging state
 let isDragging = false;
-let initialX = 0;
-let initialY = 0;
+let dragStartX = 0;
+let dragStartY = 0;
+let offsetX = 0;
+let offsetY = 0;
 
-// Add event listeners for mouse down, move, and up events
+// Function to update the position of the map and buttons
+function updatePositions(dx, dy) {
+    backgroundImage.style.backgroundPositionX = `${offsetX + dx}px`;
+    backgroundImage.style.backgroundPositionY = `${offsetY + dy}px`;
+    buttons.forEach(button => {
+        button.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+}
+
+// Mouse down event to initiate dragging
 backgroundImage.addEventListener('mousedown', function(event) {
-  isDragging = true;
-  initialX = event.clientX;
-  initialY = event.clientY;
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    event.preventDefault(); // Prevent default drag behavior
 });
 
+// Mouse move event to handle dragging
 document.addEventListener('mousemove', function(event) {
-  if (isDragging) {
-    const movementX = event.clientX - initialX;
-    const movementY = event.clientY - initialY;
-    const currentPositionX = backgroundImage.style.backgroundPositionX ? parseInt(backgroundImage.style.backgroundPositionX) : 0;
-    const currentPositionY = backgroundImage.style.backgroundPositionY ? parseInt(backgroundImage.style.backgroundPositionY) : 0;
-    backgroundImage.style.backgroundPositionX = `${currentPositionX + movementX}px`;
-    backgroundImage.style.backgroundPositionY = `${currentPositionY + movementY}px`;
-    
-    // Move button1 in the same direction and distance as the background image
-    const currentButtonX = button.style.left ? parseInt(button.style.left) : 0;
-    const currentButtonY = button.style.top ? parseInt(button.style.top) : 0;
-    button.style.left = `${currentButtonX + movementX}px`;
-    button.style.top = `${currentButtonY + movementY}px`;
-
-    initialX = event.clientX;
-    initialY = event.clientY;
-  }
+    if (isDragging) {
+        const dx = event.clientX - dragStartX;
+        const dy = event.clientY - dragStartY;
+        updatePositions(dx, dy);
+    }
 });
 
-
-
-
-document.addEventListener('mouseup', function() {
-  isDragging = false;
+// Mouse up event to end dragging
+document.addEventListener('mouseup', function(event) {
+    if (isDragging) {
+        offsetX += event.clientX - dragStartX;
+        offsetY += event.clientY - dragStartY;
+        isDragging = false;
+        // Reset transformations on buttons to bake in the translation
+        buttons.forEach(button => {
+            const computedStyle = window.getComputedStyle(button);
+            button.style.left = `${parseInt(computedStyle.left, 10) + (event.clientX - dragStartX)}px`;
+            button.style.top = `${parseInt(computedStyle.top, 10) + (event.clientY - dragStartY)}px`;
+            button.style.transform = ''; // Clear transform to avoid accumulation
+        });
+    }
 });
 
-
-
-
+/*
+// Zoom functionality
 let zoomLevel = 1;
 
-//滾輪 zoom in zoom out
-// Add event listener for mouse wheel event
 backgroundImage.addEventListener('wheel', function(event) {
-    // Prevent default scroll behavior
-    event.preventDefault();
+    event.preventDefault(); // Prevent scrolling the page
+    const zoomDirection = event.deltaY < 0 ? 0.1 : -0.1;
+    zoomLevel = Math.max(0.5, Math.min(3, zoomLevel + zoomDirection));
+    backgroundImage.style.transform = `scale(${zoomLevel})`;
+    buttons.forEach(button => {
+        button.style.transform = `scale(${zoomLevel})`;
+    });
+});
+*/
 
-    // Calculate zoom direction based on scroll direction
-    const zoomDirection = event.deltaY > 0 ? -1 : 1;
+// Variables to track zoom state
+/*
+let zoomLevel = 1;
+const initialButtonScale = 1; // Initial scale level for buttons
 
-    // Calculate new zoom level
-    zoomLevel += zoomDirection * 0.1; // Adjust the zoom speed as needed
-
-    // Limit zoom level to a minimum and maximum value if desired
-    zoomLevel = Math.max(0.5, Math.min(3, zoomLevel)); // Example limits zoom level between 0.5x and 3x
+backgroundImage.addEventListener('wheel', function(event) {
+    event.preventDefault(); // Prevent scrolling the page
+    const zoomDirection = event.deltaY < 0 ? 0.1 : -0.1;
+    zoomLevel = Math.max(0.5, Math.min(3, zoomLevel + zoomDirection));
 
     // Apply zoom level to background image
     backgroundImage.style.transform = `scale(${zoomLevel})`;
-});
 
+    // Calculate inverse scale for buttons to maintain their screen size
+    const buttonScale = initialButtonScale / zoomLevel;
+
+    // Apply the inverse scale to each button
+    buttons.forEach(button => {
+        button.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${buttonScale})`;
+    });
+});
+*/
