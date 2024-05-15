@@ -5,44 +5,86 @@
         <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
-
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Air datepicker Css -->
+        <link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.css" rel="stylesheet">
         <link href="./css/main.css" rel="stylesheet" />
+        <!-- time range picker -->
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.2.1/default/default-ocean-blue.css">
+        
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2024.1.319/js/kendo.all.min.js"></script>
+        <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
         <title>Document</title>
     </head>
     <body>
-        <div class="back1_deposit"> 
+        
+      <div class="back1_deposit"> 
             <button onclick =  "window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
                         type = "button" class="back_deposit" aria-label="Close"style="background-color: transparent;" >
                         <i class="fas fa-chevron-left"></i>Back
             </button>
-            <button onclick =  "window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
+            <button onclick =  "confirmed()" 
                         type = "button" class="confirm_deposit" aria-label="Close"style="background-color: transparent;" >
                         Confirm<i class="fas fa-chevron-right"></i>
             </button>
+            <input class="choose_date"id="myDatepicker" data-language='en' >
+        <br>
+        <br>
+            <ul class="listmenu">
+                <li class="list-group-item">Date</li>
+                <li class="list-group-item">Start Time</li>
+                <li class="list-group-item">End Time</li>
+                <li class="list-group-item">Amount</li>
+                <li class="list-group-item">Description(Optional)</li>
+              </ul>
+            <div class="amount">
+                <select name="name" id="">
+                  <option value="First value">1</option>
+                  <option value="Second value">2</option>
+                  <option value="Third value">3</option>
+                  <option value="Forth value">4</option>
+                  <option value="Fifth value">5</option>
+                </select>   
+            </div>
+            <input type = "text" class="option" id = "textinput">   
+            <div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
+              <div class="k-w-300">
+                <input id="start"  style="width: 100%;" />
+              </div>
+
+              <div class="k-w-301">
+                 <input id="end"  />
+              </div>
+            </div>
         </div>
+       
+        <style>
+          
+        </style>
         <div class="back2_deposit">
             <ul class="navbar-nav" style="margin-right: 5px;">
                 <li class="nav-item"><a class="listbtn" onclick =  "window.location.href = 'http://127.0.0.1:5500/LoginPage.html'">SERACH</a></li>
                 <li class="nav-item"><a class="listbtn" href="#!">RESERVATION</a></li>
-                <li class="nav-item"><a class="listbtn" href="#!">DELIVER-TO-HOTEL</a></li>
-                <li class="nav-item">
-                    <span class="main-menu" onmouseover="switchMenu( this, 'SubMenu1', 'MouseOver' )" onmouseout="hideMenu()">
-                    <a class="listbtn" href="#!">MORE2 </a></li>
+                <li class="nav-item"><a class="listbtn" href="#!">DELIVER TO HOTEL</a></li>
+                <li class="nav-item"></li>
+                <span class="main-menu">   
             </ul>
-        <div class="v4_1032"></div>
         </div>
-        <span class="main-menu" onclick="switchMenu( this, 'SubMenu1', 'MouseOver' )" >MORE <i class="fas fa-chevron-up"></i>
-            
-        <ul id="SubMenu1" class="sub-menu" style="display:none;">
-            <li><a href="http://www.vixual.net/" target="_blank">HOME PAGE</a></li>
-            <li><a href="http://www.google.com.tw/" target="_blank">ACCOUNT</a></li>
-            <li><a href="http://tw.yahoo.com/" target="_blank">HISTORY</a></li>
-            <li><a href="http://tw.yahoo.com/" target="_blank">FAQ</a></li>
-            <li><a href="http://tw.yahoo.com/" target="_blank">CONTACT US</a></li>
-            <li><a href="http://tw.yahoo.com/" target="_blank">LOG OUT</a></li>
-        </ul>
-    </ul>
-</span>
+        <span class="main-menu" onclick="switchMenu()" >MORE <i class="fas fa-chevron-up"></i>
+            <ul id="SubMenu1" class="sub-menu" >
+                <li><a href="http://127.0.0.1:5500/WelcomePage.html" target="_blank">HOME PAGE</a></li>
+                <li><a href="http://www.google.com.tw/" target="_blank">ACCOUNT</a></li>
+                <li><a href="http://tw.yahoo.com/" target="_blank">HISTORY</a></li>
+                <li><a href="http://tw.yahoo.com/" target="_blank">FAQ</a></li>
+                <li><a href="http://tw.yahoo.com/" target="_blank">CONTACT US</a></li>
+                <li><a href="http://tw.yahoo.com/" target="_blank">LOG OUT</a></li>
+            </ul>
+        </span>
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
 <script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+
 </body>
 </html>
