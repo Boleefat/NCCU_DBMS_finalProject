@@ -8,80 +8,80 @@ import java.util.Set;
 @Table(name = "lockerarea")
 public class LockerArea {
     @EmbeddedId
-    private LockerArea_ID IDA;
+    private LockerArea_ID idA;
 
-    @Column(name = "LockerArea_Location", nullable = false, length = 255)
-    private String LockerArea_Location;
+    @Column(name = "lockerarea_location", nullable = false, length = 255)
+    private String lockerAreaLocation;
 
     @ManyToOne
-    @MapsId("Station_ID")
-    @JoinColumn(name = "Station_ID")
-    private MrtStation MrtStation;
+    @MapsId("station_id")
+    @JoinColumn(name = "station_id")
+    private MrtStation mrtStation;
 
     @OneToMany(mappedBy = "LockerArea")
-    private Set<Locker> Lockers;
+    private Set<Locker> lockers;
 
     @OneToMany(mappedBy = "LockerArea")
-    private Set<PaymentMethod> PaymentMethods;
+    private Set<PaymentMethod> paymentMethods;
 
     @OneToMany(mappedBy = "LockerArea")
-    private Set<Possession> Possessions;
+    private Set<Possession> possessions;
 
     public LockerArea(){
     }
 
-    public LockerArea(LockerArea_ID IDA, String LockerArea_Location, MrtStation MrtStation){
-        this.IDA = IDA;
-        this.LockerArea_Location = LockerArea_Location;
-        this.MrtStation = MrtStation;
+    public LockerArea(LockerArea_ID idA, String lockerAreaLocation, MrtStation mrtStation){
+        this.idA = idA;
+        this.lockerAreaLocation = lockerAreaLocation;
+        this.mrtStation = mrtStation;
     }
 
-    public LockerArea_ID getIDA() {
-        return IDA;
+    public LockerArea_ID getIdA() {
+        return idA;
     }
 
-    public void setIDA(LockerArea_ID IDA) {
-        this.IDA = IDA;
+    public void setIdA(LockerArea_ID idA) {
+        this.idA = idA;
     }
 
     public String getLockerAreaLocation() {
-        return LockerArea_Location;
+        return lockerAreaLocation;
     }
 
-    public void setLockerAreaLocation(String LockerArea_Location) {
-        this.LockerArea_Location = LockerArea_Location;
+    public void setLockerAreaLocation(String lockerAreaLocation) {
+        this.lockerAreaLocation = lockerAreaLocation;
     }
 
 
     public MrtStation getMrtStation() {
-        return MrtStation;
+        return mrtStation;
     }
 
-    public void setMrtStation(MrtStation MrtStation) {
-        this.MrtStation = MrtStation;
+    public void setMrtStation(MrtStation mrtStation) {
+        this.mrtStation = mrtStation;
     }
 
     public Set<Locker> getLockers() {
-        return Lockers;
+        return lockers;
     }
 
-    public void setLockers(Set<Locker> Lockers) {
-        this.Lockers = Lockers;
+    public void setLockers(Set<Locker> lockers) {
+        this.lockers = lockers;
     }
 
     public Set<PaymentMethod> getPaymentMethods() {
-        return PaymentMethods;
+        return paymentMethods;
     }
 
-    public void setPaymentMethods(Set<PaymentMethod> PaymentMethods) {
-        this.PaymentMethods = PaymentMethods;
+    public void setPaymentMethods(Set<PaymentMethod> paymentMethods) {
+        this.paymentMethods = paymentMethods;
     }
 
     public Set<Possession> getPossessions() {
-        return Possessions;
+        return possessions;
     }
 
-    public void setPossessions(Set<Possession> Possessions) {
-        this.Possessions = Possessions;
+    public void setPossessions(Set<Possession> possessions) {
+        this.possessions = possessions;
     }
 }

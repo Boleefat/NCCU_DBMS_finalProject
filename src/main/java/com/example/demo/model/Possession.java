@@ -1,87 +1,70 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "possession")
 public class Possession {
     @EmbeddedId
-    private possessionAreaPayKey IDB;
-    
-    @ManyToOne
-    @JoinColumn(name = "LockerArea_ID", nullable = false)
-    private LockerArea LockerArea_ID;
+    private Possession_ID idB;
 
     @ManyToOne
-    @JoinColumn(name = "PaymentMethod_ID", nullable = false)
-    private PaymentMethod PaymentMethod_ID;
+    @MapsId("lockerAreaID")
+    @JoinColumns({
+        @JoinColumn(name = "Station_ID", referencedColumnName = "stationId"),
+        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "lockerAreaId")
+    })
+    private LockerArea lockerArea;
 
-    public Possession(){
+    @ManyToOne
+    @MapsId("paymentMethodId")
+    @JoinColumns({
+        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "lockerAreaId"),
+        @JoinColumn(name = "PaymentMethod_ID", referencedColumnName = "paymentMethodId")
+    })
+    private PaymentMethod paymentMethod;
+
+    @Column(name = "Possession_Status", nullable = false, length = 255)
+    private String possessionStatus;
+
+    public Possession() {}
+
+    public Possession(PossessionId id, LockerArea lockerArea, PaymentMethod paymentMethod, String possessionStatus) {
+        this.id = id;
+        this.lockerArea = lockerArea;
+        this.paymentMethod = paymentMethod;
+        this.possessionStatus = possessionStatus;
     }
 
-    public possessionAreaPayKey getIDB() {
-        return IDB;
+    public PossessionId getId() {
+        return id;
     }
 
-    public void setIDB(possessionAreaPayKey IDB) {
-        this.IDB = IDB;
+    public void setId(PossessionId id) {
+        this.id = id;
     }
 
-    public LockerArea getLockerAreaID() {
-        return LockerArea_ID;
+    public LockerArea getLockerArea() {
+        return lockerArea;
     }
 
-    public void setLockerAreaID(LockerArea LockerArea_ID){
-        this.LockerArea_ID = LockerArea_ID;
+    public void setLockerArea(LockerArea lockerArea) {
+        this.lockerArea = lockerArea;
     }
 
-    public PaymentMethod getPaymentMethodID() {
-        return PaymentMethod_ID;
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPaymentMethodID(PaymentMethod PaymentMethod_ID){
-        this.PaymentMethod_ID = PaymentMethod_ID;
-    }
-}
-
-@Embeddable
-class possessionAreaPayKey implements Serializable {
-    @Column(name = "LockerArea_ID")
-    private Long LockerArea_ID;
-
-    @Column(name = "PaymentMethod_ID")
-    private Long PaymentMethod_ID;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        possessionAreaPayKey that = (possessionAreaPayKey) o;
-        return Objects.equals(LockerArea_ID, that.LockerArea_ID) &&
-               Objects.equals(PaymentMethod_ID, that.PaymentMethod_ID);
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(LockerArea_ID, PaymentMethod_ID);
+    public String getPossessionStatus() {
+        return possessionStatus;
     }
 
-    // Getters and setters
-    public Long getLockerAreaID() {
-        return LockerArea_ID;
-    }
-
-    public void setLockerAreaID(Long LockerArea_ID) {
-        this.LockerArea_ID = LockerArea_ID;
-    }
-
-    public Long getPaymentMethodID() {
-        return PaymentMethod_ID;
-    }
-
-    public void setPaymentMethodID(Long PaymentMethod_ID) {
-        this.PaymentMethod_ID = PaymentMethod_ID;
+    public void setPossessionStatus(String possessionStatus) {
+        this.possessionStatus = possessionStatus;
     }
 }

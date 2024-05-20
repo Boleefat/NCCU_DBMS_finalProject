@@ -8,56 +8,56 @@ import java.util.Set;
 public class MrtStation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Station_ID")
-    private Long Station_ID;
+    @Column(name = "station_id")
+    private Long stationID;
 
-    @Column(name = "Station_Name", nullable = false, length = 255)
-    private String Station_Name;
+    @Column(name = "station_name", nullable = false, length = 255)
+    private String stationName;
 
-    @Column(name = "Location", nullable = false, length = 255)
-    private String Location;
+    @Column(name = "location", nullable = false, length = 255)
+    private String location;
 
-    @OneToMany(mappedBy = "MrtStation")
-    private Set<LockerArea> LockerAreas;
+    @OneToMany(mappedBy = "mrtStation")
+    private Set<LockerArea> lockerAreas;
 
     public MrtStation(){
     }
 
-    public MrtStation(Long Station_ID, String Station_Name, String Location){
-        this.Station_ID = Station_ID;
-        this.Station_Name = Station_Name;
-        this.Location = Location;
+    public MrtStation(Long stationID, String stationName, String location){
+        this.stationID = stationID;
+        this.stationName = stationName;
+        this.location = location;
     }
 
     public Long getStationID(){
-        return Station_ID;
+        return stationID;
     }
 
-    public void setStationID(Long Station_ID){
-        this.Station_ID = Station_ID;
+    public void setStationID(Long stationID){
+        this.stationID = stationID;
     }
 
     public String getStationName(){
-        return Station_Name;
+        return stationName;
     }
 
-    public void setStationName(String Station_Name){
-        this.Station_Name = Station_Name;
+    public void setStationName(String stationName){
+        this.stationName = stationName;
     }
 
     public String getLocation(){
-        return Location;
+        return location;
     }
 
-    public void setLocation(String Location){
-        this.Location = Location;
+    public void setLocation(String location){
+        this.location = location;
     }
 
     public Set<LockerArea> getLockerAreas() {
-        return LockerAreas;
+        return lockerAreas;
     }
 
-    public void setLockerAreas(Set<LockerArea> LockerAreas) {
-        this.LockerAreas = LockerAreas;
+    public void setLockerAreas(Set<LockerArea> lockerAreas) {
+        this.lockerAreas = lockerAreas;
     }
 }
