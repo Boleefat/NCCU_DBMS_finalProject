@@ -949,16 +949,16 @@ body {
   opacity: 0.5;                             
 }
 .station_station {
-  width: 456px;
+  width: 80%;
   color: rgba(0,0,0,1);
   position: absolute;
   top: 15%;
-  left: 6%;
+  left: 10%;
   font-family: Belgrano;
   font-weight: Regular;
   font-size: 40px;
   opacity: 1;
-  text-align: right;
+  text-align: left;
 }
 .navbar-nav {
   text-align: right; /* 将菜单项靠右对齐 */
@@ -967,7 +967,7 @@ body {
 }
 .nav-item {
   display: inline-block;
-  margin-right: 8%; /* 调整菜单项之间的间距 */
+  margin-right: 2%; /* 调整菜单项之间的间距 */
 }
 
 .listbtn {
@@ -977,6 +977,7 @@ body {
   cursor: pointer !important;/* 改變游標圖案*/
   line-height: 5;
   font-family: Belgrano;
+  z-index:999;
 }
 .listbtn:hover {
   color: var(--bs-gray); 
@@ -1227,7 +1228,27 @@ option {
   background-repeat: no-repeat, repeat;
 }
 
-
+.select {
+  background: rgba(255, 255, 255, 0); 
+  color:  rgba(0,0,0,1);
+  margin: 15px;
+  width: 305px;
+  height: 4%;
+  padding: 8px;
+  position: absolute;
+  top: 35%;
+  right:14%;
+  font-size: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(#003d79, #003d79);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -webkit-linear-gradient(transparent, transparent);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -moz-linear-gradient(#003d79, #003d79);
+  background-position: right 0.5em top 50%, 0 0;
+  background-size: contain, cover;
+  background-repeat: no-repeat, repeat;
+}
 .End-time select {
   background: rgba(255, 255, 255, 0); 
   color:  rgba(0,0,0,1);
@@ -1309,4 +1330,197 @@ option {
   font-size: 20px;
   padding-top: 5px;
  
+}
+
+
+#reservationInfo, #hotelInfo {
+  font-size: 35px;
+}
+#reservationDetails, #hotelDetails{
+  margin-top: 37px; /* Add margin for separation */
+  font-size: 20px;
+  line-height: 1.75;
+}
+
+#searchBlock.open, #reservationInfo.open, #hotelInfo.open, #more.open, .dropdown-menu.open {
+  display: block;
+}
+
+#searchInput {
+  color: black;
+  border-radius: 25px;
+  height: 46px; /* Increase height */
+  width: 40%;
+  padding: 10px 20px; /* Adjust padding */
+  font-size: 18px; /* Font size for search block */
+  box-shadow: 0px 5px 13px rgba(0, 0, 0, 0.8); /* Shadow */
+  background-color: rgba(255, 255, 255, 0.85)
+  
+}
+
+
+#searchDetails {
+  display: none; /* Hidden until a station is selected */
+}
+
+
+
+#searchDropdown {
+  background-color: black;
+  color: white; /* Set text color to white */
+  padding: 10px; /* Add padding for better appearance */
+}
+
+/* Hidden by default */
+#searchBlock, #reservationInfo, #hotelInfo, #more, .dropdown-menu {
+  display: none;
+  background-color: #616C7A;
+  padding: 20px 30px;
+  /*border: 1px solid #FFFFFF;*/
+  position: absolute;
+  top:30%;
+
+  left: 0%;
+  width: 100%;
+  z-index: 999;
+  height: 50%; /* Increased height */
+  overflow-y: auto; /* Added to enable scrolling if content exceeds height */
+  color: white; /* Set text color to white */
+}
+
+.bi-chevron-up {
+  margin-left: 2px;
+}
+#linkContainer {
+  position: fixed;
+  top:30%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  padding: 60px 20px 20px;
+  background-color: #D9D9D9;
+  overflow-y: auto;
+  z-index: 999; /* Ensure it appears above other content */
+  text-decoration: none;
+  color: black;
+  
+}
+#accountLink, #historyLink, #faqLink, #contactLink, #logoutLink {
+  padding-left: 1200px;
+  text-decoration: none;
+  color: black;
+  line-height: 50px;
+  z-index: 999;;
+  font-family: Belgrano;
+  font-size: 25px;
+}
+
+/*#logoutLink {
+    line-height: 138px;
+}
+*/
+
+.bi-box-arrow-right {
+  margin-left: 10px;
+}
+
+
+#account, #faqContainer, #contactUs, #history {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  width: 77%;
+  height: 50%;
+  background-color: rgba(125, 122, 119, 0.5);
+  padding: 20px 50px;
+  overflow-y: auto;
+  z-index: 1002; /* Slightly lower than linkContainer to allow overlap */
+  line-height: 2;
+  font-family: Belgrano;
+  font-size:22px;
+  
+}
+
+.label {
+  margin-bottom: 10px; /* Adds space below each label */
+}
+
+.detail {
+  font-size: 20px;
+  margin-bottom: 20px; /* Adds more space below each detail to separate from the next label */
+  border-bottom: 1px solid black; /* Optional: adds a line below the detail */
+  padding-bottom: 2px; /* Optional: adds padding above the border line */
+  font-family: Belgrano;
+}
+
+
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  font-family: Belgrano;
+}
+
+.faq-answer {
+  font-size: 22px;
+  padding-left: 50px;
+  display: none;
+  font-family: Belgrano;
+}
+
+/* Optional: Increase the spacing if needed */
+.bi-chevron-down {
+  margin-left: auto;
+}
+
+
+.rotated {
+  transform: rotate(180deg); /* Rotate the chevron by 180 degrees */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+
+#contactInput {
+  position: absolute;
+  top: 70%;
+  width: 1050px;
+  height: 50px;
+  padding: 1px 25px;
+  border-radius: 35px;
+  padding-right: 40px; /* Make space for the icon */
+}
+
+.input-wrapper {
+  position: absolute;
+  top: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  position: absolute;
+  left:1070px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  top:17px;
+}
+
+.historyTitle {
+  cursor: pointer;
+  font-family: Belgrano;
+}
+
+.historyDetail {
+  display: none; /* Hidden by default */
+  font-family: Belgrano;
+}
+
+.historyDetail.open {
+  display: block; /* Shown when activated */
 }

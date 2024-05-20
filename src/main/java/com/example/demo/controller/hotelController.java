@@ -22,46 +22,36 @@ public class hotelController {
 
 
     @Autowired
-    private hotelService hotelService;
+    private HotelService hotelService;
 
     // 新增一個 hotel
     @PostMapping("/")
-    public ResponseEntity<hotel> createHotel(@RequestBody hotel hotel) {
-        hotel savedHotel = hotelService.save(hotel);
-        return new ResponseEntity<>(savedHotel, HttpStatus.CREATED);
+    public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
+        Hotel createdHotel = hotelService.createHotel(hotel);
+        return new ResponseEntity<Hotel>(createdHotel, HttpStatus.CREATED);
     }
 
     // 獲取所有 hotels
     @GetMapping
-    public List<hotel> listAllHotel(@RequestParam(required = false, name = "Hotel_ID") Long Hotel_ID) {
-        if (Hotel_ID != null) {
-            return hotelService.getHotelByHotelID(Hotel_ID);
-        } else {
-            return hotelService.getAllHotel();
-        }
+    public List<Hotel> listAllHotel(@RequestParam(required = false, name = "Hotel_ID") Long Hotel_ID) {
+        return hotelService.getAllHotel();
     }
 
     // 獲取單個 hotel
     @GetMapping("/{Hotel_ID}")
-    public Optional<hotel> getHotelByHotelID(@PathVariable(value = "Hotel_ID") Long Hotel_ID) {
-        return hotelService.findHotelByHotelID(Hotel_ID);
+    public Optional<Hotel> getHotelByHotelID(@PathVariable(value = "Hotel_ID") Long Hotel_ID) {
+        return hotelService.getHotelByHotelID(Hotel_ID);
     }
 
     // 更新一個 hotel
     @PutMapping("/{Hotel_ID}")
-    public hotel updateHotel(@PathVariable(value = "Hotel_ID") Long Hotel_ID,
-                               @RequestBody hotel hotelDetails) {
-        Optional<hotel> hotel = hotelService.findByhotelID(Hotel_ID);
-        hotel existinghotel = hotel.get();
-        existinghotel.setSize(hotelDetails.getHotelName());
-        existinghotel.setPrice(hotelDetails.getLatestPickUpTime());
-        existinghotel.setStatusUsed(hotelDetails.getPickUpFee());
-        return hotelService.save(existinghotel);
+    public hotel updateHotel(@PathVariable("Hotel_ID") Long Hotel_ID, @RequestBody Hotel hotel) {
+        return hotelService.updateHotel(Hotel_ID, hotel);
     }
 
     // 刪除一個 hotel
     @DeleteMapping("/{Hotel_ID}")
-    public void deleteHotel(@PathVariable(value = "Hotel_ID") Long Hotel_ID) {
+    public void deleteHotel(@PathVariable("Hotel_ID") Long Hotel_ID) {
         hotelService.deleteHotelByHotelID(Hotel_ID);
     }
 
