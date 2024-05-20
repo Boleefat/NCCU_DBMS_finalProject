@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.model.Delivery;
 import com.example.demo.model.delivery;
 import com.example.demo.model.delivery;
 import com.example.demo.service.deliveryService;
@@ -18,42 +19,35 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/delivery")
-public class deliveryController {
-    // 新增一個 delivery
+public class DeliveryController {
+    // 新增一個 delivery   deliveryService.createdDelivery(delivery);
     @PostMapping("/")
-    public ResponseEntity<delivery> createDelivery(@RequestBody delivery delivery) {
-        delivery savedDelivery = deliveryService.save(delivery);
-        return new ResponseEntity<>(savedDelivery, HttpStatus.CREATED);
+    public ResponseEntity<Delivery> createDelivery(@RequestBody Delivery delivery) {
+        Delivery createdDelivery = deliveryService.createdDelivery(delivery);
+        return new ResponseEntity<Delivery>(createdDelivery, HttpStatus.CREATED);
     }
 
-    // 獲取所有 deliverys
+    // 獲取所有 deliverys   deliveryService.getAllDelivery();
     @GetMapping
     public List<Delivery> listAllDelivery(@RequestParam(required = false, name = "Delivery_ID") Long Delivery_ID) {
-        if (Delivery_ID != null) {
-            return deliveryService.getDeliveryByDeliveryID(Delivery_ID);
-        } else {
-            return deliveryService.getAllDelivery();
-        }
+        return deliveryService.getAllDelivery();
     }
 
-    // 獲取單個 delivery
+    // 獲取單個 delivery   deliveryService.getDeliveryByDeliveryID(Delivery_ID);
     @GetMapping("/{Delivery_ID}")
-    public Optional<delivery> getDeliveryByDeliveryID(@PathVariable(value = "Delivery_ID") Long Delivery_ID) {
-        return deliveryService.findDeliveryByDeliveryID(Delivery_ID);
+    public Optional<Delivery> getDeliveryByDeliveryID(@PathVariable("Delivery_ID") Long Delivery_ID) {
+        return deliveryService.getDeliveryByDeliveryID(Delivery_ID);
     }
 
-    // 更新一個 delivery
+    // 更新一個 delivery   delivery.updateDelivery(Delivery_ID, delivery);
     @PutMapping("/{Delivery_ID}")
-    public delivery updateDelivery(@PathVariable(value = "Delivery_ID") Long Delivery_ID,
-                               @RequestBody delivery deliveryDetails) {
-        Optional<delivery> delivery = deliveryService.findByDeliveryID(Delivery_ID);
-        delivery existingdelivery = delivery.get();
-        return deliveryService.save(existingdelivery);
+    public Delivery updateDelivery(@PathVariable("Delivery_ID") Long Delivery_ID, @RequestBody Delivery delivery) {
+        return delivery.updateDelivery(Delivery_ID, delivery);
     }
 
-    // 刪除一個 delivery
+    // 刪除一個 delivery   deliveryService.deleteDeliveryByDeliveryID(Delivery_ID);
     @DeleteMapping("/{Delivery_ID}")
-    public void deleteDelivery(@PathVariable(value = "Delivery_ID") Long Delivery_ID) {
+    public void deleteDelivery(@PathVariable("Delivery_ID") Long Delivery_ID) {
         deliveryService.deleteDeliveryByDeliveryID(Delivery_ID);
     }
 }
