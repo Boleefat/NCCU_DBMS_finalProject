@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/locker")
-public class lockerController {
+public class LockerController {
 
     @Autowired
     private LockerService lockerService;
@@ -27,8 +27,8 @@ public class lockerController {
     // 新增一個 locker   lockerService.createLocker(locker)
     @PostMapping("/")
     public ResponseEntity<Locker> createLocker(@RequestBody Locker locker) {
-        Locker createLocker = lockerService.createLocker(locker);
-        return new ResponseEntity<Locker>(createLocker, HttpStatus.CREATED);
+        Locker createdLocker = lockerService.createLocker(locker);
+        return new ResponseEntity<Locker>(createdLocker, HttpStatus.CREATED);
     }
 
     // 獲取所有 lockers   lockerService.getAllLocker()
@@ -43,32 +43,16 @@ public class lockerController {
         return lockerService.getLockerByLockerID(Locker_ID);
     }
 
-    // 更新一個 locker
+    // 更新一個 locker   lockerService.updateLocker(Locker_ID, locker)
     @PutMapping("/{Locker_ID}")
-    public Locker updateLocker(@PathVariable(value = "Locker_ID") Long Locker_ID,
-                               @RequestBody Locker lockerDetails) {
-        Optional<Locker> locker = lockerService.getLockerByLockerID(Locker_ID);
-        
-        if (existingLocker.isPresent()){
-            Locker existingLockerObj = existingLocker.get();
-
-            existingLockerObj.setSize(lockerDetails.getSize());
-            existingLockerObj.setPrice(lockerDetails.getPrice());
-            existingLockerObj.setStatusUsed(lockerDetails.getStatusUsed());
-            existingLockerObj.setStatusNotUsed(lockerDetails.getStatusNotUsed());
-            existingLockerObj.setStatusReservedButNotUsed(lockerDetails.getStatusReservedButNotUsed());
-            
-            return lockerService.save(existingLockerObj);
-        } else {
-            // Handle case when reservation is not found
-            throw new NullPointerException("Locker with ID " + locker_ID + " not found");
-        }
+    public Locker updateLocker(@PathVariable("Locker_ID") Long Locker_ID, @RequestBody Locker locker) {
+        return lockerService.updateLocker(Locker_ID, locker); 
 
     }
 
     // 利用Locker_ID刪除一個 locker   lockerService.deleteLockerByLockerID(Locker_ID)
     @DeleteMapping("/{Locker_ID}")
-    public void deleteLocker(@PathVariable(value = "Locker_ID") Long Locker_ID) {
+    public void deleteLocker(@PathVariable("Locker_ID") Long Locker_ID) {
         lockerService.deleteLockerByLockerID(Locker_ID);
     }
 }
