@@ -34,8 +34,17 @@ public class ReservationService {
     }
 
     //更新一個reservation
-    public User updateReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
+    public Reservation updateReservation(Long reservation_ID, Reservation reservationDetails) {
+        return reservationRepository.findById(reservation_ID)
+            .map(reservation -> {
+                reservation.setUserID(reservationDetails.getUserID());
+                reservation.setLockerID(reservationDetails.getLockerID());
+                reservation.setDepositTimestamp(reservationDetails.getDepositTimestamp());
+                reservation.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
+                reservation.setTotalRentalTime(reservationDetails.getTotalRentalTime());
+                reservation.setAmount(reservationDetails.getAmount());
+            })
+            .orElseThrow(() -> new RuntimeException("Reservation not found with id " + reservation_ID));
     }
 
     //刪除一個reservation

@@ -30,7 +30,7 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    // 新增一個 reservation
+    // 新增一個 reservation 
     @PostMapping("/")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
    
@@ -47,37 +47,20 @@ public class ReservationController {
 
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{Reservation_ID}")
-    public Optional<Reservation> getReservationByReservationID(@PathVariable(value = "Reservation_ID") Long reservation_ID) {
+    public Optional<Reservation> getReservationByReservationID(@PathVariable("Reservation_ID") Long reservation_ID) {
         return reservationService.getReservationByReservationID(reservation_ID);
     }
 
     // 更新一個 reservation
     @PutMapping("/{Reservation_ID}")
-    public Reservation updateReservation(@PathVariable(value = "Reservation_ID") Long reservation_ID,
-                                     @RequestBody Reservation reservationDetails) {
-    Optional<Reservation> existingReservation = reservationService.getReservationByReservationID(reservation_ID);
-    
-    if (existingReservation.isPresent()) {
-        Reservation existingReservationObj = existingReservation.get();
-        
-        existingReservationObj.setUserID(reservationDetails.getUserID());
-        existingReservationObj.setLockerID(reservationDetails.getLockerID());
-        existingReservationObj.setDepositTimestamp(reservationDetails.getDepositTimestamp());
-        existingReservationObj.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
-        existingReservationObj.setTotalRentalTime(reservationDetails.getTotalRentalTime());
-        existingReservationObj.setAmount(reservationDetails.getAmount());
-        
-        return reservationService.save(existingReservationObj);
-    } else {
-        // Handle case when reservation is not found
-        throw new NullPointerException("Reservation with ID " + reservation_ID + " not found");
-    }
+    public Reservation updateReservation(@PathVariable("Reservation_ID") Long reservation_ID, @RequestBody Reservation reservation) {
+        return reservationService.updateReservation(reservation_ID, reservation);
 }
 
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{Reservation_ID}")
-    public void deleteReservation(@PathVariable(value = "Reservation_ID") Long reservation_ID) {
+    public void deleteReservation(@PathVariable("Reservation_ID") Long reservation_ID) {
         reservationService.deleteReservationByReservationID(reservation_ID);
     }
 }
