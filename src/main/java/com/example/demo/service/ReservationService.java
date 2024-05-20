@@ -24,22 +24,31 @@ public class ReservationService {
     }
 
     //獲取所有 reservation
-       public List<Reservation> getReservations() {
+       public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 
-    //獲取單個reservation
-    public Optional<Reservation> getReservaitonById(Long id) {
-        return reservationRepository.findById(id);
+    // 利用Reservation_ID 獲取單個 reservation
+    public Optional<Reservation> getReservationByReservationID(Long reservation_ID) {
+        return reservationRepository.findById(reservation_ID);
     }
 
     //更新一個reservation
-    public User updateReservation(Reservation reservation) {
-        return reservationRepository.save(reservation);
+    public Reservation updateReservation(Long reservation_ID, Reservation reservationDetails) {
+        return reservationRepository.findById(reservation_ID)
+            .map(reservation -> {
+                reservation.setUserID(reservationDetails.getUserID());
+                reservation.setLockerID(reservationDetails.getLockerID());
+                reservation.setDepositTimestamp(reservationDetails.getDepositTimestamp());
+                reservation.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
+                reservation.setTotalRentalTime(reservationDetails.getTotalRentalTime());
+                reservation.setAmount(reservationDetails.getAmount());
+            })
+            .orElseThrow(() -> new RuntimeException("Reservation not found with id " + reservation_ID));
     }
 
     //刪除一個reservation
-    public void deleteUser(Long id) {
-        reservationRepository.deleteById(id);
+    public void deleteReservationByReservationID(Long reservation_ID) {
+        reservationRepository.deleteById(reservation_ID);
     }
 }

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locker System</title>
+    <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
+    <link href="css\homepage.css" rel="stylesheet"/>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <div class="logo">Locker System</div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="searchLink">Search</a></li>
+                    <li><a href="#" id="reservationLink">ReservationInfo</a></li>
+                    <li><a href="#" id="hotelLink">Deliver-to-Hotel</a></li>
+                    <li><a href="#" id="moreLink">More<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                      </svg></a>
+                    </li>
+                    <li><a href="#" id="dropdown-menu"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                      </svg></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Search Block -->
+            <div id="searchBlock">
+                <select id="searchInput" placeholder="Search Station" list="stationNames">
+                    <optgroup label="Brown Line">
+                        <option>BR01 Taipei Zoo</option>
+                        <option>BR02 Muzha</option>
+                        <option>BR03 Wanfang Community</option>
+                        <option>BR04 Wanfang Hospital</option>
+                        <option>BR05 Xinhai</option>
+                    </optgroup>
+                    <optgroup label="Blue Line">
+                        <option>BL01 Dingpu</option>
+                        <option>BL02 Yongning</option>
+                        <option>BL03 Tucheng</option>
+                    </optgroup>
+                </select>
+                <!-- Dropdown for suggestions -->
+                
+            </div>
+            
+            <!-- Reservation info block -->
+            <div id="reservationInfo">
+              Reservation Info
+              <div id="reservationDetails">
+                Reservation No. #3476IH<br>
+                Date 2024/05/12<br>
+                Start Time 10:00 a.m.<br>
+                End Time 12:00 p.m.<br>
+                Password ******
+              </div>
+            </div>
+            <!-- Hotel info block -->
+            <div id="hotelInfo">
+                Deliver-to-Hotel
+                <div id="hotelDetails">
+                  G Hotel<br>
+                  F Hotel<br>
+                  W Hotel<br>
+                </div>
+            </div>
+            <div id="more">
+                <a href="#">ACCOUNT</a><br> 
+                <a href="#">HISTORY</a><br> 
+                <a href="#">FAQ</a><br> 
+                <a href="#">CONTACT US</a><br> 
+                <a href="#">LOG OUT</a><br> 
+            </div>
+            <!--<div class="dropdown-menu">
+                <a href="#">HOMEPAGE</a>
+                <a href="#">ACCOUNT</a>
+                <a href="#">HISTORY</a>
+                <a href="#">FAQ</a>
+                <a href="#">CONTACT US</a>
+                <a href="#">LOG OUT</a>
+            </div>-->      
+        </div>
+    </header>
+
+    <div class="background-image" id="bgImage">
+        <!-- Empty div to hold the background image --> 
+        <!-- Example buttons with different initial positions -->
+        
+        <button id="BR01" class="map-button"></button>
+        <button id="BR02" class="map-button"></button>
+        <button id="BR03" class="map-button"></button>
+        <button id="BR04" class="map-button"></button>
+        <button id="BR05" class="map-button"></button>
+        <button id="BR13" class="map-button"></button>
+        
+        <!-- Add more buttons as needed -->
+
+    </div>
+    <!-- Main content goes here -->
+
+    <script src="js\homepage.js"></script>
+    
+</body>
+</html>
