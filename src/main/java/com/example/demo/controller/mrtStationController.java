@@ -16,48 +16,39 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/mrtStation")
-public class mrtStationController {
+public class MrtStationController {
 
     @Autowired
-    private mrtStationService mrtStationService;
+    private MrtStationService mrtStationService;
 
     // 新增一個 mrtStation
     @PostMapping("/")
-    public ResponseEntity<mrtStation> createmrtStation(@RequestBody mrtStation mrtStation) {
-        mrtStation savedmrtStation = mrtStationService.save(mrtStation);
-        return new ResponseEntity<>(savedmrtStation, HttpStatus.CREATED);
+    public ResponseEntity<MrtStation> createMrtStation(@RequestBody MrtStation mrtStation) {
+        MrtStation createdMrtStation = mrtStationService.createMrtStation(mrtStation);
+        return new ResponseEntity<MrtStation>(createdMrtStation, HttpStatus.CREATED);
     }
 
     // 獲取所有 mrtStation
     @GetMapping
-    public List<mrtStation> listAllmrtStation(@RequestParam(required = false, name = "Station_ID") Long Station_ID) {
-        if (Station_ID != null) {
-            return mrtStationService.getStationByStationID(Station_ID);
-        } else {
-            return mrtStationService.getAllStation();
-        }
+    public List<MrtStation> listAllmrtStation(@RequestParam(required = false, name = "Station_ID") Long Station_ID) {
+        return mrtStationService.getAllStation();
     }
 
     // 獲取單個 mrtStation
     @GetMapping("/{Station_ID}")
-    public Optional<mrtStation> getStationByStationID(@PathVariable(value = "Station_ID") Long Station_ID) {
-        return mrtStationService.findStationByStationID(Station_ID);
+    public Optional<MrtStation> getStationByStationID(@PathVariable("Station_ID") Long Station_ID) {
+        return mrtStationService.getStationByStationID(Station_ID);
     }
 
     // 更新一個 mrtStation
     @PutMapping("/{Station_ID}")
-    public locker updatemrtStation(@PathVariable(value = "Station_ID") Long Station_ID,
-                               @RequestBody mrtStation mrtStationDetails) {
-        Optional<mrtStation> mrtStation = mrtStationService.findStationByStationID(Station_ID);
-        locker existingmrtStation = mrtStation.get();
-        existingmrtStation.setLocation(mrtStationDetails.getLocation());
-        existingmrtStation.setStationName(mrtStationDetails.getStationName());
-        return mrtStationService.save(existingmrtStation);
+    public MrtStation updateMrtStation(@PathVariable("Station_ID") Long Station_ID, @RequestBody MrtStation mrtStation) {
+        return mrtStationService.updateMrtStation(Station_ID, mrtStation)
     }
 
     // 刪除一個 mrtStation
     @DeleteMapping("/{Station_ID}")
-    public void deleteStation(@PathVariable(value = "Station_ID") Long Station_ID) {
+    public void deleteStation(@PathVariable("Station_ID") Long Station_ID) {
         mrtStationService.deleteStationByStationID(Station_ID);
     }
 

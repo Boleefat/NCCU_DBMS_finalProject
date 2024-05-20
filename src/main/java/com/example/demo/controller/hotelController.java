@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hotel")
-public class hotelController {
+public class HotelController {
 
 
     @Autowired
