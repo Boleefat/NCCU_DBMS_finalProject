@@ -47,8 +47,8 @@ public class ReservationController {
 
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{Reservation_ID}")
-    public Optional<Reservation> getReservationByReservationID(@PathVariable("Reservation_ID") Long reservation_ID) {
-        return reservationService.getReservationByReservationID(reservation_ID);
+    public Optional<Reservation> getReservationByReservationID(@PathVariable("Reservation_ID") Long Reservation_ID) {
+        return reservationService.getReservationByReservationID(Reservation_ID);
     }
 
     // 更新一個 reservation
@@ -60,7 +60,7 @@ public class ReservationController {
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{Reservation_ID}")
-    public void deleteReservation(@PathVariable("Reservation_ID") Long reservation_ID) {
-        reservationService.deleteReservationByReservationID(reservation_ID);
+    public void deleteReservation(@PathVariable("Reservation_ID") Long Reservation_ID) {
+        reservationService.deleteReservationByReservationID(Reservation_ID);
     }
 }
