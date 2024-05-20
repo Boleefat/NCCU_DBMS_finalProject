@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.locker;
-import com.example.demo.model.lockerArea;
-import com.example.demo.service.lockerAreaService;
+import com.example.demo.model.Locker;
+import com.example.demo.model.LockerArea;
+import com.example.demo.service.LockerAreaService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -22,39 +22,41 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class lockerAreaController {
 
     @Autowired
-    private lockerAreaService lockerService;
+    private LockerAreaService lockerService;
 
     // 新增一個 lockerArea
     @PostMapping("/")
-    public ResponseEntity<lockerArea> createLockerArea(@RequestBody lockerArea lockerArea) {
-        lockerArea savedLockerArea = lockerAreaService.save(lockerArea);
-        return new ResponseEntity<>(savedLockerArea, HttpStatus.CREATED);
+    public ResponseEntity<LockerArea> createLockerArea(@RequestBody LockerArea lockerArea) {
+        LockerArea savedLockerArea = lockerAreaService.createLockerArea(lockerArea);
+        return new ResponseEntity<>(createdLockerArea, HttpStatus.CREATED);
     }
 
     // 獲取所有 lockerArea
     @GetMapping
-    public List<lockerArea> listAllLockerArea(@RequestParam(required = false, name = "LockerArea_ID") Long LockerArea_ID) {
-        if (LockerArea_ID != null) {
-            return lockerAreaService.getLockerAreaByLockerAreaID(LockerArea_ID);
-        } else {
-            return lockerAreaService.getAllLocker();
-        }
+    public List<LockerArea> listAllLockerArea(@RequestParam(required = false, name = "LockerArea_ID") Long LockerArea_ID) {
+        return lockerAreaService.getAllLocker();
     }
 
     // 利用LockerArea_ID獲取單個 lockerArea
     @GetMapping("/{LockerArea_ID}")
-    public Optional<lockerArea> getLockerAreaByLockerAreaID(@PathVariable(value = "LockerArea_ID") Long LockerArea_ID) {
-        return lockerAreaService.findLockerAreaByLockerAreaID(LockerArea_ID);
+    public Optional<LockerArea> getLockerAreaByLockerAreaID(@PathVariable(value = "LockerArea_ID") Long LockerArea_ID) {
+        return lockerAreaService.getLockerAreaByLockerAreaID(LockerArea_ID);
     }
 
     // 更新一個 lockerArea
     @PutMapping("/{LockerArea_ID}")
-    public locker updateLockerArea(@PathVariable(value = "LockerArea_ID") Long LockerArea_ID,
-                               @RequestBody lockerArea lockerAreaDetails) {
-        Optional<lockerArea> lockerArea = lockerAreaService.findByLockerID(LockerArea_ID);
-        locker existingLockerArea = lockerArea.get();
-        existingLockerArea.setLovkerAreaLocation(lockerAreaDetails.getLockerAreaLocation());
-        return lockerAreaService.save(existingLockerArea);
+    public LockerArea updateLockerArea(@PathVariable(value = "LockerArea_ID") Long LockerArea_ID,
+                               @RequestBody LockerArea lockerAreaDetails) {
+        Optional<LockerArea> existingLockerArea = lockerAreaService.getLockerAreaByLockerID(LockerArea_ID);
+        if (existingLockerArea.isPresent()) {
+            Locker existingLockerAreaObj = lockerArea.get();
+            existingLockerArea.setLockerAreaLocation(lockerAreaDetails.getLockerAreaLocation());
+            return lockerAreaService.save(existingLockerArea);
+        } else {
+            // Handle case when reservation is not found
+            throw new NullPointerException("LockerArea with ID " + locker_ID + " not found");
+        }
+        
     }
 
     // 利用LockerArea_ID刪除一個 locker
