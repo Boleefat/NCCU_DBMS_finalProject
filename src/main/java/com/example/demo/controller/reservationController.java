@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/reservation")
-public class reservationController {
+public class ReservationController {
 
     @Autowired
     private UserService userService;
@@ -32,7 +32,7 @@ public class reservationController {
 
     // 新增一個 reservation
     @PostMapping("/")
-    public ResponseEntity<Reservation> createreservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
    
         Reservation createdReservation = reservationService.createReservation(reservation);
 
