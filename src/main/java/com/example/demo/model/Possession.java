@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "possession_area_pay")
-public class Possession_Area_Payment {
+@Table(name = "possession")
+public class Possession {
     @EmbeddedId
     private possessionAreaPayKey IDB;
     
@@ -18,7 +18,7 @@ public class Possession_Area_Payment {
     @JoinColumn(name = "PaymentMethod_ID", nullable = false)
     private PaymentMethod PaymentMethod_ID;
 
-    public Possession_Area_Payment(){
+    public Possession(){
     }
 
     public possessionAreaPayKey getIDB() {

@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "mrtstation")
@@ -15,11 +15,10 @@ public class MrtStation {
     private String Station_Name;
 
     @Column(name = "Location", nullable = false, length = 255)
-    private String Location ;
+    private String Location;
 
-
-    @OneToMany(mappedBy = "mrtstation")
-    private List<Possession_Mrt_Area> possessions;
+    @OneToMany(mappedBy = "MrtStation")
+    private Set<LockerArea> LockerAreas;
 
     public MrtStation(){
     }
@@ -30,7 +29,7 @@ public class MrtStation {
         this.Location = Location;
     }
 
-    public long getStationID(){
+    public Long getStationID(){
         return Station_ID;
     }
 
@@ -52,5 +51,13 @@ public class MrtStation {
 
     public void setLocation(String Location){
         this.Location = Location;
+    }
+
+    public Set<LockerArea> getLockerAreas() {
+        return LockerAreas;
+    }
+
+    public void setLockerAreas(Set<LockerArea> LockerAreas) {
+        this.LockerAreas = LockerAreas;
     }
 }

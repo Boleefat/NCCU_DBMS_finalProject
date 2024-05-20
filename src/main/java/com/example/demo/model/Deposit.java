@@ -1,40 +1,29 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.Calendar;
 
 @Entity
-@Table(name = "deposit")
-public class Deposit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Locker_ID")
-    private Long Locker_ID;
+@DiscriminatorValue("deposit")
+public class Deposit extends Locker{
 
-    @Column(name = "Deposit_ID", nullable = false, length = 255)
+    @Column(name = "Deposit_ID", nullable = false)
     private Long Deposit_ID;
 
     @Column(name = "Total_Price", nullable = false, length = 255)
-    private int Total_Price ;
+    private int Total_Price;
 
     @Column(name = "Deposit_Password", nullable = false, length = 255)
-    private String Deposit_Password ;
+    private String Deposit_Password;
 
     public Deposit(){
     }
 
-    public Deposit(Long Locker_ID, Long Deposit_ID, int Total_Price, String Deposit_Password){
-        this.Locker_ID = Locker_ID;
+    public Deposit(Locker_ID IDB, LockerArea LockerArea, int Size, int Price, Boolean Status_Used, Boolean Status_Not_Used, Boolean Status_Reserved_But_Not_Used, Long Reservation_ID, Calendar Deposit_Timestamp, Calendar PickUp_Timestamp, Long Delivery_ID, Long Deposit_ID, int Total_Price, String Deposit_Password){
+        super(IDB, LockerArea, Size, Price, Status_Used, Status_Not_Used, Status_Reserved_But_Not_Used, Reservation_ID, Deposit_Timestamp, PickUp_Timestamp);
         this.Deposit_ID = Deposit_ID;
         this.Total_Price = Total_Price;
         this.Deposit_Password = Deposit_Password;
-    }
-
-    public long getLockerID(){
-        return Locker_ID;
-    }
-
-    public void setLockerID(Long Locker_ID){
-        this.Locker_ID = Locker_ID;
     }
 
     public Long getDepositID(){

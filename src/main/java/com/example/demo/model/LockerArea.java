@@ -1,43 +1,87 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "lockerarea")
 public class LockerArea {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "LockerArea_ID")
-    private Long LockerArea_ID;
+    @EmbeddedId
+    private LockerArea_ID IDA;
 
     @Column(name = "LockerArea_Location", nullable = false, length = 255)
     private String LockerArea_Location;
 
-    @OneToMany(mappedBy = "lockerArea")
-    private List<Possession_Mrt_Area> possessions;
+    @ManyToOne
+    @MapsId("Station_ID")
+    @JoinColumn(name = "Station_ID")
+    private MrtStation MrtStation;
+
+    @OneToMany(mappedBy = "LockerArea")
+    private Set<Locker> Lockers;
+
+    @OneToMany(mappedBy = "LockerArea")
+    private Set<PaymentMethod> PaymentMethods;
+
+    @OneToMany(mappedBy = "LockerArea")
+    private Set<Possession> Possessions;
 
     public LockerArea(){
     }
 
-    public LockerArea(Long LockerArea_ID, String LockerArea_Location){
-        this.LockerArea_ID = LockerArea_ID;
+    public LockerArea(LockerArea_ID IDA, String LockerArea_Location, MrtStation MrtStation){
+        this.IDA = IDA;
         this.LockerArea_Location = LockerArea_Location;
+        this.MrtStation = MrtStation;
     }
 
-    public long getLockerAreaID(){
-        return LockerArea_ID;
+    public LockerArea_ID getIDA() {
+        return IDA;
     }
 
-    public void setLockerAreaID(Long LockerArea_ID){
-        this.LockerArea_ID = LockerArea_ID;
+    public void setIDA(LockerArea_ID IDA) {
+        this.IDA = IDA;
     }
 
-    public String getLockerAreaLocation(){
+    public String getLockerAreaLocation() {
         return LockerArea_Location;
     }
 
-    public void setLockerAreaLocation(String LockerArea_Location){
+    public void setLockerAreaLocation(String LockerArea_Location) {
         this.LockerArea_Location = LockerArea_Location;
+    }
+
+
+    public MrtStation getMrtStation() {
+        return MrtStation;
+    }
+
+    public void setMrtStation(MrtStation MrtStation) {
+        this.MrtStation = MrtStation;
+    }
+
+    public Set<Locker> getLockers() {
+        return Lockers;
+    }
+
+    public void setLockers(Set<Locker> Lockers) {
+        this.Lockers = Lockers;
+    }
+
+    public Set<PaymentMethod> getPaymentMethods() {
+        return PaymentMethods;
+    }
+
+    public void setPaymentMethods(Set<PaymentMethod> PaymentMethods) {
+        this.PaymentMethods = PaymentMethods;
+    }
+
+    public Set<Possession> getPossessions() {
+        return Possessions;
+    }
+
+    public void setPossessions(Set<Possession> Possessions) {
+        this.Possessions = Possessions;
     }
 }
