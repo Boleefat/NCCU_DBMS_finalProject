@@ -9,52 +9,45 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.demo.model.PaymentMethod;
 import com.example.demo.model.paymentMethod;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/paymentMethod")
-public class paymentMethodController {
+public class PaymentMethodController {
     @Autowired
-    private paymentMethodService paymentMethodService;
+    private PaymentMethodService paymentMethodService;
 
-    // 新增一個 paymentMethod
+    // 新增一個 paymentMethod   paymentMethodService.createpaymentMethod(paymentMethod)
     @PostMapping("/")
-    public ResponseEntity<paymentMethod> createpaymentMethod(@RequestBody paymentMethod paymentMethod) {
-        paymentMethod savedpaymentMethod = paymentMethodService.save(paymentMethod);
-        return new ResponseEntity<>(savedpaymentMethod, HttpStatus.CREATED);
+    public ResponseEntity<PaymentMethod> createpaymentMethod(@RequestBody PaymentMethod paymentMethod) {
+        PaymentMethod createdpaymentMethod = paymentMethodService.createpaymentMethod(paymentMethod);
+        return new ResponseEntity<PaymentMethod>(createdpaymentMethod, HttpStatus.CREATED);
     }
 
-    // 獲取所有 paymentMethod
+    // 獲取所有 paymentMethod   paymentMethodService.getAllPaymentMethod()
     @GetMapping
-    public List<paymentMethod> listAllPaymentMethod(@RequestParam(required = false, name = "PaymentMethod_ID") Long PaymentMethod_ID) {
-        if (PaymentMethod_ID != null) {
-            return paymentMethodService.getPaymentMethodByPaymentMethodID(PaymentMethod_ID);
-        } else {
-            return paymentMethodService.getAllPaymentMethod();
-        }
+    public List<PaymentMethod> listAllPaymentMethod(@RequestParam(required = false, name = "PaymentMethod_ID") Long PaymentMethod_ID) {
+        return paymentMethodService.getAllPaymentMethod();
     }
 
-    // 獲取單個 paymentMethod
+    // 獲取單個 paymentMethod   paymentMethodService.getPaymentMethodByPaymentMethodID(PaymentMethod_ID)
     @GetMapping("/{PaymentMethod_ID}")
-    public Optional<paymentMethod> getPaymentMethodBypaymentMethodID(@PathVariable(value = "PaymentMethod_ID") Long PaymentMethod_ID) {
-        return paymentMethodService.findPaymentMethodByPaymentMethodID(PaymentMethod_ID);
+    public Optional<PaymentMethod> getPaymentMethodBypaymentMethodID(@PathVariable("PaymentMethod_ID") Long PaymentMethod_ID) {
+        return paymentMethodService.getPaymentMethodByPaymentMethodID(PaymentMethod_ID);
     }
 
-    // 更新一個 paymentMethod
+    // 更新一個 paymentMethod   updatepaymentMethod(PaymentMethod_ID, paymentMethod)
     @PutMapping("/{PaymentMethod_ID}")
-    public paymentMethod updatepaymentMethod(@PathVariable(value = "PaymentMethod_ID") Long PaymentMethod_ID,
-                               @RequestBody paymentMethod paymentMethodDetails) {
-        Optional<paymentMethod> paymentMethod = paymentMethodService.findPaymentMethodByPaymentMethod(PaymentMethod_ID);
-        paymentMethod existingpaymentMethod = paymentMethod.get();
-        existingpaymentMethod.setStationName(paymentMethodDetails.getPaymentMethodName());
-        return paymentMethodService.save(existingpaymentMethod);
+    public PaymentMethod updatepaymentMethod(@PathVariable("PaymentMethod_ID") Long PaymentMethod_ID, @RequestBody PaymentMethod paymentMethod) {
+        return updatepaymentMethod(PaymentMethod_ID, paymentMethod);
     }
 
-    // 刪除一個 paymentMethod
-    @DeleteMapping("/{PaymentMethod_ID}")
-    public void deletePaymentMethod(@PathVariable(value = "PaymentMethod_ID") Long PaymentMethod_ID) {
+    // 刪除一個 paymentMethod   paymentMethodService.deletePaymentMethodByPaymentMethodID(PaymentMethod_ID)
+    @DeleteMapping("/{PaymentMethod_ID}")   
+    public void deletePaymentMethod(@PathVariable("PaymentMethod_ID") Long PaymentMethod_ID) {
         paymentMethodService.deletePaymentMethodByPaymentMethodID(PaymentMethod_ID);
     }
 }
