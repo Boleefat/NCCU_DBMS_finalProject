@@ -33,26 +33,26 @@ public class DepositController {
 
     // 獲取所有 deposits   depositService.getAllDeposit();
     @GetMapping
-    public List<Deposit> listAlldeposit(@RequestParam(required = false, name = "Deposit_ID") Long Deposit_ID) {
+    public List<Deposit> listAlldeposit(@RequestParam(required = false, name = "deposit_id") Long DepositID) {
         return depositService.getAllDeposit();
     }
 
-    // 獲取單個 deposit   depositService.getDepositByDepositID(Deposit_ID);
-    @GetMapping("/{Deposit_ID}")
-    public Optional<Deposit> getDepositByDepositID(@PathVariable("Deposit_ID") Long Deposit_ID) {
-        return depositService.getDepositByDepositID(Deposit_ID);
+    // 獲取單個 deposit   depositService.getDepositByDepositID(DepositID);
+    @GetMapping("/{deposit_id}")
+    public Optional<Deposit> getDepositByDepositID(@PathVariable("deposit_id") Long DepositID) {
+        return depositService.getDepositByDepositID(DepositID);
     }
 
-    // 更新一個 deposit   updateDeposit(Deposit_ID, deposit);
-    @PutMapping("/{Deposit_ID}")
-    public Deposit updateDeposit(@PathVariable("Deposit_ID") Long Deposit_ID, @RequestBody Deposit deposit) {
-        return updateDeposit(Deposit_ID, deposit);
+    // 更新一個 deposit   updateDeposit(DepositID, deposit);
+    @PutMapping("/{deposit_id}")
+    public Deposit updateDeposit(@PathVariable("deposit_id") Long DepositID, @RequestBody Deposit deposit) {
+        return updateDeposit(DepositID, deposit);
     }
 
-    // 刪除一個 deposit   depositService.deleteDepositByDepositID(Deposit_ID);
-    @DeleteMapping("/{Deposit_ID}")
-    public void deleteDeposit(@PathVariable("Deposit_ID") Long Deposit_ID) {
-        depositService.deleteDepositByDepositID(Deposit_ID);
+    // 刪除一個 deposit   depositService.deleteDepositByDepositID(DepositID);
+    @DeleteMapping("/{deposit_id}")
+    public void deleteDeposit(@PathVariable("deposit_id") Long DepositID) {
+        depositService.deleteDepositByDepositID(DepositID);
     }
 
 }

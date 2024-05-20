@@ -33,26 +33,26 @@ public class LockerController {
 
     // 獲取所有 lockers   lockerService.getAllLocker()
     @GetMapping
-    public List<Locker> listAllLocker(@RequestParam(required = false, name = "Locker_ID") Long Locker_ID) {
+    public List<Locker> listAllLocker(@RequestParam(required = false, name = "locker_id") Long LockerID) {
             return lockerService.getAllLocker();
     }
 
-    // 利用Locker_ID獲取單個locker   lockerService.getLockerByLockerID(Locker_ID)
-    @GetMapping("/{Locker_ID}")
-    public Optional<Locker> getLockerByLockerID(@PathVariable(value = "Locker_ID") Long Locker_ID) {
-        return lockerService.getLockerByLockerID(Locker_ID);
+    // 利用Locker_ID獲取單個locker   lockerService.getLockerByLockerID(LockerID)
+    @GetMapping("/{locker_id}")
+    public Optional<Locker> getLockerByLockerID(@PathVariable("locker_id") Long LockerID) {
+        return lockerService.getLockerByLockerID(LockerID);
     }
 
-    // 更新一個 locker   lockerService.updateLocker(Locker_ID, locker)
-    @PutMapping("/{Locker_ID}")
-    public Locker updateLocker(@PathVariable("Locker_ID") Long Locker_ID, @RequestBody Locker locker) {
-        return lockerService.updateLocker(Locker_ID, locker); 
+    // 更新一個 locker   lockerService.updateLocker(LockerID, locker)
+    @PutMapping("/{locker_id}")
+    public Locker updateLocker(@PathVariable("locker_id") Long LockerID, @RequestBody Locker locker) {
+        return lockerService.updateLocker(LockerID, locker); 
 
     }
 
-    // 利用Locker_ID刪除一個 locker   lockerService.deleteLockerByLockerID(Locker_ID)
-    @DeleteMapping("/{Locker_ID}")
-    public void deleteLocker(@PathVariable("Locker_ID") Long Locker_ID) {
-        lockerService.deleteLockerByLockerID(Locker_ID);
+    // 利用Locker_ID刪除一個 locker   lockerService.deleteLockerByLockerID(LockerID)
+    @DeleteMapping("/{locker_id}")
+    public void deleteLocker(@PathVariable("locker_id") Long LockerID) {
+        lockerService.deleteLockerByLockerID(LockerID);
     }
 }
