@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Deposit;
 import com.example.demo.model.deposit;
 import com.example.demo.service.depositService;
 
@@ -18,48 +19,39 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deposit")
-public class depositController {
+public class DepositController {
 
     @Autowired
-    private depositService depositService;
+    private DepositService depositService;
 
-    // 新增一個 deposit
+    // 新增一個 deposit   depositService.createDeposit(deposit);
     @PostMapping("/")
-    public ResponseEntity<deposit> createDeposit(@RequestBody deposit deposit) {
-        deposit savedDeposit = depositService.save(deposit);
-        return new ResponseEntity<>(savedDeposit, HttpStatus.CREATED);
+    public ResponseEntity<Deposit> createDeposit(@RequestBody Deposit deposit) {
+        Deposit createdDeposit = depositService.createDeposit(deposit);
+        return new ResponseEntity<Deposit>(createdDeposit, HttpStatus.CREATED);
     }
 
-    // 獲取所有 deposits
+    // 獲取所有 deposits   depositService.getAllDeposit();
     @GetMapping
-    public List<deposit> listAlldeposit(@RequestParam(required = false, name = "Deposit_ID") Long Deposit_ID) {
-        if (Deposit_ID != null) {
-            return depositService.getDepositByDepositID(Deposit_ID);
-        } else {
-            return depositService.getAllDeposit();
-        }
+    public List<Deposit> listAlldeposit(@RequestParam(required = false, name = "Deposit_ID") Long Deposit_ID) {
+        return depositService.getAllDeposit();
     }
 
-    // 獲取單個 deposit
+    // 獲取單個 deposit   depositService.getDepositByDepositID(Deposit_ID);
     @GetMapping("/{Deposit_ID}")
-    public Optional<deposit> getDepositByDepositID(@PathVariable(value = "Deposit_ID") Long Deposit_ID) {
-        return depositService.findDepositByDepositID(Deposit_ID);
+    public Optional<Deposit> getDepositByDepositID(@PathVariable("Deposit_ID") Long Deposit_ID) {
+        return depositService.getDepositByDepositID(Deposit_ID);
     }
 
-    // 更新一個 deposit
+    // 更新一個 deposit   updateDeposit(Deposit_ID, deposit);
     @PutMapping("/{Deposit_ID}")
-    public deposit updateDeposit(@PathVariable(value = "Deposit_ID") Long Deposit_ID,
-                               @RequestBody deposit depositDetails) {
-        Optional<deposit> deposit = depositService.findByDepositID(Deposit_ID);
-        deposit existingdeposit = deposit.get();
-        existingdeposit.setDepositPassword(depositDetails.getDepositPassword());
-        existingdeposit.setTotalPrice(depositDetails.getTotalPrice());
-        return depositService.save(existingdeposit);
+    public Deposit updateDeposit(@PathVariable("Deposit_ID") Long Deposit_ID, @RequestBody Deposit deposit) {
+        return updateDeposit(Deposit_ID, deposit);
     }
 
-    // 刪除一個 deposit
+    // 刪除一個 deposit   depositService.deleteDepositByDepositID(Deposit_ID);
     @DeleteMapping("/{Deposit_ID}")
-    public void deleteDeposit(@PathVariable(value = "Deposit_ID") Long Deposit_ID) {
+    public void deleteDeposit(@PathVariable("Deposit_ID") Long Deposit_ID) {
         depositService.deleteDepositByDepositID(Deposit_ID);
     }
 
