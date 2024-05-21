@@ -15,18 +15,18 @@ public class MrtStation {
     private String stationName;
 
     @Column(name = "mrt_station_location", nullable = false)
-    private String location;
+    private String mrtStationLocation;
 
-    @OneToMany(mappedBy = "mrtStation")
+    @OneToMany(mappedBy = "mrtStation") //
     private Set<LockerArea> lockerAreas;
 
     public MrtStation(){
     }
 
-    public MrtStation(int stationID, String stationName, String location){
+    public MrtStation(int stationID, String stationName, String mrtStationLocation){
         this.stationID = stationID;
         this.stationName = stationName;
-        this.location = location;
+        this.mrtStationLocation = mrtStationLocation;
     }
 
     public int getStationID(){
@@ -45,12 +45,12 @@ public class MrtStation {
         this.stationName = stationName;
     }
 
-    public String getLocation(){
-        return location;
+    public String getMrtStationLocation(){
+        return mrtStationLocation;
     }
 
-    public void setLocation(String location){
-        this.location = location;
+    public void setMrtStationLocation(String mrtStationLocation){
+        this.mrtStationLocation = mrtStationLocation;
     }
 
     public Set<LockerArea> getLockerAreas() {

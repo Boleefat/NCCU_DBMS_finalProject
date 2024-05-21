@@ -1,6 +1,3 @@
-
-
-
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -12,7 +9,7 @@ import java.math.BigDecimal;
 @Table(name = "locker")
 public class Locker {
     @EmbeddedId
-    private Locker_ID IDB;
+    private Locker_ID lockerId;
 
     @Column(name = "size", nullable = false, length = 255)
     private int size;
@@ -35,10 +32,10 @@ public class Locker {
     @ManyToOne
     @MapsId("lockerAreaID")
     @JoinColumns({
-        @JoinColumn(name = "station_id", referencedColumnName = "station_id"),
-        @JoinColumn(name = "locker_area_id", referencedColumnName = "locker_areaid")
+        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
     })
-    private LockerArea lockerArea;
+    private LockerArea lockerArea; //
 
     @OneToMany(mappedBy = "locker")
     private Set<Reservation> reservations;

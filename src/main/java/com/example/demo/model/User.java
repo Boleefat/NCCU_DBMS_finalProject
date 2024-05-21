@@ -9,10 +9,10 @@ import jakarta.persistence.*;
 @Table(name = "user")
 public class User {
 
-    @Id //PK
+    @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userID;
+    private int userID;
  
     // Column = Attribute
     @Column(name = "email", nullable = false, unique = true, length = 255)
@@ -34,18 +34,18 @@ public class User {
     public User() {
     }
 
-    public User(Long userID, String email, String password) {
+    public User(int userID, String email, String password) {
         this.userID = userID;
         this.email = email;
         this.password = password;
     }
 
     // Getters and Setters
-    public Long getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(Long userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 

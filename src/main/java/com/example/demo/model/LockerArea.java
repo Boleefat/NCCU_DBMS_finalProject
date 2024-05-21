@@ -8,11 +8,12 @@ import java.util.Set;
 @Table(name = "lockerarea")
 public class LockerArea {
     @EmbeddedId
-    private LockerArea_ID IDA;
+    private LockerArea_ID lockerAreaId;
 
-    @Column(name = "locker_area_location", nullable = false, length = 255)
+    @Column(name = "locker_area_location", nullable = false)
     private String lockerAreaLocation;
 
+    // 多值屬性
     @ElementCollection
     @CollectionTable(name = "locker_area_payment_methods", joinColumns = {
         @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
@@ -24,27 +25,27 @@ public class LockerArea {
     @ManyToOne
     @MapsId("stationID")
     @JoinColumn(name = "station_id")
-    private MrtStation mrtStation;
+    private MrtStation mrtStation; //
 
-    @OneToMany(mappedBy = "lockerArea")
+    @OneToMany(mappedBy = "lockerArea") //
     private Set<Locker> lockers;
 
     public LockerArea(){
     }
 
-    public LockerArea(LockerArea_ID IDA, String lockerAreaLocation, MrtStation mrtStation, Set<String> paymentMethods){
-        this.IDA = IDA;
+    public LockerArea(LockerArea_ID lockerAreaId, String lockerAreaLocation , Set<String> paymentMethods, MrtStation mrtStation){
+        this.lockerAreaId = lockerAreaId;
         this.lockerAreaLocation = lockerAreaLocation;
-        this.mrtStation = mrtStation;
         this.paymentMethods = paymentMethods;
+        this.mrtStation = mrtStation;
     }
 
-    public LockerArea_ID getIDA() {
-        return IDA;
+    public LockerArea_ID getLockerAreaId() {
+        return lockerAreaId;
     }
 
-    public void setIDA(LockerArea_ID IDA) {
-        this.IDA = IDA;
+    public void setlockerAreaId(LockerArea_ID lockerAreaId) {
+        this.lockerAreaId = lockerAreaId;
     }
 
     public String getLockerAreaLocation() {

@@ -11,7 +11,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reservation_id")
-    private Long reservationID;
+    private int reservationID;
 
     @Column(name = "deposit_timestamp", nullable = false)
     private Calendar depositTimestamp;
@@ -21,10 +21,10 @@ public class Reservation {
 
     @Column(name = "deposit_or_delivery", nullable = false)
     private Boolean depositOrDelivery;
-    
+
     // Be_Delivered_To
     @Column(name = "delivery_id", nullable = true)
-    private Long deliveryID;
+    private int deliveryID;
 
     @Column(name = "status_picked_up", nullable = true)
     private Boolean statusPickedUp;
@@ -53,7 +53,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(Long reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp, Boolean depositOrDelivery, Long deliveryID, Boolean statusPickedUp, Boolean statusWaiting) {
+    public Reservation(int reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp, Boolean depositOrDelivery, int deliveryID, Boolean statusPickedUp, Boolean statusWaiting) {
         this.reservationID = reservationID;
         this.depositTimestamp = depositTimestamp;
         this.pickUpTimestamp = pickUpTimestamp;
@@ -63,11 +63,11 @@ public class Reservation {
         this.statusWaiting = statusWaiting;
     }
 
-    public Long getReservationID() {
+    public int getReservationID() {
         return reservationID;
     }
 
-    public void setReservationID(Long reservationID) {
+    public void setReservationID(int reservationID) {
         this.reservationID = reservationID;
     }
 
@@ -95,11 +95,11 @@ public class Reservation {
         this.depositOrDelivery = depositOrDelivery;
     }
 
-    public Long getDeliveryID(){
+    public int getDeliveryID(){
         return deliveryID;
     }
 
-    public void setDeliveryID(Long deliveryID){
+    public void setDeliveryID(int deliveryID){
         this.deliveryID = deliveryID;
     }
 
@@ -131,17 +131,17 @@ public class Reservation {
     }
 
     @Transient
-    public Long getTotalRentalHours() {
+    public int getTotalRentalHours() {
         return getTotalRentalTime().toHours();
     }
 
     @Transient
-    public Long getTotalRentalMinutes() {
+    public int getTotalRentalMinutes() {
         return getTotalRentalTime().toMinutes();
     }
 
     @Transient
-    public Long getTotalRentalSeconds() {
+    public int getTotalRentalSeconds() {
         return getTotalRentalTime().getSeconds();
     }
 }
