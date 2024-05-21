@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.hotel;
-import com.example.demo.service.hotelService;
+import com.example.demo.model.Hotel;
+import com.example.demo.service.HotelService;
 
 import jakarta.servlet.http.HttpServletRequest;
 

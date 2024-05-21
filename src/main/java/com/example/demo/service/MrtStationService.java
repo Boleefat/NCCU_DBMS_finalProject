@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.model.MrtStation;
 import com.example.demo.repository.MrtStationRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,8 @@ import java.util.Optional;
 @Service
 public class MrtStationService {
 
-    private  MrtStationRepository mrtStationRepository;
+    @Autowired
+    private MrtStationRepository mrtStationRepository;
 
     // 新增一個 mrtStation
     public MrtStation createMrtStation(MrtStation mrtstation) {
@@ -28,21 +31,20 @@ public class MrtStationService {
     }
 
     // 更新一個 mrtStation
-    public MrtStation updateMrtStation(int stationID, MrtStation newMrtStation) {
-        Optional<MrtStation> mrtStationOptional = mrtStationRepository.findBystation_id(stationID);
-        if(mrtStationOptional.isPresent()){
-            MrtStation mrtStation = mrtStationOptional.get();
+    public Optional<MrtStation> updateMrtStation(int stationID, MrtStation newMrtStation) {
+        return mrtStationRepository.findBystation_id(stationID).map(mrtStation -> {
             mrtStation.setLocation(newMrtStation.getLocation());
-            mrtStation.setStationID(newMrtStation.getStationID());
             mrtStation.setStationName(newMrtStation.getStationName());
             return mrtStationRepository.save(mrtStation);
-        }
-        return null;
+        });
     }
 
-
     // 刪除一個 mrtStation
-    public void deleteMrtStation(int stationID) {
-        mrtStationRepository.deleteBystation_id(stationID);
+    public boolean deleteStationByStationID(int stationID) {
+        if (mrtStationRepository.existsById(stationID)) {
+            mrtStationRepository.deleteById(stationID);
+            return true;
+        }
+        return false;
     }
 }
