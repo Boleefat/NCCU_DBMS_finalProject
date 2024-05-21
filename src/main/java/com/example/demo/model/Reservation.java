@@ -38,7 +38,7 @@ public class Reservation {
         @JoinColumn(name = "locker_id"/*sql*/, referencedColumnName = "lockerID"/*java*/),
         @JoinColumn(name = "locker_area_id"/*sql*/, referencedColumnName = "lockerAreaID"/*java*/)
     })
-    private Locker locker;
+    private Locker locker; //
 
     @ManyToOne
     @MapsId("userID"/*java*/)
@@ -131,17 +131,17 @@ public class Reservation {
     }
 
     @Transient
-    public int getTotalRentalHours() {
+    public Long getTotalRentalHours() {
         return getTotalRentalTime().toHours();
     }
 
     @Transient
-    public int getTotalRentalMinutes() {
+    public Long getTotalRentalMinutes() {
         return getTotalRentalTime().toMinutes();
     }
 
     @Transient
-    public int getTotalRentalSeconds() {
+    public Long getTotalRentalSeconds() {
         return getTotalRentalTime().getSeconds();
     }
 }

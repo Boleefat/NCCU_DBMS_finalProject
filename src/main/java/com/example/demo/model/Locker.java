@@ -11,10 +11,10 @@ public class Locker {
     @EmbeddedId
     private Locker_ID lockerId;
 
-    @Column(name = "size", nullable = false, length = 255)
+    @Column(name = "size", nullable = false)
     private int size;
 
-    @Column(name = "price", nullable = false, length = 255)
+    @Column(name = "price", nullable = false)
     private int price;
 
     @Column(name = "locker_password", nullable = false)
@@ -37,14 +37,14 @@ public class Locker {
     })
     private LockerArea lockerArea; //
 
-    @OneToMany(mappedBy = "locker")
+    @OneToMany(mappedBy = "locker") //
     private Set<Reservation> reservations;
 
     public Locker(){
     }
 
-    public Locker(Locker_ID IDB, LockerArea lockerArea, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
-        this.IDB = IDB;
+    public Locker(Locker_ID lockerId, LockerArea lockerArea, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
+        this.lockerId = lockerId;
         this.lockerArea = lockerArea;
         this.size = size;
         this.price = price;
@@ -54,12 +54,12 @@ public class Locker {
         this.statusReservedButNotUsed = statusReservedButNotUsed;
     }
 
-    public Locker_ID getIDB(){
-        return IDB;
+    public Locker_ID getLockerId(){
+        return lockerId;
     }
 
-    public void setIDB(Locker_ID IDB){
-        this.IDB = IDB;
+    public void setLockerId(Locker_ID lockerId){
+        this.lockerId = lockerId;
     }
 
     public LockerArea getLockerArea() {
