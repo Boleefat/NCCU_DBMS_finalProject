@@ -29,25 +29,25 @@ public class DeliveryController {
 
     // 獲取所有 deliverys   deliveryService.getAllDelivery();
     @GetMapping
-    public List<Delivery> listAllDelivery(@RequestParam(required = false, name = "Delivery_ID") Long Delivery_ID) {
+    public List<Delivery> listAllDelivery(@RequestParam(required = false, name = "delivery_id") Long DeliveryID) {
         return deliveryService.getAllDelivery();
     }
 
-    // 獲取單個 delivery   deliveryService.getDeliveryByDeliveryID(Delivery_ID);
-    @GetMapping("/{Delivery_ID}")
-    public Optional<Delivery> getDeliveryByDeliveryID(@PathVariable("Delivery_ID") Long Delivery_ID) {
-        return deliveryService.getDeliveryByDeliveryID(Delivery_ID);
+    // 獲取單個 delivery   deliveryService.getDeliveryByDeliveryID(DeliveryID);
+    @GetMapping("/{delivery_id}")
+    public Optional<Delivery> getDeliveryByDeliveryID(@PathVariable("delivery_id") Long DeliveryID) {
+        return deliveryService.getDeliveryByDeliveryID(DeliveryID);
     }
 
-    // 更新一個 delivery   delivery.updateDelivery(Delivery_ID, delivery);
+    // 更新一個 delivery   delivery.updateDelivery(DeliveryID, delivery);
     @PutMapping("/{Delivery_ID}")
-    public Delivery updateDelivery(@PathVariable("Delivery_ID") Long Delivery_ID, @RequestBody Delivery delivery) {
-        return delivery.updateDelivery(Delivery_ID, delivery);
+    public Delivery updateDelivery(@PathVariable("delivery_id") Long DeliveryID, @RequestBody Delivery delivery) {
+        return delivery.updateDelivery(DeliveryID, delivery);
     }
 
-    // 刪除一個 delivery   deliveryService.deleteDeliveryByDeliveryID(Delivery_ID);
-    @DeleteMapping("/{Delivery_ID}")
-    public void deleteDelivery(@PathVariable("Delivery_ID") Long Delivery_ID) {
-        deliveryService.deleteDeliveryByDeliveryID(Delivery_ID);
+    // 刪除一個 delivery   deliveryService.deleteDeliveryByDeliveryID(DeliveryID);
+    @DeleteMapping("/{delivery_id}")
+    public void deleteDelivery(@PathVariable("delivery_id") Long DeliveryID) {
+        deliveryService.deleteDeliveryByDeliveryID(DeliveryID);
     }
 }

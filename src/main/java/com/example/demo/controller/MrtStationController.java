@@ -30,26 +30,26 @@ public class MrtStationController {
 
     // 獲取所有 mrtStation
     @GetMapping
-    public List<MrtStation> listAllmrtStation(@RequestParam(required = false, name = "Station_ID") Long Station_ID) {
+    public List<MrtStation> listAllmrtStation(@RequestParam(required = false, name = "station_id") Long StationID) {
         return mrtStationService.getAllStation();
     }
 
     // 獲取單個 mrtStation
-    @GetMapping("/{Station_ID}")
-    public Optional<MrtStation> getStationByStationID(@PathVariable("Station_ID") Long Station_ID) {
-        return mrtStationService.getStationByStationID(Station_ID);
+    @GetMapping("/{station_id}")
+    public Optional<MrtStation> getStationByStationID(@PathVariable("station_id") Long StationID) {
+        return mrtStationService.getStationByStationID(StationID);
     }
 
     // 更新一個 mrtStation
-    @PutMapping("/{Station_ID}")
-    public MrtStation updateMrtStation(@PathVariable("Station_ID") Long Station_ID, @RequestBody MrtStation mrtStation) {
-        return mrtStationService.updateMrtStation(Station_ID, mrtStation)
+    @PutMapping("/{station_id}")
+    public MrtStation updateMrtStation(@PathVariable("station_id") Long StationID, @RequestBody MrtStation mrtStation) {
+        return mrtStationService.updateMrtStation(StationID, mrtStation)
     }
 
     // 刪除一個 mrtStation
-    @DeleteMapping("/{Station_ID}")
-    public void deleteStation(@PathVariable("Station_ID") Long Station_ID) {
-        mrtStationService.deleteStationByStationID(Station_ID);
+    @DeleteMapping("/{station_id}")
+    public void deleteStation(@PathVariable("station_id") Long StationID) {
+        mrtStationService.deleteStationByStationID(StationID);
     }
 
 
