@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/mrtStation")
+
 public class MrtStationController {
 
     @Autowired
@@ -21,7 +22,7 @@ public class MrtStationController {
     @PostMapping("/")
     public ResponseEntity<MrtStation> createMrtStation(@RequestBody MrtStation mrtStation) {
         MrtStation createdMrtStation = mrtStationService.createMrtStation(mrtStation);
-        return new ResponseEntity<MrtStation>(createdMrtStation, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdMrtStation, HttpStatus.CREATED);
     }
 
     // 獲取所有 mrtStation
@@ -34,25 +35,25 @@ public class MrtStationController {
     @GetMapping("/{station_id}")
     public ResponseEntity<MrtStation> getStationByStationID(@PathVariable("station_id") int stationID) {
         Optional<MrtStation> mrtStationOptional = mrtStationService.getStationByStationID(stationID);
-        if (mrtStationOptional.isPresent()) {
-            return ResponseEntity.ok(mrtStationOptional.get());
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return mrtStationOptional.map(ResponseEntity::ok)
+                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 更新一個 mrtStation
     @PutMapping("/{station_id}")
-    public MrtStation updateMrtStation(@PathVariable("station_id") int stationID, @RequestBody MrtStation mrtStation) {
-        return mrtStationService.updateMrtStation(stationID,mrtStation);
+    public ResponseEntity<MrtStation> updateMrtStation(@PathVariable("station_id") int stationID, @RequestBody MrtStation mrtStation) {
+        Optional<MrtStation> updatedMrtStation = mrtStationService.updateMrtStation(stationID, mrtStation);
+        return updatedMrtStation.map(ResponseEntity::ok)
+                                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 刪除一個 mrtStation
     @DeleteMapping("/{station_id}")
-    public void deleteStation(@PathVariable("station_id") int stationID) {
-        mrtStationService.deleteStationByStationID(stationID);
+    public ResponseEntity<Void> deleteStation(@PathVariable("station_id") int stationID) {
+        if (mrtStationService.deleteStationByStationID(stationID)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
-
-
-
 }
