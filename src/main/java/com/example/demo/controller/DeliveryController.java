@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 import com.example.demo.model.Delivery;
-import com.example.demo.model.delivery;
-import com.example.demo.model.delivery;
-import com.example.demo.service.deliveryService;
+import com.example.demo.service.DeliveryService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
