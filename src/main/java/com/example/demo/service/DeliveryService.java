@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Delivery;
+import com.example.demo.model.User;
 import com.example.demo.repository.DeliveryRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,17 @@ import java.util.Optional;
 public class DeliveryService {
 
     private final DeliveryRepository deliveryRepository;
+
+    public Delivery createdDelivery(Delivery delivery){
+        return deliveryRepository.save(delivery);
+    }
+
+    public Delivery getAllDelivery(){
+        return deliveryRepository.findAll();
+    }
+
+
+
 
     public DeliveryService(DeliveryRepository deliveryRepository) {
         this.deliveryRepository = deliveryRepository;
