@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 import com.example.demo.model.Delivery;
-import com.example.demo.model.delivery;
-import com.example.demo.model.delivery;
-import com.example.demo.service.deliveryService;
-
+import com.example.demo.service.DeliveryService;
+import com.example.demo.repository.DeliveryRepository;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,8 @@ import java.util.Optional;
 @RequestMapping("/api/delivery")
 public class DeliveryController {
     // 新增一個 delivery   deliveryService.createdDelivery(delivery);
+    private DeliveryService deliveryService;
+
     @PostMapping("/")
     public ResponseEntity<Delivery> createDelivery(@RequestBody Delivery delivery) {
         Delivery createdDelivery = deliveryService.createdDelivery(delivery);

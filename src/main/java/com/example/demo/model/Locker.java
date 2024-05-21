@@ -1,3 +1,6 @@
+
+
+
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -32,8 +35,8 @@ public class Locker {
     @ManyToOne
     @MapsId("lockerAreaID")
     @JoinColumns({
-        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
-        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
+        @JoinColumn(name = "station_id", referencedColumnName = "station_id"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "locker_areaid")
     })
     private LockerArea lockerArea;
 
