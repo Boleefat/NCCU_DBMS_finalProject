@@ -17,8 +17,8 @@ public class DeliveryService {
         return deliveryRepository.save(delivery);
     }
 
-    public Delivery getAllDelivery(){
-        return deliveryRepository.findAll();
+    public  List<Delivery> getAllDelivery(){
+        return  deliveryRepository.findAll();
     }
 
 

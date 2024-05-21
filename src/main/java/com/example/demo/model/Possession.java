@@ -11,15 +11,15 @@ public class Possession {
     @ManyToOne
     @MapsId("lockerAreaID")
     @JoinColumns({
-        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
-        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
+        @JoinColumn(name = "station_id", referencedColumnName = "station_id"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "locker_areaid")
     })
     private LockerArea lockerArea;
 
     @ManyToOne
     @MapsId("paymentMethodID")
     @JoinColumns({
-        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "locker_areaid"),
         @JoinColumn(name = "payment_method_id", referencedColumnName = "paymentMethodID")
     })
     private PaymentMethod paymentMethod;

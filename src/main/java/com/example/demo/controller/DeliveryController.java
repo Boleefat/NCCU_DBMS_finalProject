@@ -19,6 +19,8 @@ import java.util.Optional;
 @RequestMapping("/api/delivery")
 public class DeliveryController {
     // 新增一個 delivery   deliveryService.createdDelivery(delivery);
+    private DeliveryService deliveryService;
+
     @PostMapping("/")
     public ResponseEntity<Delivery> createDelivery(@RequestBody Delivery delivery) {
         Delivery createdDelivery = deliveryService.createdDelivery(delivery);
