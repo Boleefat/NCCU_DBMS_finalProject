@@ -2,40 +2,37 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class LockerArea_ID implements Serializable {
     // 複合主鍵
-    private Long stationID;
-    @Column(name = "locker_areaid")
-    private Long lockerAreaID;
+    private int stationID;
+    private int lockerAreaID;
 
     public LockerArea_ID() {
     }
 
-    public LockerArea_ID(Long stationID, Long lockerAreaID) {
+    public LockerArea_ID(int stationID, int lockerAreaID) {
         this.stationID = stationID;
         this.lockerAreaID = lockerAreaID;
     }
 
     // Getters, setters, hashCode and equals methods
 
-    public Long getStationID() {
+    public int getStationID() {
         return stationID;
     }
 
-    public void setStationID(Long stationID) {
+    public void setStationID(int stationID) {
         this.stationID = stationID;
     }
 
-    public Long getLockerAreaID() {
+    public int getLockerAreaID() {
         return lockerAreaID;
     }
 
-    public void setLockerAreaID(Long lockerAreaID) {
+    public void setLockerAreaID(int lockerAreaID) {
         this.lockerAreaID = lockerAreaID;
     }
     
