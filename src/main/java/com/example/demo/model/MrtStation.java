@@ -29,11 +29,11 @@ public class MrtStation {
         this.location = location;
     }
 
-    public Long getStationID(){
+    public int getStationID(){
         return stationID;
     }
 
-    public void setStationID(Long stationID){
+    public void setStationID(int stationID){
         this.stationID = stationID;
     }
 

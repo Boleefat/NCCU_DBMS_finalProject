@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MrtStationRepository extends JpaRepository<MrtStation, Long> {
+public interface MrtStationRepository extends JpaRepository<MrtStation, Integer> {
     // 獲取單個 mrtStation
-    MrtStation findBystation_id(Long stationID);
+    Optional<MrtStation> findBystation_id(int stationID);
     // 刪除一個 mrtStation
-    Optional<MrtStation> deleteBystation_id(Long stationID);
+    Optional<MrtStation> deleteBystation_id(int stationID);
 }
