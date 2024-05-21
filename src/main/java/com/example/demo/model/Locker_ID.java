@@ -6,6 +6,7 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Locker_ID implements Serializable {
+    // 複合主鍵
     private Long lockerAreaID;
     private Long lockerID;
 

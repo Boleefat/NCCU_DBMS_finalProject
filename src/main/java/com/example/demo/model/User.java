@@ -9,56 +9,59 @@ import jakarta.persistence.*;
 @Table(name = "user")
 public class User {
 
-    @Id
+    @Id //PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long User_ID;
+    @Column(name = "user_id")
+    private Long userID;
+ 
+    // Column = Attribute
+    @Column(name = "email", nullable = false, unique = true, length = 255)
+    private String email;
 
-    @Column(nullable = false, unique = true, length = 255)
-    private String Email;
+    @Column(name = "password", nullable = false, length = 64)
+    private String password;
 
-    @Column(nullable = false, length = 64)
-    private String Password;
-
+    // User是many，Hotel是one
     @ManyToOne
-    @MapsId("Hotel_ID")
-    @JoinColumn(name = "Hotel_ID")
-    private Hotel Hotel;
+    @MapsId("Hotel_ID") // (java)MapsID = 對應到的class的PK
+    @JoinColumn(name = "hotel_id") // (sql)JoinColumn 
+    private Hotel hotels;
 
-    @OneToMany(mappedBy = "Locker")
-    private Set<Locker> Lockers;
+    @OneToMany(mappedBy = "reservations") // (java)
+    private Set<Reservation> reservations; 
 
     // Constructors
     public User() {
     }
 
-    public User(Long User_ID, String Email, String Password) {
-        this.User_ID = User_ID;
-        this.Email = Email;
-        this.Password = Password;
+    public User(Long userID, String email, String password) {
+        this.userID = userID;
+        this.email = email;
+        this.password = password;
     }
 
     // Getters and Setters
     public Long getUserID() {
-        return User_ID;
+        return userID;
     }
 
-    public void setUserID(Long User_ID) {
-        this.User_ID = User_ID;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setemail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

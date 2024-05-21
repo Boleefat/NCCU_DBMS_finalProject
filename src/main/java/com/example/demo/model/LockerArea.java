@@ -13,6 +13,14 @@ public class LockerArea {
     @Column(name = "locker_area_location", nullable = false, length = 255)
     private String lockerAreaLocation;
 
+    @ElementCollection
+    @CollectionTable(name = "locker_area_payment_methods", joinColumns = {
+        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
+    })
+    @Column(name = "payment_method")
+    private Set<String> paymentMethods;
+
     @ManyToOne
     @MapsId("stationID")
     @JoinColumn(name = "station_id")
@@ -21,16 +29,14 @@ public class LockerArea {
     @OneToMany(mappedBy = "lockerArea")
     private Set<Locker> lockers;
 
-    @OneToMany(mappedBy = "lockerArea")
-    private Set<Possession> possessions;
-
     public LockerArea(){
     }
 
-    public LockerArea(LockerArea_ID IDA, String lockerAreaLocation, MrtStation mrtStation){
+    public LockerArea(LockerArea_ID IDA, String lockerAreaLocation, MrtStation mrtStation, Set<String> paymentMethods){
         this.IDA = IDA;
         this.lockerAreaLocation = lockerAreaLocation;
         this.mrtStation = mrtStation;
+        this.paymentMethods = paymentMethods;
     }
 
     public LockerArea_ID getIDA() {
@@ -63,13 +69,5 @@ public class LockerArea {
 
     public void setLockers(Set<Locker> lockers) {
         this.lockers = lockers;
-    }
-
-    public Set<Possession> getPossessions() {
-        return possessions;
-    }
-
-    public void setPossessions(Set<Possession> possessions) {
-        this.possessions = possessions;
     }
 }

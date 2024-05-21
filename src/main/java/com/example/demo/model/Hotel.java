@@ -18,13 +18,13 @@ public class Hotel {
     @Column(name = "latest_pick_up_time", nullable = false)
     private LocalTime latestPickUpTime;
 
-    @Column(name = "bookingID", nullable = false)
+    @Column(name = "booking_id", nullable = false)
     private Long bookingID;
 
-    @OneToMany(mappedBy = "Hotel")
-    private Set<Delivery> Deliveries;
+    @OneToMany(mappedBy = "hotels"/*java*/) 
+    private Set<Reservation> reservations;
 
-    @OneToMany(mappedBy = "Hotel")
+    @OneToMany(mappedBy = "hotels"/*java*/)
     private Set<User> Users;
 
     public Hotel(){
@@ -70,12 +70,12 @@ public class Hotel {
     }
 
 
-    public Set<Delivery> getDeliveries() {
-        return Deliveries;
+    public Set<Reservation> getreservations() {
+        return reservations;
     }
 
-    public void setDelivery(Set<Delivery> Deliveries) {
-        this.Deliveries = Deliveries;
+    public void setReservation(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Set<User> getUsers() {

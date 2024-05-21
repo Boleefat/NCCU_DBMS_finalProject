@@ -1,9 +1,9 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.Calendar;
+import java.util.Set;
 import java.time.Duration;
-import java.time.Instant;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "locker")
@@ -17,6 +17,9 @@ public class Locker {
     @Column(name = "price", nullable = false, length = 255)
     private int price;
 
+    @Column(name = "locker_password", nullable = false)
+    private String lockerPassword;
+
     @Column(name = "status_used", nullable = false)
     private Boolean statusUsed;
 
@@ -26,15 +29,6 @@ public class Locker {
     @Column(name = "status_reserved_but_not_used", nullable = false)
     private Boolean statusReservedButNotUsed;
 
-    @Column(name = "reservation_id", nullable = false)
-    private Long reservationID;
-
-    @Column(name = "deposit_timestamp", nullable = false)
-    private Calendar depositTimestamp;
-
-    @Column(name = "pick_up_timestamp", nullable = false)
-    private Calendar pickUpTimestamp;
-
     @ManyToOne
     @MapsId("lockerAreaID")
     @JoinColumns({
@@ -43,25 +37,21 @@ public class Locker {
     })
     private LockerArea lockerArea;
 
-    @ManyToOne
-    @MapsId("userID")
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "locker")
+    private Set<Reservation> reservations;
 
     public Locker(){
     }
 
-    public Locker(Locker_ID IDB, LockerArea lockerArea, int size, int price, Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed, Long reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp){
+    public Locker(Locker_ID IDB, LockerArea lockerArea, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
         this.IDB = IDB;
         this.lockerArea = lockerArea;
         this.size = size;
         this.price = price;
+        this.lockerPassword = lockerPassword;
         this.statusUsed = statusUsed;
         this.statusNotUsed = statusNotUsed;
         this.statusReservedButNotUsed = statusReservedButNotUsed;
-        this.reservationID = reservationID;
-        this.depositTimestamp = depositTimestamp;
-        this.pickUpTimestamp = pickUpTimestamp;
     }
 
     public Locker_ID getIDB(){
@@ -96,6 +86,14 @@ public class Locker {
         this.price = price;
     }
 
+    public String getLockerPassword(){
+        return lockerPassword;
+    }
+
+    public void setLockerPassword(String lockerPassword){
+        this.lockerPassword = lockerPassword;
+    }
+
     public Boolean getStatusUsed(){
         return statusUsed;
     }
@@ -120,53 +118,26 @@ public class Locker {
         this.statusReservedButNotUsed = statusReservedButNotUsed;
     }
 
-    public Long getReservationID(){
-        return reservationID;
-    }
-
-    public void setReservationID(Long reservationID){
-        this.reservationID = reservationID;
-    }
-
-    public Calendar getDepositTimestamp(){
-        return depositTimestamp;
-    }
-
-    public void setDepositTimestamp(Calendar depositTimestamp){
-        this.depositTimestamp = depositTimestamp;
-    }
-
-    public Calendar getPickUpTimestamp(){
-        return pickUpTimestamp;
-    }
-
-    public void setPickUpTimestamp(Calendar pickUpTimestamp){
-        this.pickUpTimestamp = pickUpTimestamp;
+    @Transient
+    public BigDecimal getTotalPrice() {
+        if (getPrice() > 0 && getTotalRentalTime().toHours() > 0) {
+            return BigDecimal.valueOf(getPrice()).multiply(BigDecimal.valueOf(getTotalRentalTime().toHours()));
+        } else {
+            return BigDecimal.ZERO;
+        }
     }
 
     @Transient
     public Duration getTotalRentalTime() {
-        if (pickUpTimestamp != null && depositTimestamp != null) {
-            Instant depositInstant = depositTimestamp.toInstant();
-            Instant pickupInstant = pickUpTimestamp.toInstant();
-            return Duration.between(depositInstant, pickupInstant);
+        if (reservations != null && !reservations.isEmpty()) {
+            Reservation reservation = reservations.iterator().next();
+            return reservation.getTotalRentalTime();
         } else {
             return Duration.ZERO;
         }
     }
 
-    @Transient
-    public Long getTotalRentalHours() {
-        return getTotalRentalTime().toHours();
-    }
-
-    @Transient
-    public Long getTotalRentalMinutes() {
-        return getTotalRentalTime().toMinutes();
-    }
-
-    @Transient
-    public Long getTotalRentalSeconds() {
-        return getTotalRentalTime().getSeconds();
+    public void setTotalPrice(BigDecimal totalPrice) {
+        // This setter might not be necessary if totalPrice is always calculated dynamically.
     }
 }

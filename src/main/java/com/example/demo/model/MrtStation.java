@@ -4,17 +4,17 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "mrtstation")
+@Table(name = "mrt_station")
 public class MrtStation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "station_id")
-    private Long stationID;
+    private int stationID;
 
-    @Column(name = "station_name", nullable = false, length = 255)
+    @Column(name = "station_name", nullable = false)
     private String stationName;
 
-    @Column(name = "location", nullable = false, length = 255)
+    @Column(name = "mrt_station_location", nullable = false)
     private String location;
 
     @OneToMany(mappedBy = "mrtStation")
@@ -23,7 +23,7 @@ public class MrtStation {
     public MrtStation(){
     }
 
-    public MrtStation(Long stationID, String stationName, String location){
+    public MrtStation(int stationID, String stationName, String location){
         this.stationID = stationID;
         this.stationName = stationName;
         this.location = location;
