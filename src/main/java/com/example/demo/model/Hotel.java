@@ -9,17 +9,17 @@ import java.time.LocalTime;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Hotel_ID")
-    private Long Hotel_ID;
+    @Column(name = "hotel_id")
+    private Long hotelID;
 
-    @Column(name = "Hotel_Name", nullable = false, length = 255)
-    private String Hotel_Name;
+    @Column(name = "hotel_name", nullable = false, length = 255)
+    private String hotelName;
 
-    @Column(name = "Latest_PickUp_Time", nullable = false)
-    private LocalTime Latest_PickUp_Time;
+    @Column(name = "latest_pick_up_time", nullable = false)
+    private LocalTime latestPickUpTime;
 
-    @Column(name = "Booking_ID", nullable = false)
-    private Long Booking_ID;
+    @Column(name = "bookingID", nullable = false)
+    private Long bookingID;
 
     @OneToMany(mappedBy = "Hotel")
     private Set<Delivery> Deliveries;
@@ -30,43 +30,43 @@ public class Hotel {
     public Hotel(){
     }
 
-    public Hotel(Long Hotel_ID, String Hotel_Name, LocalTime Latest_PickUp_Time, Long Booking_ID){
-        this.Hotel_ID = Hotel_ID;
-        this.Hotel_Name = Hotel_Name;
-        this.Latest_PickUp_Time = Latest_PickUp_Time;
-        this.Booking_ID = Booking_ID;
+    public Hotel(Long hotelID, String hotelName, LocalTime latestPickUpTime, Long bookingID){
+        this.hotelID = hotelID;
+        this.hotelName = hotelName;
+        this.latestPickUpTime = latestPickUpTime;
+        this.bookingID = bookingID;
     }
 
     public Long getHotelID(){
-        return Hotel_ID;
+        return hotelID;
     }
 
-    public void setHotelID(Long Hotel_ID){
-        this.Hotel_ID = Hotel_ID;
+    public void setHotelID(Long hotelID){
+        this.hotelID = hotelID;
     }
 
     public String getHotelName(){
-        return Hotel_Name;
+        return hotelName;
     }
 
-    public void setHotelName(String Hotel_Name){
-        this.Hotel_Name = Hotel_Name;
+    public void setHotelName(String hotelName){
+        this.hotelName = hotelName;
     }
 
     public LocalTime getLatestPickUpTime(){
-        return Latest_PickUp_Time;
+        return latestPickUpTime;
     }
 
-    public void setLatestPickUpTime(LocalTime Latest_PickUp_Time){
-        this.Latest_PickUp_Time = Latest_PickUp_Time;
+    public void setLatestPickUpTime(LocalTime latestPickUpTime){
+        this.latestPickUpTime = latestPickUpTime;
     }
 
     public Long getBookingID(){
-        return Booking_ID;
+        return bookingID;
     }
 
-    public void setBookingID(Long Booking_ID){
-        this.Booking_ID = Booking_ID;
+    public void setBookingID(Long bookingID){
+        this.bookingID = bookingID;
     }
 
 

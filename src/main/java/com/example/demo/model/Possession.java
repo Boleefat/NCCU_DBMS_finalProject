@@ -6,42 +6,39 @@ import jakarta.persistence.*;
 @Table(name = "possession")
 public class Possession {
     @EmbeddedId
-    private Possession_ID idB;
+    private Possession_ID IDB;
 
     @ManyToOne
     @MapsId("lockerAreaID")
     @JoinColumns({
-        @JoinColumn(name = "Station_ID", referencedColumnName = "stationId"),
-        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "lockerAreaId")
+        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
     })
     private LockerArea lockerArea;
 
     @ManyToOne
-    @MapsId("paymentMethodId")
+    @MapsId("paymentMethodID")
     @JoinColumns({
-        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "lockerAreaId"),
-        @JoinColumn(name = "PaymentMethod_ID", referencedColumnName = "paymentMethodId")
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID"),
+        @JoinColumn(name = "payment_method_id", referencedColumnName = "paymentMethodID")
     })
     private PaymentMethod paymentMethod;
 
-    @Column(name = "Possession_Status", nullable = false, length = 255)
-    private String possessionStatus;
+    public Possession() {
+    }
 
-    public Possession() {}
-
-    public Possession(PossessionId id, LockerArea lockerArea, PaymentMethod paymentMethod, String possessionStatus) {
-        this.id = id;
+    public Possession(Possession_ID IDB, LockerArea lockerArea, PaymentMethod paymentMethod) {
+        this.IDB = IDB;
         this.lockerArea = lockerArea;
         this.paymentMethod = paymentMethod;
-        this.possessionStatus = possessionStatus;
     }
 
-    public PossessionId getId() {
-        return id;
+    public Possession_ID getIDB() {
+        return IDB;
     }
 
-    public void setId(PossessionId id) {
-        this.id = id;
+    public void setIDB(Possession_ID IDB) {
+        this.IDB = IDB;
     }
 
     public LockerArea getLockerArea() {
@@ -58,13 +55,5 @@ public class Possession {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public String getPossessionStatus() {
-        return possessionStatus;
-    }
-
-    public void setPossessionStatus(String possessionStatus) {
-        this.possessionStatus = possessionStatus;
     }
 }

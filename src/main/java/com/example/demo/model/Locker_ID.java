@@ -6,21 +6,38 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Locker_ID implements Serializable {
-    private Long LockerArea_ID;
-    private Long Locker_ID;
+    private Long lockerAreaID;
+    private Long lockerID;
 
     public Locker_ID() {
     }
 
-    public Locker_ID(Long LockerArea_ID, Long Locker_ID) {
-        this.LockerArea_ID = LockerArea_ID;
-        this.Locker_ID = Locker_ID;
+    public Locker_ID(Long lockerAreaID, Long lockerID) {
+        this.lockerAreaID = lockerAreaID;
+        this.lockerID = lockerID;
     }
 
     // Getters, setters, hashCode and equals methods
+
+    public Long getLockerAreaID(){
+        return lockerAreaID;
+    }
+
+    public void setLockerAreaID(Long lockerAreaID){
+        this.lockerAreaID = lockerAreaID;
+    }
+
+    public Long getLockerID(){
+        return lockerID;
+    }
+
+    public void setLockerID(Long lockerID){
+        this.lockerID = lockerID;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(LockerArea_ID, Locker_ID);
+        return Objects.hash(lockerAreaID, lockerID);
     }
 
     @Override
@@ -28,7 +45,7 @@ public class Locker_ID implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Locker_ID that = (Locker_ID) obj;
-        return Objects.equals(LockerArea_ID, that.LockerArea_ID) &&
-               Objects.equals(Locker_ID, that.Locker_ID);
+        return Objects.equals(lockerAreaID, that.lockerAreaID) &&
+               Objects.equals(lockerID, that.lockerID);
     }
 }

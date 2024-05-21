@@ -11,53 +11,57 @@ public class Locker {
     @EmbeddedId
     private Locker_ID IDB;
 
-    @Column(name = "Size", nullable = false, length = 255)
-    private int Size;
+    @Column(name = "size", nullable = false, length = 255)
+    private int size;
 
-    @Column(name = "Price", nullable = false, length = 255)
-    private int Price;
+    @Column(name = "price", nullable = false, length = 255)
+    private int price;
 
-    @Column(name = "Status_Used", nullable = true, length = 255)
-    private Boolean Status_Used;
+    @Column(name = "status_used", nullable = false)
+    private Boolean statusUsed;
 
-    @Column(name = "Status_Not_Used", nullable = true, length = 255)
-    private Boolean Status_Not_Used;
+    @Column(name = "status_not_used", nullable = false)
+    private Boolean statusNotUsed;
 
-    @Column(name = "Status_Reserved_But_Not_Used", nullable = true, length = 255)
-    private Boolean Status_Reserved_But_Not_Used;
+    @Column(name = "status_reserved_but_not_used", nullable = false)
+    private Boolean statusReservedButNotUsed;
 
-    @Column(name = "Reservation_ID", nullable = false)
-    private Long Reservation_ID;
+    @Column(name = "reservation_id", nullable = false)
+    private Long reservationID;
 
-    @Column(name = "Deposit_Timestamp", nullable = false)
-    private Calendar Deposit_Timestamp;
+    @Column(name = "deposit_timestamp", nullable = false)
+    private Calendar depositTimestamp;
 
-    @Column(name = "PickUp_Timestamp", nullable = false)
-    private Calendar PickUp_Timestamp;
-
+    @Column(name = "pick_up_timestamp", nullable = false)
+    private Calendar pickUpTimestamp;
 
     @ManyToOne
-    @MapsId("LockerArea_ID")
+    @MapsId("lockerAreaID")
     @JoinColumns({
-        @JoinColumn(name = "Station_ID", referencedColumnName = "Station_ID"),
-        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "LockerArea_ID")
+        @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
+        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
     })
-    private LockerArea LockerArea;
+    private LockerArea lockerArea;
+
+    @ManyToOne
+    @MapsId("userID")
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Locker(){
     }
 
-    public Locker(Locker_ID IDB, LockerArea LockerArea, int Size, int Price, Boolean Status_Used, Boolean Status_Not_Used, Boolean Status_Reserved_But_Not_Used, Long Reservation_ID, Calendar Deposit_Timestamp, Calendar PickUp_Timestamp){
+    public Locker(Locker_ID IDB, LockerArea lockerArea, int size, int price, Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed, Long reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp){
         this.IDB = IDB;
-        this.LockerArea = LockerArea;
-        this.Size = Size;
-        this.Price = Price;
-        this.Status_Used = Status_Used;
-        this.Status_Not_Used = Status_Not_Used;
-        this.Status_Reserved_But_Not_Used = Status_Reserved_But_Not_Used;
-        this.Reservation_ID = Reservation_ID;
-        this.Deposit_Timestamp = Deposit_Timestamp;
-        this.PickUp_Timestamp = PickUp_Timestamp;
+        this.lockerArea = lockerArea;
+        this.size = size;
+        this.price = price;
+        this.statusUsed = statusUsed;
+        this.statusNotUsed = statusNotUsed;
+        this.statusReservedButNotUsed = statusReservedButNotUsed;
+        this.reservationID = reservationID;
+        this.depositTimestamp = depositTimestamp;
+        this.pickUpTimestamp = pickUpTimestamp;
     }
 
     public Locker_ID getIDB(){
@@ -69,74 +73,82 @@ public class Locker {
     }
 
     public LockerArea getLockerArea() {
-        return LockerArea;
+        return lockerArea;
     }
 
-    public void setLockerArea(LockerArea LockerArea) {
-        this.LockerArea = LockerArea;
+    public void setLockerArea(LockerArea lockerArea) {
+        this.lockerArea = lockerArea;
     }
 
     public int getSize(){
-        return Size;
+        return size;
     }
 
-    public void setSize(int Size){
-        this.Size = Size;
+    public void setSize(int size){
+        this.size = size;
     }
 
     public int getPrice(){
-        return Price;
+        return price;
     }
 
-    public void setPrice(int Price){
-        this.Price = Price;
+    public void setPrice(int price){
+        this.price = price;
     }
 
     public Boolean getStatusUsed(){
-        return Status_Used;
+        return statusUsed;
     }
 
-    public void setStatusUsed(Boolean Status_Used){
-        this.Status_Used = Status_Used;
+    public void setStatusUsed(Boolean statusUsed){
+        this.statusUsed = statusUsed;
     }
 
     public Boolean getStatusNotUsed(){
-        return Status_Not_Used;
+        return statusNotUsed;
     }
 
-    public void setStatusNotUsed(Boolean Status_Not_Used){
-        this.Status_Not_Used = Status_Not_Used;
+    public void setStatusNotUsed(Boolean statusNotUsed){
+        this.statusNotUsed = statusNotUsed;
     }
 
     public Boolean getStatusReservedButNotUsed(){
-        return Status_Reserved_But_Not_Used;
+        return statusReservedButNotUsed;
     }
 
-    public void setStatusReservedButNotUsed(Boolean Status_Reserved_But_Not_Used){
-        this.Status_Reserved_But_Not_Used = Status_Reserved_But_Not_Used;
+    public void setStatusReservedButNotUsed(Boolean statusReservedButNotUsed){
+        this.statusReservedButNotUsed = statusReservedButNotUsed;
+    }
+
+    public Long getReservationID(){
+        return reservationID;
+    }
+
+    public void setReservationID(Long reservationID){
+        this.reservationID = reservationID;
     }
 
     public Calendar getDepositTimestamp(){
-        return Deposit_Timestamp;
+        return depositTimestamp;
     }
 
-    public void setDepositTimestamp(Calendar Deposit_Timestamp){
-        this.Deposit_Timestamp = Deposit_Timestamp;
+    public void setDepositTimestamp(Calendar depositTimestamp){
+        this.depositTimestamp = depositTimestamp;
     }
 
     public Calendar getPickUpTimestamp(){
-        return PickUp_Timestamp;
+        return pickUpTimestamp;
     }
 
-    public void setPickUpTimestamp(Calendar PickUp_Timestamp){
-        this.PickUp_Timestamp = PickUp_Timestamp;
+    public void setPickUpTimestamp(Calendar pickUpTimestamp){
+        this.pickUpTimestamp = pickUpTimestamp;
     }
 
     @Transient
     public Duration getTotalRentalTime() {
-        if (PickUp_Timestamp != null && Deposit_Timestamp != null) {
-            Instant depositInstant = Deposit_Timestamp.toInstant();
-            Instant pickupInstant = PickUp_Timestamp.toInstant();
+        if (pickUpTimestamp != null && depositTimestamp != null) {
+            Instant depositInstant = depositTimestamp.toInstant();
+            Instant pickupInstant = pickUpTimestamp.toInstant();
             return Duration.between(depositInstant, pickupInstant);
         } else {
             return Duration.ZERO;

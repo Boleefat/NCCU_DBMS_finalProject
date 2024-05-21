@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "paymentmethod")
@@ -8,36 +9,22 @@ public class PaymentMethod {
     @EmbeddedId
     private PaymentMethod_ID IDC;
 
-    @Column(name = "PaymentMethod_Name", nullable = false, length = 255)
-    private String PaymentMethod_Name;
+    @Column(name = "payment_method_name", nullable = false, length = 255)
+    private String paymentMethodName;
 
-    @ManyToOne
-    @MapsId("LockerArea_ID")
-    @JoinColumns({
-        @JoinColumn(name = "Station_ID", referencedColumnName = "Station_ID"),
-        @JoinColumn(name = "LockerArea_ID", referencedColumnName = "LockerArea_ID")
-    })
-    private LockerArea LockerArea;
+    @OneToMany(mappedBy = "paymentMethod")
+    private Set<Possession> possessions;
 
     public PaymentMethod(){
     }
 
-    public PaymentMethod(PaymentMethod_ID IDC, LockerArea LockerArea, String PaymentMethod_Name){
+    public PaymentMethod(PaymentMethod_ID IDC, String paymentMethodName){
         this.IDC = IDC;
-        this.LockerArea = LockerArea;
-        this.PaymentMethod_Name = PaymentMethod_Name;
+        this.paymentMethodName = paymentMethodName;
     }
 
     public PaymentMethod_ID getIDC(){
         return IDC;
-    }
-
-    public LockerArea getLockerArea() {
-        return LockerArea;
-    }
-
-    public void setLockerArea(LockerArea LockerArea) {
-        this.LockerArea = LockerArea;
     }
 
     public void setIDC(PaymentMethod_ID IDC){
@@ -45,10 +32,10 @@ public class PaymentMethod {
     }
 
     public String getPaymentMethodName(){
-        return PaymentMethod_Name;
+        return paymentMethodName;
     }
 
-    public void setPaymentMethodName(String PaymentMethod_Name){
-        this.PaymentMethod_Name = PaymentMethod_Name;
+    public void setPaymentMethodName(String paymentMethodName){
+        this.paymentMethodName = paymentMethodName;
     }
 }

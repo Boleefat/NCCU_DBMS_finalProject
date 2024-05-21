@@ -6,20 +6,38 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class PaymentMethod_ID implements Serializable {
-    private Long LockerArea_ID;
-    private Long PaymentMethod_ID;
+    private Long lockerAreaID;
+    private Long paymentMethodID;
 
-    public PaymentMethod_ID() {}
+    public PaymentMethod_ID() {
+    }
 
-    public PaymentMethod_ID(Long LockerArea_ID, Long PaymentMethod_ID) {
-        this.LockerArea_ID = LockerArea_ID;
-        this.PaymentMethod_ID = PaymentMethod_ID;
+    public PaymentMethod_ID(Long lockerAreaID, Long paymentMethodID) {
+        this.lockerAreaID = lockerAreaID;
+        this.paymentMethodID = paymentMethodID;
     }
 
     // Getters, setters, hashCode and equals methods
+
+    public Long getLockerAreaID(){
+        return lockerAreaID;
+    }
+
+    public void setLockerAreaID(Long lockerAreaID){
+        this.lockerAreaID = lockerAreaID;
+    }
+
+    public Long getPaymentMethodID(){
+        return paymentMethodID;
+    }
+
+    public void setPaymentMethodID(Long paymentMethodID){
+        this.paymentMethodID = paymentMethodID;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(LockerArea_ID, PaymentMethod_ID);
+        return Objects.hash(lockerAreaID, paymentMethodID);
     }
 
     @Override
@@ -27,7 +45,7 @@ public class PaymentMethod_ID implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         PaymentMethod_ID that = (PaymentMethod_ID) obj;
-        return Objects.equals(LockerArea_ID, that.LockerArea_ID) &&
-               Objects.equals(PaymentMethod_ID, that.PaymentMethod_ID);
+        return Objects.equals(lockerAreaID, that.lockerAreaID) &&
+               Objects.equals(paymentMethodID, that.paymentMethodID);
     }
 }

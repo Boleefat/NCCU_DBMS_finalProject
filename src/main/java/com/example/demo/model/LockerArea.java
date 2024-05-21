@@ -8,40 +8,37 @@ import java.util.Set;
 @Table(name = "lockerarea")
 public class LockerArea {
     @EmbeddedId
-    private LockerArea_ID idA;
+    private LockerArea_ID IDA;
 
-    @Column(name = "lockerarea_location", nullable = false, length = 255)
+    @Column(name = "locker_area_location", nullable = false, length = 255)
     private String lockerAreaLocation;
 
     @ManyToOne
-    @MapsId("station_id")
+    @MapsId("stationID")
     @JoinColumn(name = "station_id")
     private MrtStation mrtStation;
 
-    @OneToMany(mappedBy = "LockerArea")
+    @OneToMany(mappedBy = "lockerArea")
     private Set<Locker> lockers;
 
-    @OneToMany(mappedBy = "LockerArea")
-    private Set<PaymentMethod> paymentMethods;
-
-    @OneToMany(mappedBy = "LockerArea")
+    @OneToMany(mappedBy = "lockerArea")
     private Set<Possession> possessions;
 
     public LockerArea(){
     }
 
-    public LockerArea(LockerArea_ID idA, String lockerAreaLocation, MrtStation mrtStation){
-        this.idA = idA;
+    public LockerArea(LockerArea_ID IDA, String lockerAreaLocation, MrtStation mrtStation){
+        this.IDA = IDA;
         this.lockerAreaLocation = lockerAreaLocation;
         this.mrtStation = mrtStation;
     }
 
-    public LockerArea_ID getIdA() {
-        return idA;
+    public LockerArea_ID getIDA() {
+        return IDA;
     }
 
-    public void setIdA(LockerArea_ID idA) {
-        this.idA = idA;
+    public void setIDA(LockerArea_ID IDA) {
+        this.IDA = IDA;
     }
 
     public String getLockerAreaLocation() {
@@ -51,7 +48,6 @@ public class LockerArea {
     public void setLockerAreaLocation(String lockerAreaLocation) {
         this.lockerAreaLocation = lockerAreaLocation;
     }
-
 
     public MrtStation getMrtStation() {
         return mrtStation;
@@ -67,14 +63,6 @@ public class LockerArea {
 
     public void setLockers(Set<Locker> lockers) {
         this.lockers = lockers;
-    }
-
-    public Set<PaymentMethod> getPaymentMethods() {
-        return paymentMethods;
-    }
-
-    public void setPaymentMethods(Set<PaymentMethod> paymentMethods) {
-        this.paymentMethods = paymentMethods;
     }
 
     public Set<Possession> getPossessions() {
