@@ -29,12 +29,12 @@ public class ReservationService {
     }
 
     // 利用Reservation_ID 獲取單個 reservation
-    public Optional<Reservation> getReservationByReservationID(Long reservation_ID) {
+    public Optional<Reservation> getReservationByReservationID(int reservation_ID) {
         return reservationRepository.findById(reservation_ID);
     }
 
     //更新一個reservation
-    public Reservation updateReservation(Long reservation_ID, Reservation reservationDetails) {
+    public Reservation updateReservation(int reservation_ID, Reservation reservationDetails) {
         return reservationRepository.findById(reservation_ID)
             .map(reservation -> {
                 reservation.setUserID(reservationDetails.getUserID());
@@ -48,7 +48,7 @@ public class ReservationService {
     }
 
     //刪除一個reservation
-    public void deleteReservationByReservationID(Long reservation_ID) {
+    public void deleteReservationByReservationID(int reservation_ID) {
         reservationRepository.deleteById(reservation_ID);
     }
 }
