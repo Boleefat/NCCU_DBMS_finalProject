@@ -36,7 +36,7 @@ public class Reservation {
     @MapsId("lockerID")
     @JoinColumns({
         @JoinColumn(name = "locker_id"/*sql*/, referencedColumnName = "lockerID"/*java*/),
-        @JoinColumn(name = "locker_area_id"/*sql*/, referencedColumnName = "lockerAreaID"/*java*/)
+        @JoinColumn(name = "locker_area_id"/*sql*/, referencedColumnName = "locker_areaid"/*java*/)
     })
     private Locker locker; //
 
@@ -45,10 +45,10 @@ public class Reservation {
     @JoinColumn(name = "user_id"/*sql*/)
     private User users;
 
-    @ManyToOne
-    @MapsId("hotelID"/*java*/)
-    @JoinColumn(name = "hotel_id"/*sql*/)
-    private Hotel hotels;
+    // @ManyToOne
+    // @MapsId("hotelID"/*java*/)
+    // @JoinColumn(name = "hotel_id"/*sql*/)
+    // private Hotel hotels;
 
     public Reservation() {
     }

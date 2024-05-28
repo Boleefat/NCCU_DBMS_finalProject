@@ -17,7 +17,7 @@ public class LockerArea {
     @ElementCollection
     @CollectionTable(name = "locker_area_payment_methods", joinColumns = {
         @JoinColumn(name = "station_id", referencedColumnName = "stationID"),
-        @JoinColumn(name = "locker_area_id", referencedColumnName = "lockerAreaID")
+        @JoinColumn(name = "locker_areaid", referencedColumnName = "locker_areaid")
     })
     @Column(name = "payment_method")
     private Set<String> paymentMethods;
