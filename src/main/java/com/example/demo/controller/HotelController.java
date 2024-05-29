@@ -1,25 +1,19 @@
 package com.example.demo.controller;
-
 import com.example.demo.model.Hotel;
 import com.example.demo.service.HotelService;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hotel")
 public class HotelController {
-
 
     @Autowired
     private HotelService hotelService;
@@ -33,25 +27,25 @@ public class HotelController {
 
     // 獲取所有 hotels
     @GetMapping
-    public List<Hotel> listAllHotel(@RequestParam(required = false, name = "hotel_id") Long HotelID) {
+    public List<Hotel> listAllHotel(@RequestParam(required = false, name = "hotel_id") int HotelID) {
         return hotelService.getAllHotel();
     }
 
     // 獲取單個 hotel
     @GetMapping("/{hotel_id}")
-    public Optional<Hotel> getHotelByHotelID(@PathVariable("hotel_id") Long HotelID) {
+    public Optional<Hotel> getHotelByHotelID(@PathVariable("hotel_id") int HotelID) {
         return hotelService.getHotelByHotelID(HotelID);
     }
 
     // 更新一個 hotel
     @PutMapping("/{hotel_id}")
-    public Hotel updateHotel(@PathVariable("hotel_id") Long HotelID, @RequestBody Hotel hotel) {
+    public Hotel updateHotel(@PathVariable("hotel_id") int HotelID, @RequestBody Hotel hotel) {
         return hotelService.updateHotel(HotelID, hotel);
     }
 
     // 刪除一個 hotel
     @DeleteMapping("/{hotel_id}")
-    public void deleteHotel(@PathVariable("hotel_id") Long HotelID) {
+    public void deleteHotel(@PathVariable("hotel_id") int HotelID) {
         hotelService.deleteHotelByHotelID(HotelID);
     }
 

@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 import java.time.Duration;
 import java.math.BigDecimal;
 
@@ -10,9 +10,6 @@ import java.math.BigDecimal;
 public class Locker {
     @EmbeddedId
     private Locker_ID lockerId;
-
-    @Column(name = "locker_location", nullable = false)
-    private int lockerLocation;
 
     @Column(name = "size", nullable = false)
     private int size;
@@ -33,18 +30,22 @@ public class Locker {
     private Boolean statusReservedButNotUsed;
 
     @ManyToOne
-    @JoinColumn(name = "station_id",referencedColumnName = "station_id",nullable = false)
-    private MrtStation mrtStation;
+    @MapsId("lockerAreaID")
+    @JoinColumns({
+        @JoinColumn(name = "station_id", referencedColumnName = "station_id"),
+        @JoinColumn(name = "locker_areaid", referencedColumnName = "locker_areaid")
+    })
+    private LockerArea lockerArea; //
 
-    @OneToMany(mappedBy = "locker",cascade = CascadeType.ALL) //
-    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "locker") //
+    private Set<Reservation> reservations;
 
     public Locker(){
     }
 
-    public Locker(Locker_ID lockerId, /*LockerArea lockerArea,*/ int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
+    public Locker(Locker_ID lockerId, LockerArea lockerArea, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
         this.lockerId = lockerId;
-        // this.lockerArea = lockerArea;
+        this.lockerArea = lockerArea;
         this.size = size;
         this.price = price;
         this.lockerPassword = lockerPassword;
@@ -61,13 +62,13 @@ public class Locker {
         this.lockerId = lockerId;
     }
 
-    // public LockerArea getLockerArea() {
-    //     return lockerArea;
-    // }
+    public LockerArea getLockerArea() {
+        return lockerArea;
+    }
 
-    // public void setLockerArea(LockerArea lockerArea) {
-    //     this.lockerArea = lockerArea;
-    // }
+    public void setLockerArea(LockerArea lockerArea) {
+        this.lockerArea = lockerArea;
+    }
 
     public int getSize(){
         return size;
