@@ -12,7 +12,7 @@ public class User {
     @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userID;
+    private Long userID;
  
     // Column = Attribute
     @Column(name = "email", nullable = false, unique = true, length = 255)
@@ -34,18 +34,18 @@ public class User {
     public User() {
     }
 
-    public User(int userID, String email, String password) {
+    public User(Long userID, String email, String password) {
         this.userID = userID;
         this.email = email;
         this.password = password;
     }
 
     // Getters and Setters
-    public int getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 

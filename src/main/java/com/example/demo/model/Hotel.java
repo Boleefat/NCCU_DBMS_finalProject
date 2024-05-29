@@ -10,7 +10,7 @@ public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "hotel_id")
-    private int hotelID;
+    private Long hotelID;
 
     @Column(name = "hotel_name", nullable = false, length = 255)
     private String hotelName;
@@ -30,18 +30,18 @@ public class Hotel {
     public Hotel(){
     }
 
-    public Hotel(int hotelID, String hotelName, LocalTime latestPickUpTime, int bookingID){
+    public Hotel(Long hotelID, String hotelName, LocalTime latestPickUpTime, int bookingID){
         this.hotelID = hotelID;
         this.hotelName = hotelName;
         this.latestPickUpTime = latestPickUpTime;
         // this.bookingID = bookingID;
     }
 
-    public int getHotelID(){
+    public Long getHotelID(){
         return hotelID;
     }
 
-    public void setHotelID(int hotelID){
+    public void setHotelID(Long hotelID){
         this.hotelID = hotelID;
     }
 

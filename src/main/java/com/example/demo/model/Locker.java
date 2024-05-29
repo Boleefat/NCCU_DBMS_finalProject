@@ -12,9 +12,9 @@ public class Locker {
     private Locker_ID lockerId;
 
     @Column(name = "locker_location", nullable = false)
-    private int lockerLocation;
+    private String lockerLocation;
 
-    @Column(name = "size", nullable = false)
+    @Column(name = "size", nullable = false)//20 24 32
     private int size;
 
     @Column(name = "price", nullable = false)
@@ -22,6 +22,9 @@ public class Locker {
 
     @Column(name = "locker_password", nullable = false)
     private String lockerPassword;
+
+    @Column(name = "payment_method", nullable = false)
+    private String paymentMethod;
 
     @Column(name = "status_used", nullable = false)
     private Boolean statusUsed;
@@ -61,7 +64,13 @@ public class Locker {
         this.lockerId = lockerId;
     }
 
-  
+    public String getLockerLocation(){
+        return lockerLocation;
+    }
+
+    public void setLockerStation(String lockerLocation){
+        this.lockerLocation = lockerLocation;
+    }
 
     public int getSize(){
         return size;
@@ -85,6 +94,14 @@ public class Locker {
 
     public void setLockerPassword(String lockerPassword){
         this.lockerPassword = lockerPassword;
+    }
+
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod){
+        this.paymentMethod = paymentMethod;
     }
 
     public Boolean getStatusUsed(){

@@ -11,7 +11,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reservation_id")
-    private int reservationID;
+    private Long reservationID;
 
     @Column(name = "deposit_timestamp", nullable = false)
     private Calendar depositTimestamp;
@@ -24,7 +24,7 @@ public class Reservation {
 
     // Be_Delivered_To
     @Column(name = "delivery_id", nullable = true)
-    private int deliveryID;
+    private Long deliveryID;
 
     @Column(name = "status_picked_up", nullable = true)
     private Boolean statusPickedUp;
@@ -50,7 +50,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp, Boolean depositOrDelivery, int deliveryID, Boolean statusPickedUp, Boolean statusWaiting) {
+    public Reservation(Long reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp, Boolean depositOrDelivery, Long deliveryID, Boolean statusPickedUp, Boolean statusWaiting) {
         this.reservationID = reservationID;
         this.depositTimestamp = depositTimestamp;
         this.pickUpTimestamp = pickUpTimestamp;
@@ -60,11 +60,11 @@ public class Reservation {
         this.statusWaiting = statusWaiting;
     }
 
-    public int getReservationID() {
+    public Long getReservationID() {
         return reservationID;
     }
 
-    public void setReservationID(int reservationID) {
+    public void setReservationID(Long reservationID) {
         this.reservationID = reservationID;
     }
 
@@ -92,11 +92,11 @@ public class Reservation {
         this.depositOrDelivery = depositOrDelivery;
     }
 
-    public int getDeliveryID(){
+    public Long getDeliveryID(){
         return deliveryID;
     }
 
-    public void setDeliveryID(int deliveryID){
+    public void setDeliveryID(Long deliveryID){
         this.deliveryID = deliveryID;
     }
 
