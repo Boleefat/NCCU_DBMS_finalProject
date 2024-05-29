@@ -33,22 +33,16 @@ public class Reservation {
     private Boolean statusWaiting;
 
     @ManyToOne
-    @MapsId("lockerID")
-    @JoinColumns({
-        @JoinColumn(name = "locker_id"/*sql*/, referencedColumnName = "lockerID"/*java*/),
-        @JoinColumn(name = "locker_area_id"/*sql*/, referencedColumnName = "lockerAreaID"/*java*/)
-    })
+    @JoinColumn(name = "locker_id"/*sql*/, referencedColumnName = "locker_id"/*java*/)
     private Locker locker; //
 
     @ManyToOne
-    @MapsId("userID"/*java*/)
-    @JoinColumn(name = "user_id"/*sql*/)
-    private User users;
+    @JoinColumn(name = "user_id",referencedColumnName = "user_id"/*sql*/,nullable = false)
+    private User user;
 
     @ManyToOne
-    @MapsId("hotelID"/*java*/)
-    @JoinColumn(name = "hotel_id"/*sql*/)
-    private Hotel hotels;
+    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id"/*sql*/)
+    private Hotel hotel;
 
     public Reservation() {
     }

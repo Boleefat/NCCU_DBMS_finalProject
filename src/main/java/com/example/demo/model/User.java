@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.util.Set;
+import java.util.List;
 import jakarta.persistence.*;
 
 // import org.springframework.security.access.method.P;
@@ -22,13 +22,13 @@ public class User {
     private String password;
 
     // User是many，Hotel是one
-    @ManyToOne
-    @MapsId("Hotel_ID") // (java)MapsID = 對應到的class的PK
-    @JoinColumn(name = "hotel_id") // (sql)JoinColumn 
-    private Hotel hotels;
+    // @ManyToOne
+    // @MapsId("Hotel_ID") // (java)MapsID = 對應到的class的PK
+    // @JoinColumn(name = "hotel_id") // (sql)JoinColumn 
+    // private Hotel hotels;
 
-    @OneToMany(mappedBy = "reservations") // (java)
-    private Set<Reservation> reservations; 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // (java)
+    private List<Reservation> reservations; 
 
     // Constructors
     public User() {
@@ -53,7 +53,7 @@ public class User {
         return email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
