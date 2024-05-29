@@ -33,7 +33,10 @@ public class Reservation {
     private Boolean statusWaiting;
 
     @ManyToOne
-    @JoinColumn(name = "locker_id"/*sql*/, referencedColumnName = "locker_id"/*java*/)
+    @JoinColumns({
+        @JoinColumn(name="station_id", referencedColumnName="stationID", nullable=false),
+        @JoinColumn(name="locker_id", referencedColumnName="lockerID", nullable=false)
+    })
     private Locker locker; //
 
     @ManyToOne
