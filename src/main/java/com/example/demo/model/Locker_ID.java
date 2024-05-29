@@ -14,9 +14,9 @@ public class Locker_ID implements Serializable {
     public Locker_ID() {
     }
 
-    public Locker_ID(Long stationID, /*int lockerAreaID,*/ Long lockerID) {
+    public Locker_ID(Long stationID,  Long lockerID) {
         this.stationID = stationID;
-        // this.lockerAreaID = lockerAreaID;
+       
         this.lockerID = lockerID;
     }
 
@@ -30,14 +30,6 @@ public class Locker_ID implements Serializable {
         this.stationID = stationID;
     }
 
-    // public int getLockerAreaID(){
-    //     return lockerAreaID;
-    // }
-
-    // public void setLockerAreaID(int lockerAreaID){
-    //     this.lockerAreaID = lockerAreaID;
-    // }
-
     public Long getLockerID(){
         return lockerID;
     }
@@ -48,7 +40,7 @@ public class Locker_ID implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(stationID, /*lockerAreaID,*/ lockerID);
+        return Objects.hash(stationID,  lockerID);
     }
 
     @Override
@@ -57,7 +49,7 @@ public class Locker_ID implements Serializable {
         if (obj == null || getClass() != obj.getClass()) return false;
         Locker_ID that = (Locker_ID) obj;
         return Objects.equals(stationID, that.stationID) &&
-               // Objects.equals(lockerAreaID, that.lockerAreaID) &&
+              
                Objects.equals(lockerID, that.lockerID);
     }
 }
