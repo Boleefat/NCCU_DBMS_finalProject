@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.User;
+import com.example.demo.model.MrtStation;
 import com.example.demo.model.Reservation;
 import com.example.demo.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -24,31 +25,34 @@ public class ReservationService {
     }
 
     //獲取所有 reservation
-       public List<Reservation> getAllReservations() {
+       public List<Reservation> getAllReservation() {
         return reservationRepository.findAll();
     }
 
     // 利用Reservation_ID 獲取單個 reservation
-    public Optional<Reservation> getReservationByReservationID(int reservation_ID) {
-        return reservationRepository.findById(reservation_ID);
+    public Optional<Reservation> getReservationByReservationID(int reservationID) {
+        return reservationRepository.findById(reservationID);
     }
 
     //更新一個reservation
-    public Reservation updateReservation(int reservation_ID, Reservation reservationDetails) {
-        return reservationRepository.findById(reservation_ID)
-            .map(reservation -> {
-                reservation.setUserID(reservationDetails.getUserID());
-                reservation.setLockerID(reservationDetails.getLockerID());
-                reservation.setDepositTimestamp(reservationDetails.getDepositTimestamp());
-                reservation.setPickUpTimestamp(reservationDetails.getPickUpTimestamp());
-                reservation.setTotalRentalTime(reservationDetails.getTotalRentalTime());
-                reservation.setAmount(reservationDetails.getAmount());
-            })
-            .orElseThrow(() -> new RuntimeException("Reservation not found with id " + reservation_ID));
+    public Optional<Reservation> updateReservation(int reservationID, Reservation newReservation) {
+        return reservationRepository.findByID(reservationID).map(reservation -> {
+                reservation.setUserID(newReservation.getUserID());
+                reservation.setLockerID(newReservation.getLockerID());
+                reservation.setDepositTimestamp(newReservation.getDepositTimestamp());
+                reservation.setPickUpTimestamp(newReservation.getPickUpTimestamp());
+                reservation.setTotalRentalTime(newReservation.getTotalRentalTime());
+                reservation.setAmount(newReservation.getAmount());
+                return reservationRepository.save(reservation);
+        });
     }
 
     //刪除一個reservation
-    public void deleteReservationByReservationID(int reservation_ID) {
-        reservationRepository.deleteById(reservation_ID);
+    public boolean deleteReservationByReservationID(int reservationID) {
+        if (reservationRepository.existsById(reservationID)) {
+            reservationRepository.deleteById(reservationID);
+            return true;
+        }
+        return false;
     }
 }

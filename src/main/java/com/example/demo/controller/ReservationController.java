@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Locker;
+import com.example.demo.model.MrtStation;
 import com.example.demo.model.Reservation;
 import com.example.demo.service.ReservationService;
 import com.example.demo.service.UserService;
@@ -29,32 +30,39 @@ public class ReservationController {
     // 新增一個 reservation 
     @PostMapping("/")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-
         Reservation createdReservation = reservationService.createReservation(reservation);
-        return new ResponseEntity<Reservation>(createdReservation, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
     }
 
     // 獲取所有 reservations
     @GetMapping
-    public List<Reservation> listAllReservation(@RequestParam(required = false, name = "reservation_id") int Reservation_ID) {
-        return reservationService.getAllReservations();
+    public List<Reservation> listAllReservation(@RequestParam(required = false, name = "reservation_id") int reservationID) {
+        return reservationService.getAllReservation();
     }
 
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{reservation_id}")
-    public Optional<Reservation> getReservationByReservationID(@PathVariable("reservation_id") int Reservation_ID) {
-        return reservationService.getReservationByReservationID(Reservation_ID);
+    public ResponseEntity<Reservation> getReservationByReservationID(@PathVariable("reservation_id") int reservationID) {
+        Optional<MrtStation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
+        return reservationService.map(ResponseEntity::ok)
+                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 更新一個 reservation
     @PutMapping("/{reservation_id}")
-    public Reservation updateReservation(@PathVariable("reservation_id") int Reservation_ID, @RequestBody Reservation reservation) {
-        return reservationService.updateReservation(Reservation_ID, reservation);
-}
+    public ResponseEntity<Reservation> updateReservation(@PathVariable("reservation_id") int reservationID, @RequestBody Reservation reservation) {
+        Optional<Reservation> updatedReservation = reservationService.updateReservation(reservationID, reservation);
+        return reservationService.map(ResponseEntity::ok)
+                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{reservation_id}")
-    public void deleteReservation(@PathVariable("reservation_id") int Reservation_ID) {
-        reservationService.deleteReservationByReservationID(Reservation_ID);
+    public ResponseEntity<Void> deleteReservation(@PathVariable("reservation_id") int reservationID) {
+        if (reservationService.deleteReservationByReservationID(reservationID)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
