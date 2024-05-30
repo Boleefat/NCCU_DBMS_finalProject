@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MrtStationRepository extends JpaRepository<MrtStation, Integer> {
+public interface MrtStationRepository extends JpaRepository<MrtStation, Long> {
     // 獲取單個 mrtStation
     Optional<MrtStation> findByStationID(Long stationID);
 }

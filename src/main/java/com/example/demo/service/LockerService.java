@@ -20,8 +20,5 @@ public class LockerService {
 
 // 利用Locker_ID獲取單個locker
 
-// 利用Locker_ID刪除一個 locker
-public void deleteLocker(Long Locker_ID) {
-    lockerRepository.deleteById(Locker_ID);
-}
+
 }

@@ -20,7 +20,7 @@ public class HotelService {
         return hotelRepository.findAll();
     }
 
-    public Optional<Hotel> getHotelById(Long hotelID) {
+    public Optional<Hotel> getHotelByHotelID(Long hotelID) {
         return hotelRepository.findById(hotelID);
     }
 
@@ -28,11 +28,14 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public Hotel updateHotel(Hotel hotel) {
-        return hotelRepository.save(hotel);
+    public Optional<Hotel> updateHotel(Long hotelID, Hotel newHotel) {
+        return hotelRepository.findByHotelID(hotelID).map(hotel -> {
+            hotel.setHotelName(newHotel.getHotelName());
+            return hotelRepository.save(hotel);
+        });
     }
 
-    public void deleteHotel(Long hotelID) {
+    public void deleteHotelByHotelID(Long hotelID) {
         hotelRepository.deleteById(hotelID);
     }
 }

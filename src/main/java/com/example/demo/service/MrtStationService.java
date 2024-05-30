@@ -40,7 +40,7 @@ public class MrtStationService {
     }
 
     // 刪除一個 mrtStation
-    public boolean deleteStationByStationID(int stationID) {
+    public boolean deleteStationByStationID(Long stationID) {
         if (mrtStationRepository.existsById(stationID)) {
             mrtStationRepository.deleteById(stationID);
             return true;

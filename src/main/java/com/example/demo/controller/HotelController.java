@@ -42,7 +42,7 @@ public class HotelController {
     public Hotel updateHotel(@PathVariable("hotel_id") Long hotelID, @RequestBody Hotel hotel) {
         Optional<Hotel> updatedHotel = HotelService.updateHotel(hotelID, hotel);
         return updatedHotel.map(ResponseEntity::ok)
-                                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                           .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 刪除一個 hotel
