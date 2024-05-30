@@ -30,11 +30,11 @@ public class LockerService {
 
 // 利用Locker_ID獲取單個locker
     public Optional<Locker> getLockerByLockerID(Locker_ID lockerId) {
-        return lockerRepository.findByLockerID(lockerId);
+        return lockerRepository.findByLockerId(lockerId);
     }
 
     public Optional<Locker> updateLocker(Locker_ID lockerId, Locker newLocker) {
-        return lockerRepository.findByLockerID(lockerId).map(locker -> {
+        return lockerRepository.findByLockerId(lockerId).map(locker -> {
             locker.setLockerPassword(newLocker.getLockerPassword());
             locker.setStatusUsed(newLocker.getStatusUsed());
             locker.setStatusNotUsed(newLocker.getStatusNotUsed());

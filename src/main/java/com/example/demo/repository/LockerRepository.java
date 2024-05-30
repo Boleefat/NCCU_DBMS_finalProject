@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface LockerRepository extends JpaRepository<Locker, Locker_ID> {
-    Optional<Locker> findByLockerID(Locker_ID lockerId);
+    Optional<Locker> findByLockerId(Locker_ID lockerId);
 }
