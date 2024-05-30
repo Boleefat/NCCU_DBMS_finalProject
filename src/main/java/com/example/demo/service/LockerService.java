@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Locker;
+import com.example.demo.model.Locker_ID;
 import com.example.demo.model.MrtStation;
 import com.example.demo.repository.LockerRepository;
 import com.example.demo.repository.UserRepository;
@@ -27,8 +28,8 @@ public class LockerService {
     }
 
 // 利用Locker_ID獲取單個locker
-    public Optional<Locker> getLockerByLockerID(Locker_ID lockerID) {
-        return lockerRepository.findByLockerID(lockerID);
+    public Optional<Locker> getLockerByLockerID(Locker_ID lockerId) {
+        return lockerRepository.findByLockerID(lockerId);
     }
 
 
