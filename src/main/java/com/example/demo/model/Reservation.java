@@ -115,6 +115,39 @@ public class Reservation {
     public void setStatusWaiting(Boolean statusWaiting){
         this.statusWaiting = statusWaiting;
     }
+// 获取关联的用户
+public User getUser() {
+    return user;
+}
+
+ // 设置关联的用户
+ public void setUser(User user) {
+    this.user = user;
+}
+// 获取关联的锁定器
+public Locker getLocker() {
+    return locker;
+}
+// 设置关联的锁定器
+public void setLocker(Locker locker) {
+    this.locker = locker;
+}
+     // 更新预约
+     public void updateReservation(Reservation newReservation) {
+        if (newReservation.getUser() != null) {
+            this.setUser(newReservation.getUser());
+        }
+        if (newReservation.getLocker() != null) {
+            this.setLocker(newReservation.getLocker());
+        }
+        if (newReservation.getDepositTimestamp() != null) {
+            this.setDepositTimestamp(newReservation.getDepositTimestamp());
+        }
+        if (newReservation.getPickUpTimestamp() != null) {
+            this.setPickUpTimestamp(newReservation.getPickUpTimestamp());
+        }
+        // 不需要设置 totalRentalTime，因为它是根据 timestamp 计算的
+    }
 
     @Transient
     public Duration getTotalRentalTime() {

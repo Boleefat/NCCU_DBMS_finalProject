@@ -36,17 +36,25 @@ public class ReservationService {
         return reservationRepository.findById(reservationID);
     }
 
-    // 更新一個reservation
-    public Optional<Reservation> updateReservation(Long reservationID, Reservation newReservation) {
-        return reservationRepository.findById(reservationID).map(reservation -> {
-            reservation.setUser(newReservation.getUser());
-            reservation.setLocker(newReservation.getLocker());
-            reservation.setDepositTimestamp(newReservation.getDepositTimestamp());
-            reservation.setPickUpTimestamp(newReservation.getPickUpTimestamp());
-            // 不需要設置 totalRentalTime，因為它是根據 timestamp 計算的
-            return reservationRepository.save(reservation);
-        });
-    }
+    // // 更新一個reservation
+    // public Optional<Reservation> updateReservation(Long reservationID, Reservation newReservation) {
+    //     return reservationRepository.findById(reservationID).map(reservation -> {
+    //         reservation.setUser(newReservation.getUser());
+    //         reservation.setLocker(newReservation.getLocker());
+    //         reservation.setDepositTimestamp(newReservation.getDepositTimestamp());
+    //         reservation.setPickUpTimestamp(newReservation.getPickUpTimestamp());
+    //         // 不需要設置 totalRentalTime，因為它是根據 timestamp 計算的
+    //         return reservationRepository.save(reservation);
+    //     });
+    // }
+
+// 更新预约
+public Optional<Reservation> updateReservation(Long reservationID, Reservation newReservation) {
+    return reservationRepository.findById(reservationID).map(reservation -> {
+        reservation.updateReservation(newReservation);
+        return reservationRepository.save(reservation);
+    });
+}
 
     // 刪除一個reservation
     public boolean deleteReservationByReservationID(Long reservationID) {
