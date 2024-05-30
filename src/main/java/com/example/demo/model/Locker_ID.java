@@ -16,7 +16,6 @@ public class Locker_ID implements Serializable {
 
     public Locker_ID(Long stationID,  Long lockerID) {
         this.stationID = stationID;
-       
         this.lockerID = lockerID;
     }
 
