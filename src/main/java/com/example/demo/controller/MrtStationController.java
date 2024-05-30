@@ -49,7 +49,7 @@ public class MrtStationController {
 
     // 刪除一個 mrtStation
     @DeleteMapping("/{station_id}")
-    public ResponseEntity<Void> deleteStation(@PathVariable("station_id") int stationID) {
+    public ResponseEntity<Void> deleteStation(@PathVariable("station_id") Long stationID) {
         if (mrtStationService.deleteStationByStationID(stationID)) {
             return ResponseEntity.noContent().build();
         } else {

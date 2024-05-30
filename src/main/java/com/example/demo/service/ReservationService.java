@@ -42,7 +42,6 @@ public class ReservationService {
                 reservation.setDepositTimestamp(newReservation.getDepositTimestamp());
                 reservation.setPickUpTimestamp(newReservation.getPickUpTimestamp());
                 reservation.setTotalRentalTime(newReservation.getTotalRentalTime());
-                reservation.setAmount(newReservation.getAmount());
                 return reservationRepository.save(reservation);
         });
     }
