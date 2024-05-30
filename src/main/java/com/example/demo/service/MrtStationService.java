@@ -26,14 +26,14 @@ public class MrtStationService {
     }
 
     // 獲取單個 mrtStation
-    public Optional<MrtStation> getStationByStationID(int stationID) {
-        return mrtStationRepository.findBystation_id(stationID);
+    public Optional<MrtStation> getStationByStationID(Long stationID) {
+        return mrtStationRepository.findByStationID(stationID);
     }
 
     // 更新一個 mrtStation
-    public Optional<MrtStation> updateMrtStation(int stationID, MrtStation newMrtStation) {
-        return mrtStationRepository.findBystation_id(stationID).map(mrtStation -> {
-            mrtStation.setLocation(newMrtStation.getLocation());
+    public Optional<MrtStation> updateMrtStation(Long stationID, MrtStation newMrtStation) {
+        return mrtStationRepository.findByStationID(stationID).map(mrtStation -> {
+            mrtStation.setMrtStationLocation(newMrtStation.getMrtStationLocation());
             mrtStation.setStationName(newMrtStation.getStationName());
             return mrtStationRepository.save(mrtStation);
         });

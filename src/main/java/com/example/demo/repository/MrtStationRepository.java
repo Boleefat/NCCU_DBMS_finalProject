@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface MrtStationRepository extends JpaRepository<MrtStation, Integer> {
     // 獲取單個 mrtStation
-    Optional<MrtStation> findBystation_id(int stationID);
+    Optional<MrtStation> findByStationID(Long stationID);
 }

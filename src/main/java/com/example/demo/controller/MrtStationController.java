@@ -33,7 +33,7 @@ public class MrtStationController {
 
     // 獲取單個 mrtStation
     @GetMapping("/{station_id}")
-    public ResponseEntity<MrtStation> getStationByStationID(@PathVariable("station_id") int stationID) {
+    public ResponseEntity<MrtStation> getStationByStationID(@PathVariable("station_id") Long stationID) {
         Optional<MrtStation> mrtStationOptional = mrtStationService.getStationByStationID(stationID);
         return mrtStationOptional.map(ResponseEntity::ok)
                                  .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -41,7 +41,7 @@ public class MrtStationController {
 
     // 更新一個 mrtStation
     @PutMapping("/{station_id}")
-    public ResponseEntity<MrtStation> updateMrtStation(@PathVariable("station_id") int stationID, @RequestBody MrtStation mrtStation) {
+    public ResponseEntity<MrtStation> updateMrtStation(@PathVariable("station_id") Long stationID, @RequestBody MrtStation mrtStation) {
         Optional<MrtStation> updatedMrtStation = mrtStationService.updateMrtStation(stationID, mrtStation);
         return updatedMrtStation.map(ResponseEntity::ok)
                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());

@@ -27,25 +27,27 @@ public class HotelController {
 
     // 獲取所有 hotels
     @GetMapping
-    public List<Hotel> listAllHotel(@RequestParam(required = false, name = "hotel_id") int HotelID) {
+    public List<Hotel> listAllHotel(@RequestParam(required = false, name = "hotel_id") Long HotelID) {
         return hotelService.getAllHotel();
     }
 
     // 獲取單個 hotel
     @GetMapping("/{hotel_id}")
-    public Optional<Hotel> getHotelByHotelID(@PathVariable("hotel_id") int HotelID) {
+    public Optional<Hotel> getHotelByHotelID(@PathVariable("hotel_id") Long HotelID) {
         return hotelService.getHotelByHotelID(HotelID);
     }
 
     // 更新一個 hotel
     @PutMapping("/{hotel_id}")
-    public Hotel updateHotel(@PathVariable("hotel_id") int HotelID, @RequestBody Hotel hotel) {
-        return hotelService.updateHotel(HotelID, hotel);
+    public Hotel updateHotel(@PathVariable("hotel_id") Long hotelID, @RequestBody Hotel hotel) {
+        Optional<Hotel> updatedHotel = HotelService.updateHotel(hotelID, hotel);
+        return updatedHotel.map(ResponseEntity::ok)
+                                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 刪除一個 hotel
     @DeleteMapping("/{hotel_id}")
-    public void deleteHotel(@PathVariable("hotel_id") int HotelID) {
+    public void deleteHotel(@PathVariable("hotel_id") Long HotelID) {
         hotelService.deleteHotelByHotelID(HotelID);
     }
 
