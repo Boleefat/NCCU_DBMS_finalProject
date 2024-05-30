@@ -35,7 +35,11 @@ public class HotelService {
         });
     }
 
-    public void deleteHotelByHotelID(Long hotelID) {
-        hotelRepository.deleteById(hotelID);
+    public boolean deleteHotelByHotelID(Long hotelID) {
+        if (hotelRepository.existsById(hotelID)) {
+            hotelRepository.deleteById(hotelID);
+            return true;
+        }
+        return false;
     }
 }

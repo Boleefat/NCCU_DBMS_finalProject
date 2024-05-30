@@ -68,6 +68,22 @@ public class Reservation {
         this.reservationID = reservationID;
     }
 
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public Locker getLocker(){
+        return locker;
+    }
+
+    public void setLocker(Locker locker){
+        this.locker = locker;
+    }
+
     public Calendar getDepositTimestamp(){
         return depositTimestamp;
     }

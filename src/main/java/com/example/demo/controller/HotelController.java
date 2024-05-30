@@ -37,18 +37,22 @@ public class HotelController {
         return hotelService.getHotelByHotelID(HotelID);
     }
 
-    // 更新一個 hotel
+    // 更新一個 mrtStation
     @PutMapping("/{hotel_id}")
-    public Hotel updateHotel(@PathVariable("hotel_id") Long hotelID, @RequestBody Hotel hotel) {
-        Optional<Hotel> updatedHotel = HotelService.updateHotel(hotelID, hotel);
+    public ResponseEntity<Hotel> updateHotel(@PathVariable("hotel_id") Long hotelID, @RequestBody Hotel hotel) {
+        Optional<Hotel> updatedHotel = hotelService.updateHotel(hotelID, hotel);
         return updatedHotel.map(ResponseEntity::ok)
-                           .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+                                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    // 刪除一個 hotel
-    @DeleteMapping("/{hotel_id}")
-    public void deleteHotel(@PathVariable("hotel_id") Long HotelID) {
-        hotelService.deleteHotelByHotelID(HotelID);
+    // 刪除一個 mrtStation
+    @DeleteMapping("/{station_id}")
+    public ResponseEntity<Void> deleteStation(@PathVariable("station_id") Long stationID) {
+        if (mrtStationService.deleteStationByStationID(stationID)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 }
