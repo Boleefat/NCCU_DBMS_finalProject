@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Locker;
 import com.example.demo.model.Locker_ID;
 import com.example.demo.model.MrtStation;
+import com.example.demo.model.Reservation;
 import com.example.demo.repository.LockerRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -32,7 +33,23 @@ public class LockerService {
         return lockerRepository.findByLockerID(lockerId);
     }
 
+    public Optional<Locker> updateLocker(Locker_ID lockerId, Locker newLocker) {
+        return lockerRepository.findByLockerID(lockerId).map(locker -> {
+            locker.setLockerPassword(newLocker.getLockerPassword());
+            locker.setStatusUsed(newLocker.getStatusUsed());
+            locker.setStatusNotUsed(newLocker.getStatusNotUsed());
+            locker.setStatusReservedButNotUsed(newLocker.getStatusReservedButNotUsed());
+            return lockerRepository.save(locker);
+        });
+    }
 
-
+    //刪除一個reservation
+    public boolean deleteLockerByLockerID(Locker_ID lockerId) {
+        if (lockerRepository.existsById(lockerId)) {
+            lockerRepository.deleteById(lockerId);
+            return true;
+        }
+        return false;
+    }
 
 }
