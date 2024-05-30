@@ -36,21 +36,21 @@ public class ReservationController {
 
     // 獲取所有 reservations
     @GetMapping
-    public List<Reservation> listAllReservation(@RequestParam(required = false, name = "reservation_id") int reservationID) {
+    public List<Reservation> listAllReservation(@RequestParam(required = false, name = "reservation_id") Long reservationID) {
         return reservationService.getAllReservation();
     }
 
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{reservation_id}")
-    public ResponseEntity<Reservation> getReservationByReservationID(@PathVariable("reservation_id") int reservationID) {
-        Optional<MrtStation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
+    public ResponseEntity<Reservation> getReservationByReservationID(@PathVariable("reservation_id") Long reservationID) {
+        Optional<Reservation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
         return reservationService.map(ResponseEntity::ok)
                                  .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     // 更新一個 reservation
     @PutMapping("/{reservation_id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable("reservation_id") int reservationID, @RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> updateReservation(@PathVariable("reservation_id") Long reservationID, @RequestBody Reservation reservation) {
         Optional<Reservation> updatedReservation = reservationService.updateReservation(reservationID, reservation);
         return reservationService.map(ResponseEntity::ok)
                                  .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -58,7 +58,7 @@ public class ReservationController {
 
     // 利用Reservation_ID 刪除一個 reservation
     @DeleteMapping("/{reservation_id}")
-    public ResponseEntity<Void> deleteReservation(@PathVariable("reservation_id") int reservationID) {
+    public ResponseEntity<Void> deleteReservation(@PathVariable("reservation_id") Long reservationID) {
         if (reservationService.deleteReservationByReservationID(reservationID)) {
             return ResponseEntity.noContent().build();
         } else {

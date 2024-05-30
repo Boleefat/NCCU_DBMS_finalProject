@@ -6,6 +6,8 @@ import com.example.demo.model.Reservation;
 import com.example.demo.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Calendar;
@@ -15,7 +17,8 @@ import java.time.Instant;
 @Service
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
