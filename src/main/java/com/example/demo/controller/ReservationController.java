@@ -43,17 +43,23 @@ public class ReservationController {
     // 利用Reservation_ID 獲取單個 reservation
     @GetMapping("/{reservation_id}")
     public ResponseEntity<Reservation> getReservationByReservationID(@PathVariable("reservation_id") Long reservationID) {
-        Optional<Reservation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
-        return reservationService.map(ResponseEntity::ok)
-                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    Optional<Reservation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
+    if (reservationOptional.isPresent()) {
+        return ResponseEntity.ok(reservationOptional.get());
+    } else {
+        return ResponseEntity.notFound().build();
     }
+}
 
     // 更新一個 reservation
     @PutMapping("/{reservation_id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("reservation_id") Long reservationID, @RequestBody Reservation reservation) {
         Optional<Reservation> updatedReservation = reservationService.updateReservation(reservationID, reservation);
-        return reservationService.map(ResponseEntity::ok)
-                                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        if (updatedReservation.isPresent()) {
+            return ResponseEntity.ok(updatedReservation.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // 利用Reservation_ID 刪除一個 reservation
