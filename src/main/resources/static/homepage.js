@@ -233,7 +233,7 @@ document.getElementById('logoutLink').addEventListener('click', function(event) 
     // Show a pop-up alert window
     alert('You have been logged out.');
     // Redirect to the homepage
-    window.location.href = "DBMS_Fontend.html";
+    window.location.href = "WelcomePage.html";
 });
 
 
