@@ -1,3 +1,4 @@
+
 // Define the station names grouped by line
 
 
@@ -84,7 +85,6 @@ document.getElementById('hotelLink').addEventListener('click', function(event) {
 function toggleVisibility(activeBlockId, closeLinkContainer) {
     var allBlocks = ['searchBlock', 'reservationInfo', 'hotelInfo', 'account' ,'faqContainer', 'contactUs', 'linkContainer', 'history'];
     var activeBlock = document.getElementById(activeBlockId);
-
     allBlocks.forEach(blockId => {
         var block = document.getElementById(blockId);
         if (blockId === 'linkContainer' && !closeLinkContainer) {
@@ -258,12 +258,26 @@ for (let i = 1; i <= 24; i++) {
 }
 */
 // 藍線
+
+
 for (let i = 11; i <= 18; i++) {
     const button = document.createElement('button');
     button.id = 'BL' + (i < 10 ? '0' : '') + i;
     button.className = 'map-button';
+    button.addEventListener('click', function() {
+        // 獲取按鈕的 ID
+        const buttonID = this.id;
+       
+        // 導航到 StationInfo.html 頁面，並將按鈕的 ID 作為參數傳遞
+        window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/StationInfo.html?id=' + buttonID;
+    });
     container.appendChild(button);
 }
+
+
+
+       
+       
 /*
 //綠線
 for (let i = 1; i <= 19; i++) {
@@ -467,4 +481,4 @@ backgroundImage.addEventListener('wheel', function(event) {
         button.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${buttonScale})`;
     });
 });
-*/
+*/  
