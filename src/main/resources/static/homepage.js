@@ -269,7 +269,11 @@ for (let i = 11; i <= 18; i++) {
         const buttonID = this.id;
        
         // 導航到 StationInfo.html 頁面，並將按鈕的 ID 作為參數傳遞
+<<<<<<< Updated upstream
         window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/StationInfo.html?id=' + buttonID;
+=======
+        window.location.href = 'http://127.0.0.1:5500/StationInfo.html?id=' + buttonID;
+>>>>>>> Stashed changes
     });
     container.appendChild(button);
 }
