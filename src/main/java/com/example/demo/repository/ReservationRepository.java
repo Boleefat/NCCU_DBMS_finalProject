@@ -1,22 +1,16 @@
 package com.example.demo.repository;
 
-import java.util.List;
-import org.springframework.stereotype.Repository;
 import com.example.demo.model.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.demo.model.User;
-
-import com.example.demo.model.Reservation;
-
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    List<Reservation> findByUser_ID(Long user_ID);
+    @Query(value="SELECT * FROM reservation AS r WHERE r.userId = %?1", nativeQuery = true)
+    Optional<Reservation> findByUser_ID(Long userID);
+    @Query(value="SELECT * FROM reservation AS r WHERE r.reservationId = %?1", nativeQuery = true)
+    Optional<Reservation> findByReservation_Id(Long reservationID);
 }
-
-@Repository
-public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    Optional<Reservation> getReservationByReservationID(Long reservation_ID);
-}
-

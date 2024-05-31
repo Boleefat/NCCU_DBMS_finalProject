@@ -4,53 +4,60 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "mrtstation")
+@Table(name = "mrt_station")
 public class MrtStation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Station_ID")
-    private Long Station_ID;
+    @Column(name = "station_id")
+    private Long stationID;
 
-    @Column(name = "Station_Name", nullable = false, length = 255)
-    private String Station_Name;
+    @Column(name = "station_name", nullable = false)
+    private String stationName;
 
-    @Column(name = "Location", nullable = false, length = 255)
-    private String Location ;
+    @Column(name = "mrt_station_location", nullable = false)
+    private String mrtStationLocation;
 
-
-    @OneToMany(mappedBy = "mrtstation")
-    private List<Possession_Mrt_Area> possessions;
-
+    @OneToMany(mappedBy = "mrtStation")
+    private List<Locker> lockers;
+    
     public MrtStation(){
     }
 
-    public MrtStation(Long Station_ID, String Station_Name, String Location){
-        this.Station_ID = Station_ID;
-        this.Station_Name = Station_Name;
-        this.Location = Location;
+    public MrtStation(Long stationID, String stationName, String mrtStationLocation){
+        this.stationID = stationID;
+        this.stationName = stationName;
+        this.mrtStationLocation = mrtStationLocation;
     }
 
-    public long getStationID(){
-        return Station_ID;
+    public Long getStationID(){
+        return stationID;
     }
 
-    public void setStationID(Long Station_ID){
-        this.Station_ID = Station_ID;
+    public void setStationID(Long stationID){
+        this.stationID = stationID;
     }
 
     public String getStationName(){
-        return Station_Name;
+        return stationName;
     }
 
-    public void setStationName(String Station_Name){
-        this.Station_Name = Station_Name;
+    public void setStationName(String stationName){
+        this.stationName = stationName;
     }
 
-    public String getLocation(){
-        return Location;
+    public String getMrtStationLocation(){
+        return mrtStationLocation;
     }
 
-    public void setLocation(String Location){
-        this.Location = Location;
+    public void setMrtStationLocation(String mrtStationLocation){
+        this.mrtStationLocation = mrtStationLocation;
+    }
+
+    public List<Locker> getLockers() {
+        return lockers;
+    }
+
+    public void setLockers(List<Locker> lockers) {
+        this.lockers = lockers;
     }
 }

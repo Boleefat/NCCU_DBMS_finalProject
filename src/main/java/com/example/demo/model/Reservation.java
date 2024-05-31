@@ -1,108 +1,160 @@
 package com.example.demo.model;
 
-import java.sql.Timestamp;
 import jakarta.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
+import java.util.Calendar;
+import java.time.Duration;
+import java.time.Instant;
 
 @Entity
 @Table(name = "reservation")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Reservation_ID")
-    private Long Reservation_ID;
+    @Column(name = "reservation_id")
+    private Long reservationID;
 
-    @Column(name = "User_ID", nullable = false, length = 255)
-    private Long User_ID;
+    @Column(name = "deposit_timestamp", nullable = false)
+    private Calendar depositTimestamp;
 
-    @Column(name = "Locker_ID", nullable = false, length = 255)
-    private Long Locker_ID;
+    @Column(name = "pick_up_timestamp", nullable = false)
+    private Calendar pickUpTimestamp;
 
-    @Column(name = "Deposit_Timestamp", nullable = false, length = 255)
-    private Timestamp Deposit_Timestamp;;
+    @Column(name = "deposit_or_delivery", nullable = false)
+    private Boolean depositOrDelivery;
 
-    @Column(name = "PickUp_Timestamp", nullable = false, length = 255)
-    private Timestamp PickUp_Timestamp;
+    // Be_Delivered_To
+    @Column(name = "delivery_id", nullable = true)
+    private Long deliveryID;
 
-    @Column(name = "Total_Rental_Time", nullable = false, length = 255)
-    private int Total_Rental_Time;
+    @Column(name = "status_picked_up", nullable = true)
+    private Boolean statusPickedUp;
 
-    @Column(name = "Amount", nullable = false, length = 255)
-    private int Amount;
-    
-    @ManyToOne
-    @JoinColumn(name = "Locker_ID", nullable = false)
-    private Locker Locker_ID;
+    @Column(name = "status_waiting", nullable = true)
+    private Boolean statusWaiting;
 
     @ManyToOne
-    @JoinColumn(name = "User_ID", nullable = false)
-    private User User_ID;
+    @JoinColumns({
+        @JoinColumn(name="station_id", referencedColumnName="stationID", nullable=false),
+        @JoinColumn(name="locker_id", referencedColumnName="lockerID", nullable=false)
+    })
+    private Locker locker; //
 
-    public Reservation(){
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "user_id"/*sql*/,nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id"/*sql*/)
+    private Hotel hotel;
+
+    public Reservation() {
     }
 
-    public possessionAreaLockerKey getIDC() {
-        return IDC;
+    public Reservation(Long reservationID, Calendar depositTimestamp, Calendar pickUpTimestamp, Boolean depositOrDelivery, Long deliveryID, Boolean statusPickedUp, Boolean statusWaiting) {
+        this.reservationID = reservationID;
+        this.depositTimestamp = depositTimestamp;
+        this.pickUpTimestamp = pickUpTimestamp;
+        this.depositOrDelivery = depositOrDelivery;
+        this.deliveryID = deliveryID;
+        this.statusPickedUp = statusPickedUp;
+        this.statusWaiting = statusWaiting;
     }
 
-    public void setIDC(possessionAreaLockerKey IDC) {
-        this.IDC = IDC;
+    public Long getReservationID() {
+        return reservationID;
     }
 
-    public LockerArea getLockerAreaID() {
-        return LockerArea_ID;
+    public void setReservationID(Long reservationID) {
+        this.reservationID = reservationID;
     }
 
-    public void setLockerAreaID(LockerArea LockerArea_ID){
-        this.LockerArea_ID = LockerArea_ID;
+    public User getUser(){
+        return user;
     }
 
-    public Locker getLockerID() {
-        return Locker_ID;
+    public void setUser(User user){
+        this.user = user;
     }
 
-    public void setLockerID(Locker Locker_ID){
-        this.Locker_ID = Locker_ID;
-    }
-}
-
-@Embeddable
-class possessionAreaLockerKey implements Serializable {
-    @Column(name = "LockerArea_ID")
-    private Long LockerArea_ID;
-
-    @Column(name = "Locker_ID")
-    private Long Locker_ID;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        possessionAreaLockerKey that = (possessionAreaLockerKey) o;
-        return Objects.equals(LockerArea_ID, that.LockerArea_ID) &&
-               Objects.equals(Locker_ID, that.Locker_ID);
+    public Locker getLocker(){
+        return locker;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(LockerArea_ID, Locker_ID);
+    public void setLocker(Locker locker){
+        this.locker = locker;
     }
 
-    // Getters and setters
-    public Long getLockerAreaID() {
-        return LockerArea_ID;
+    public Calendar getDepositTimestamp(){
+        return depositTimestamp;
     }
 
-    public void setLockerAreaID(Long LockerArea_ID) {
-        this.LockerArea_ID = LockerArea_ID;
+    public void setDepositTimestamp(Calendar depositTimestamp){
+        this.depositTimestamp = depositTimestamp;
     }
 
-    public Long getLockerID() {
-        return Locker_ID;
+    public Calendar getPickUpTimestamp(){
+        return pickUpTimestamp;
     }
 
-    public void setLockerID(Long Locker_ID) {
-        this.Locker_ID = Locker_ID;
+    public void setPickUpTimestamp(Calendar pickUpTimestamp){
+        this.pickUpTimestamp = pickUpTimestamp;
+    }
+
+    public Boolean getDepositOrDelivery(){
+        return depositOrDelivery;
+    }
+
+    public void setDepositOrDelivery(Boolean depositOrDelivery){
+        this.depositOrDelivery = depositOrDelivery;
+    }
+
+    public Long getDeliveryID(){
+        return deliveryID;
+    }
+
+    public void setDeliveryID(Long deliveryID){
+        this.deliveryID = deliveryID;
+    }
+
+    public Boolean getStatusPickedUp(){
+        return statusPickedUp;
+    }
+
+    public void setStatusPicked(Boolean statusPickedUp){
+        this.statusPickedUp = statusPickedUp;
+    }
+
+    public Boolean getStatusWaiting(){
+        return statusWaiting;
+    }
+
+    public void setStatusWaiting(Boolean statusWaiting){
+        this.statusWaiting = statusWaiting;
+    }
+
+    @Transient
+    public Duration getTotalRentalTime() {
+        if (pickUpTimestamp != null && depositTimestamp != null) {
+            Instant depositInstant = depositTimestamp.toInstant();
+            Instant pickupInstant = pickUpTimestamp.toInstant();
+            return Duration.between(depositInstant, pickupInstant);
+        } else {
+            return Duration.ZERO;
+        }
+    }
+
+    @Transient
+    public Long getTotalRentalHours() {
+        return getTotalRentalTime().toHours();
+    }
+
+    @Transient
+    public Long getTotalRentalMinutes() {
+        return getTotalRentalTime().toMinutes();
+    }
+
+    @Transient
+    public Long getTotalRentalSeconds() {
+        return getTotalRentalTime().getSeconds();
     }
 }

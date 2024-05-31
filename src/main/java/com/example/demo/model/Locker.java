@@ -2,90 +2,152 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.time.Duration;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "locker")
 public class Locker {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Locker_ID")
-    private Long Locker_ID;
+    @EmbeddedId
+    private Locker_ID lockerId;
 
-    @Column(name = "Size", nullable = false, length = 255)
-    private int Size;
+    @Column(name = "locker_location", nullable = false)
+    private String lockerLocation;
 
-    @Column(name = "Price", nullable = false, length = 255)
-    private int Price;
+    @Column(name = "size", nullable = false)//20 24 32
+    private int size;
 
-    @Column(name = "Status_Used", nullable = true, length = 255)
-    private Boolean Status_Used;
+    @Column(name = "price", nullable = false)
+    private int price;
 
-    @Column(name = "Status_Not_Used", nullable = true, length = 255)
-    private Boolean Status_Not_Used;
+    @Column(name = "locker_password", nullable = false)
+    private String lockerPassword;
 
-    @Column(name = "Status_Reserved_But_Not_Used", nullable = true, length = 255)
-    private Boolean Status_Reserved_But_Not_Used;
+    @Column(name = "payment_method", nullable = false)
+    private String paymentMethod;
 
-    @OneToMany(mappedBy = "locker")
-    private List<Possession_Area_Locker> possessionsC;
+    @Column(name = "status_used", nullable = false)
+    private Boolean statusUsed;
+
+    @Column(name = "status_not_used", nullable = false)
+    private Boolean statusNotUsed;
+
+    @Column(name = "status_reserved_but_not_used", nullable = false)
+    private Boolean statusReservedButNotUsed;
+
+    @ManyToOne
+    @JoinColumn(name = "station_id",referencedColumnName = "station_id",nullable = false)
+    private MrtStation mrtStation;
+
+    @OneToMany(mappedBy = "locker",cascade = CascadeType.ALL) //
+    private List<Reservation> reservations;
 
     public Locker(){
     }
 
-    public Locker(Long Locker_ID, int Size, int Price, Boolean Status_Used, Boolean Status_Not_Used, Boolean Status_Reserved_But_Not_Used){
-        this.Locker_ID = Locker_ID;
-        this.Size = Size;
-        this.Price = Price;
-        this.Status_Used = Status_Used;
-        this.Status_Not_Used = Status_Not_Used;
-        this.Status_Reserved_But_Not_Used = Status_Reserved_But_Not_Used;
+    public Locker(Locker_ID lockerId, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
+        this.lockerId = lockerId;
+        
+        this.size = size;
+        this.price = price;
+        this.lockerPassword = lockerPassword;
+        this.statusUsed = statusUsed;
+        this.statusNotUsed = statusNotUsed;
+        this.statusReservedButNotUsed = statusReservedButNotUsed;
     }
 
-    public long getLockerID(){
-        return Locker_ID;
+    public Locker_ID getLockerId(){
+        return lockerId;
     }
 
-    public void setLockerID(Long Locker_ID){
-        this.Locker_ID = Locker_ID;
+    public void setLockerId(Locker_ID lockerId){
+        this.lockerId = lockerId;
+    }
+
+    public String getLockerLocation(){
+        return lockerLocation;
+    }
+
+    public void setLockerStation(String lockerLocation){
+        this.lockerLocation = lockerLocation;
     }
 
     public int getSize(){
-        return Size;
+        return size;
     }
 
-    public void setSize(int Size){
-        this.Size = Size;
+    public void setSize(int size){
+        this.size = size;
     }
 
     public int getPrice(){
-        return Price;
+        return price;
     }
 
-    public void setPrice(int Price){
-        this.Price = Price;
+    public void setPrice(int price){
+        this.price = price;
+    }
+
+    public String getLockerPassword(){
+        return lockerPassword;
+    }
+
+    public void setLockerPassword(String lockerPassword){
+        this.lockerPassword = lockerPassword;
+    }
+
+    public String getPaymentMethod(){
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod){
+        this.paymentMethod = paymentMethod;
     }
 
     public Boolean getStatusUsed(){
-        return Status_Used;
+        return statusUsed;
     }
 
-    public void setStatusUsed(Boolean Status_Used){
-        this.Status_Used = Status_Used;
+    public void setStatusUsed(Boolean statusUsed){
+        this.statusUsed = statusUsed;
     }
 
     public Boolean getStatusNotUsed(){
-        return Status_Not_Used;
+        return statusNotUsed;
     }
 
-    public void setStatusNotUsed(Boolean Status_Not_Used){
-        this.Status_Not_Used = Status_Not_Used;
+    public void setStatusNotUsed(Boolean statusNotUsed){
+        this.statusNotUsed = statusNotUsed;
     }
 
     public Boolean getStatusReservedButNotUsed(){
-        return Status_Reserved_But_Not_Used;
+        return statusReservedButNotUsed;
     }
 
-    public void setStatusReservedButNotUsed(Boolean Status_Reserved_But_Not_Used){
-        this.Status_Reserved_But_Not_Used = Status_Reserved_But_Not_Used;
+    public void setStatusReservedButNotUsed(Boolean statusReservedButNotUsed){
+        this.statusReservedButNotUsed = statusReservedButNotUsed;
+    }
+
+    @Transient
+    public BigDecimal getTotalPrice() {
+        if (getPrice() > 0 && getTotalRentalTime().toHours() > 0) {
+            return BigDecimal.valueOf(getPrice()).multiply(BigDecimal.valueOf(getTotalRentalTime().toHours()));
+        } else {
+            return BigDecimal.ZERO;
+        }
+    }
+
+    @Transient
+    public Duration getTotalRentalTime() {
+        if (reservations != null && !reservations.isEmpty()) {
+            Reservation reservation = reservations.iterator().next();
+            return reservation.getTotalRentalTime();
+        } else {
+            return Duration.ZERO;
+        }
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        // This setter might not be necessary if totalPrice is always calculated dynamically.
     }
 }

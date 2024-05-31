@@ -1,47 +1,52 @@
 package com.example.demo.model;
 
+import java.util.List;
 import jakarta.persistence.*;
 
-import java.util.List;
+// import org.springframework.security.access.method.P;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
-    @Id
+    @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long User_ID;
-
-    @Column(nullable = false, unique = true, length = 255)
+    @Column(name = "user_id")
+    private Long userID;
+ 
+    // Column = Attribute
+    @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
 
-    @Column(nullable = false, length = 64)
+    @Column(name = "password", nullable = false, length = 64)
     private String password;
 
-    @Column(nullable = false, length = 20)
-    private String nickname;
+    // User是many，Hotel是one
+    // @ManyToOne
+    // @MapsId("Hotel_ID") // (java)MapsID = 對應到的class的PK
+    // @JoinColumn(name = "hotel_id") // (sql)JoinColumn 
+    // private Hotel hotels;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Product> products;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // (java)
+    private List<Reservation> reservations; 
 
     // Constructors
     public User() {
     }
 
-    public User(Long id, String email, String password, String nickname) {
-        this.id = id;
+    public User(Long userID, String email, String password) {
+        this.userID = userID;
         this.email = email;
         this.password = password;
-        this.nickname = nickname;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
@@ -58,13 +63,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 }

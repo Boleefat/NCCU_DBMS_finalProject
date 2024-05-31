@@ -9,6 +9,16 @@
             "projectName": "dbms_web_sample",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DbmsWebSampleApplication<NCCU_DBMS_2024Spring>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.demo.DbmsWebSampleApplication",
+            "projectName": "NCCU_DBMS_2024Spring",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
