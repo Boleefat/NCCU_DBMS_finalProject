@@ -20,7 +20,7 @@ public class Locker {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "locker_password", nullable = false)
+    @Column(name = "locker_password", nullable = true)
     private String lockerPassword;
 
     @Column(name = "payment_method", nullable = false)
