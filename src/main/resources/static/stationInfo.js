@@ -214,3 +214,20 @@ function show(theMainMenu, theSubMenu, theEvent) {
     }
 }
 */
+const choosed = () => { 
+    Swal.fire({
+        title: 'Deposit Or Delivery?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Deposit',
+        cancelButtonText: 'Delivery',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // 如果用戶點擊 "Deposit Page" 按鈕，執行相應的操作
+          window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DepositPage.html'; // 導向到 deposit page
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // 如果用戶點擊 "Delivery" 按鈕，執行相應的操作
+          window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DeliveryPage.html'; // 導向到 delivery page
+        }
+      });
+}

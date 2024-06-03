@@ -952,8 +952,8 @@
     width: 80%;
     color: rgba(0,0,0,1);
     position: absolute;
-    top: 15%;
-    left: 10%;
+    top: 10%;
+    left: 8%;
     font-family: Belgrano;
     font-weight: Regular;
     font-size: 40px;
@@ -1331,6 +1331,28 @@
     padding-top: 5px;
    
   }
+  .hotel Select{
+      background: rgba(255, 255, 255, 0); 
+      color:  rgba(0,0,0,1);
+      margin: 15px;
+      width: 305px;
+      height: 4%;
+      padding: 8px;
+      position: absolute;
+      top:33%;
+      right:14%;
+      font-size: 15px;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), linear-gradient(#003d79, #003d79);
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -webkit-linear-gradient(transparent, transparent);
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M7%2010l5%205%205-5z%22%2F%3E%3C%2Fsvg%3E"), -moz-linear-gradient(#003d79, #003d79);
+      background-position: right 0.5em top 50%, 0 0;
+      background-size: contain, cover;
+      background-repeat: no-repeat, repeat;
+    
+  }
   
   
   #reservationInfo, #hotelInfo {
@@ -1524,4 +1546,49 @@
   .historyDetail.open {
     display: block; /* Shown when activated */
   }
+
+
+  .showlockers {
+    position:absolute;
+    width: 90%; /* 设置框的宽度 */
+    height: 60%; /* 设置框的高度 */
+    left:5%;
+    top:20%;
+   
+    padding: 10px; /* 设置框内边距 */
+    overflow: hidden; /* 隐藏溢出的文本 */
+    white-space: normal; /* 防止文本换行 */
+    text-overflow: ellipsis; /* 溢出部分显示省略号 */
+}
+
+.lockersDetail{
+  display: none;
+  position: absolute;
+  width: 90%; /* 设置框的宽度 */
+  height: 60%; /* 设置框的高度 */
+  left: 5%;
+  top: 20%;
+ 
+  padding: 10px; /* 设置框内边距 */
+  overflow: hidden; /* 隐藏溢出的文本 */
+  white-space: normal; /* 允许文本换行 */
+  text-overflow: ellipsis; /* 如果文本溢出，显示省略号 */
+  font-size: 30px;
+}
+.size{
+  position:absolute;
+  left:5%;
   
+}
+.availability{
+  position:relative;
+  left:45%;
+
+}
+.lockers {
+  /*background-color: transparent; /* 背景透明 */
+  border: none; /* 移除边框 */
+  color: black; /* 文字颜色 */
+  font-size: 16px; /* 字体大小 */
+  cursor: pointer; /* 鼠标悬停时显示手型光标 */
+}

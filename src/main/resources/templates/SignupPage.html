@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
-        <link href="../css/main.css" rel="stylesheet" />
+        <link href="../css/macmain.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
 
         <title>Document</title>
@@ -21,20 +21,44 @@
     <span class="signup_p3">
         SIGN UP
     </span>
-    <span class="email">
+    <span class="email" id = "email">
         E-Mail
     </span>
-    <span class="password">
+    <span class="password" id = "password">
         Password
     </span>
     <input type = "email" class="input1" id = "emailinput">
     <input type = "password" class="input2" id = "passinput">               
-    <button onclick = "getvalue('emailinput');getpass('passinput')
+    <button id = "sign" onclick = "getvalue('emailinput');getpass('passinput')
             ;window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
             type = "button" class="login_p3"  style="background-color: transparent;" >
                     SIGN UP And LOGIN→   
-     </button>      
+     </button>  
+     <script>    
+     const apiBaseUrl = 'http://localhost:8080';
 
+     document.getElementById('sign').addEventListener('click', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+            fetch('http://your-backend-url/api/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+
+    </script>
     <script src="../static/scripts.js"></script>
 </body>
 </html>

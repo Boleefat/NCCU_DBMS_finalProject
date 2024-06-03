@@ -4,18 +4,18 @@
         <meta charset="utf-8" />
         <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
-        <link href="../css/main.css" rel="stylesheet" />
+        <link href="../css/macmain.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <title>Document</title>
         </head>
     <body>
-                <button onclick = "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/SignupPage.html'"
+        
+               <button onclick = "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/SignupPage.html'"
                         type = "button" class="Signup" aria-label="Close" style="background-color: transparent;">
                     Sign Up
                 </button>
-                <button onclick="window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'"
-                        type = "button" class="Login1" style="background-color: transparent;">
+                <button onclick = "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'"id = "loginbut"type = "button" class="Login1" style="background-color: transparent;">
                              Login→
                 </button>
                 <span class="Keep">
@@ -30,10 +30,34 @@
                 <span class="Password">
                     Password
                 </span>
-                <input type = "text" class="link-top" id = "textinput">   
-                </div>
-                <input type = "password" class="line" id = "passwordinput">
-                </div>
+                <form id = "loginform">
+                    <input type = "email" class="link-top" id = "textinput">   
+                    <input type = "password" class="line" id = "passwordinput">
+                </form>
+                
+                <script>
+                 /*   document.getElementById('loginbut').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const email = document.getElementById('textinput').value;
+                    const password = document.getElementById('passwordinput').value;
+
+                        fetch('http://your-backend-url/api/data', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email, password: password })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                    });
+                    */
+                </script>
                 <span class="Account">
                     Account
                 </span>
