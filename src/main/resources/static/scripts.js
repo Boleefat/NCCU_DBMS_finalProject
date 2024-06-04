@@ -359,3 +359,10 @@ const choosed = () => {
             console.error('Error:', error);
         });
     });
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const lockerName = urlParams.get('save');
+    const lockerSize= urlParams.get('no');
+    const spanElement = document.getElementById('title');
+    spanElement.textContent = lockerSize;

@@ -16,7 +16,7 @@
              <!-- 顯示出口和置物櫃數量 -->
              <div class="showlockers" id = "showlocker">
                 <span class="exit-name">Exit 1</span> <br>
-                <button class="lockers">Locker 613</button>
+                <button class = "lockers">Locker 613</button>
                 <br>
                 <span class="exit-name">Exit 2</span> <br>
                 <button class="lockers">Locker 614</button>
@@ -32,38 +32,89 @@
             </div>
             <!-- 顯示置物櫃尺寸、可選擇數量 -->
             <div class = "lockersDetail" id = "detail">
+                <span class = "lockerName" id ="lockerName"></span>
+                <br>
                 <span class = "size">Size</span>
                 <span class = "availability"> Availability quantity</span>
                 <br>
-
-                <button class = "lockers"> 20'''<span style="margin: 5px 300px;">&nbsp;</span>3</button>
-                <button class = "lockers"> 30'''<span style="margin: 5px 300px;">&nbsp;</span>2</button>
-            </div>
-            <div class = "lockersDetail2" id = "detail2">
                 
-                <button class = "lockers" onclick=choosed()> 20'''<span style="margin: 5px 300px;">&nbsp;</span>Reserve Available</button>
-                <button class = "lockers" onclick=choosed()> 30'''<span style="margin: 5px 300px;">&nbsp;</span>Reserve Available</button>
+                <button class = "lockers2" > 20'''</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">3</button>
+                <br>
+                <button class = "lockers2" > 30'''</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">2</button>
             </div>
+              <!-- 顯示置物櫃尺寸、是否可選擇-->
+            <div class = "lockersAvail" id = "lockersAvail">
+                <span class = "total" id ="total"></span>
+                <br>
+                <button class = "lockers3" > 123</button><span style="margin: 5px 300px;">&nbsp;</span><button  class = "others">Reserve Available</button>
+                <br>
+                <button class = "lockers3" > 456</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">Reserve Available</button>
+            </div>
+           
             <script>
-               function showLocker(event) {
-    
-                // 如果需要隱藏原來的列表和顯示新的信息
-                document.getElementById('detail').style.display = 'block';
-                document.getElementById('showlocker').style.display = 'none';
-                }
-                function showLocker2() {
-                document.getElementById('detail2').style.display = 'block';
-                document.getElementById('detail').style.display = 'none';
-                }
-
+                
                 const lockerButtons = document.querySelectorAll('.lockers');
+                const locker= document.getElementById('lockerName');
+                function showLocker(event) {
+    
+                    // 如果需要隱藏原來的列表和顯示新的信息
+                    document.getElementById('detail').style.display = 'block';
+                    document.getElementById('showlocker').style.display = 'none';
+                }
+                let save = 0;
                 lockerButtons.forEach(button => {
-                button.addEventListener('click', showLocker);
+                    
+                    button.addEventListener('click', function(){
+                       
+                        locker.textContent = button.textContent;
+                       save =  button.textContent;
+                        showLocker();
+                       
+                    });
+                    
                 });
-                const lockerButtons2 = document.querySelectorAll('.lockersDetail');
+                function showLocker3() {
+                
+                document.getElementById('lockersAvail').style.display = 'block';
+                document.getElementById('detail').style.display = 'none';
+
+                }
+                const lockerButtons1 = document.querySelectorAll('.lockers2');
+                const locker3 = document.getElementById('total');
+               
+                lockerButtons1.forEach(button => {
+                button.addEventListener('click', function(){
+                    locker3.textContent = save+button.textContent;
+                    
+                    showLocker3();
+                    });
+                    
+                });
+                const lockerButtons2 = document.querySelectorAll('.lockers3');
                 lockerButtons2.forEach(button => {
-                button.addEventListener('click', showLocker2);
+                let no = 0;
+                button.addEventListener('click', function(){
+                    num = button.textContent;
+
+                    Swal.fire({
+                    title: 'Deposit Or Delivery?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Deposit',
+                    cancelButtonText: 'Delivery',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    // 如果用戶點擊 "Deposit Page" 按鈕，執行相應的操作
+                    window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DepositPage.html'; // 導向到 deposit page
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // 如果用戶點擊 "Delivery" 按鈕，執行相應的操作
+                    window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DeliveryPage.html'; // 導向到 delivery page
+                    }
+      });
+                    });
+                    
                 });
+
             </script>
             <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'" 
                         type = "button" class="back_station" aria-label="Close"style="background-color: transparent;" >

@@ -1590,7 +1590,7 @@
   height: 60%; /* 设置框的高度 */
   left: 5%;
   top: 20%;
- 
+
   padding: 10px; /* 设置框内边距 */
   overflow: hidden; /* 隐藏溢出的文本 */
   white-space: normal; /* 允许文本换行 */
@@ -1611,6 +1611,20 @@
   left:45%;
 
 }
+.lockerName{
+  font-family: Belgrano;
+  font-weight: Regular;
+  position:absolute;
+  top:0%;
+  
+}
+.lockerSize{
+  font-family: Belgrano;
+  font-weight: Regular;
+  position:absolute;
+  top:0%;
+  
+}
 .lockers {
   font-family: Belgrano;
   font-weight: Regular;
@@ -1619,6 +1633,31 @@
   font-size: 20px; /* 字体大小 */
   cursor: pointer; /* 鼠标悬停时显示手型光标 */
   background-color: transparent; 
+}
+.lockers2 {
+  font-family: Belgrano;
+  font-weight: Regular;
+  border: none; /* 移除边框 */
+  color: black; /* 文字颜色 */
+  font-size: 20px; /* 字体大小 */
+  cursor: pointer; /* 鼠标悬停时显示手型光标 */
+  background-color: transparent; 
+}
+.lockers3 {
+  font-family: Belgrano;
+  font-weight: Regular;
+  border: none; /* 移除边框 */
+  color: black; /* 文字颜色 */
+  font-size: 20px; /* 字体大小 */
+  cursor: pointer; /* 鼠标悬停时显示手型光标 */
+  background-color: transparent; 
+}
+.others{
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 20px; 
+  background-color: transparent; 
+  border: none; 
 }
 .exit-name{
   font-family: Belgrano;
@@ -1639,4 +1678,26 @@
   white-space: normal; /* 允许文本换行 */
   text-overflow: ellipsis; /* 如果文本溢出，显示省略号 */
   font-size: 30px;
+}
+.lockersAvail{
+  display: none;
+  position: absolute;
+  width: 90%; /* 设置框的宽度 */
+  height: 60%; /* 设置框的高度 */
+  left: 5%;
+  top: 20%;
+ 
+  padding: 10px; /* 设置框内边距 */
+  overflow: hidden; /* 隐藏溢出的文本 */
+  white-space: normal; /* 允许文本换行 */
+  text-overflow: ellipsis; /* 如果文本溢出，显示省略号 */
+  font-size: 30px;
+}
+#title{
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 30px;
+  position:absolute;
+  top:15%;
+  left:8%
 }

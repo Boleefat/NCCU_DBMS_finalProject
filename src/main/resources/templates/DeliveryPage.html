@@ -203,7 +203,52 @@
           </div>
       </span>
       <script>
-         function fetchAllReservations() {
+        document.getElementById('confirm').addEventListener('click', function(event) {
+            var date = document.getElementById('myDatepicker').value;
+            var hotel = document.getElementById('hotelSelect').value;
+           
+            var amount = document.getElementById('quantity').value;
+           
+            if (!date) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please choose the date you want to deposit'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+
+            if (!hotel) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please choose the hotel that you want to deliver.'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+            if(!amount){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please enter the amounts of your packages that want to store .'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;
+            }
+            else{
+                Swal.fire({
+        icon: 'success',
+        title: 'RESERVATION CONFIRMED!',
+        html: 'Your reservation no is!<br>Check your reservation status on RESERVATION Page.',
+        willClose: () => {
+            window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'; // 替换为你的目标页面 URL
+        }
+    }); 
+            }
+        });
+         /*function fetchAllReservations() {
         fetch(`${apiBaseUrl}/reservations`)
             .then(response => response.json())
             .then(data => {
@@ -250,7 +295,7 @@
             };
             createReservation(newReservation);
         });
-       
+       */
       </script>
 <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
 <script src="../static/scripts.js"></script>
