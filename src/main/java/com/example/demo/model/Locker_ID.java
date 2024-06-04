@@ -2,13 +2,17 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Locker_ID implements Serializable {
     // 複合主鍵
+    @Column(name = "station_id")
     private Long station_id;
-    // private int lockerAreaID;
+
+    @Column(name = "locker_id")
     private Long locker_id;
 
     public Locker_ID() {

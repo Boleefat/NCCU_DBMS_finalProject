@@ -15,7 +15,7 @@
                         type = "button" class="Signup" aria-label="Close" style="background-color: transparent;">
                     Sign Up
                 </button>
-                <button onclick = "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'"id = "loginbut"type = "button" class="Login1" style="background-color: transparent;">
+                <button id = "loginbut" type = "button" class="Login1" style="background-color: transparent;">
                              Login→
                 </button>
                 <span class="Keep">
@@ -36,27 +36,40 @@
                 </form>
                 
                 <script>
-                 /*   document.getElementById('loginbut').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const email = document.getElementById('textinput').value;
-                    const password = document.getElementById('passwordinput').value;
+                    document.getElementById('loginbut').addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const email = document.getElementById('textinput').value;
+                        const password = document.getElementById('passwordinput').value;
 
-                        fetch('http://your-backend-url/api/data', {
+                        fetch('http://localhost:8080/api/user/login', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({ email: email, password: password })
                         })
-                        .then(response => response.json())
+                        .then(response => {
+                            if (!response.ok) {
+                                console.log(response.status)
+                                if (response.status == 401) {
+                                    throw new Error('Unauthorized: Please check your credentials.');
+                                    // 導向到登入頁面或其他處理
+                                } else {
+                                    throw new Error('Network response was not ok');
+                                }
+                            }
+                            return response.json();
+                        })
                         .then(data => {
                             console.log('Success:', data);
+                            window.location.href = 'DBMS_Fontend.html'; // 導向至登入頁面 
                         })
                         .catch((error) => {
                             console.error('Error:', error);
                         });
                     });
-                    */
+
+                    
                 </script>
                 <span class="Account">
                     Account

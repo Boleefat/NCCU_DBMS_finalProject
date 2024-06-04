@@ -9,6 +9,10 @@ import java.math.BigDecimal;
 @Table(name = "locker")
 public class Locker {
     @EmbeddedId
+    @AttributeOverrides({
+        @AttributeOverride(name = "station_id", column = @Column(name = "station_id")),
+        @AttributeOverride(name = "locker_id", column = @Column(name = "locker_id"))
+    })
     private Locker_ID lockerId;
 
     @Column(name = "locker_location", nullable = false)
@@ -36,7 +40,7 @@ public class Locker {
     private Boolean statusReservedButNotUsed;
 
     @ManyToOne
-    @JoinColumn(name = "station_id",referencedColumnName = "station_id",nullable = false)
+    @JoinColumn(name = "station_id", referencedColumnName = "station_id", insertable = false, updatable = false)
     private MrtStation mrtStation;
 
     @OneToMany(mappedBy = "locker",cascade = CascadeType.ALL) //
