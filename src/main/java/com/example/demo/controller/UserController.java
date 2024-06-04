@@ -25,7 +25,8 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     //新增一個user
-    @PostMapping
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
+    @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         Optional<User> existingUser = userService.getUserByEmail(user.getEmail());
         if (existingUser.isPresent()) {
@@ -41,6 +42,7 @@ public class UserController {
         return new ResponseEntity<User>(createdUser, HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestBody User user) {
         Optional<User> existingUser = userService.getUserByEmail(user.getEmail());

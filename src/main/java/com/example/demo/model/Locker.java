@@ -1,3 +1,4 @@
+
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -31,7 +32,6 @@ public class Locker {
 
     @Column(name = "status_not_used", nullable = false)
     private Boolean statusNotUsed;
-
     @Column(name = "status_reserved_but_not_used", nullable = false)
     private Boolean statusReservedButNotUsed;
 

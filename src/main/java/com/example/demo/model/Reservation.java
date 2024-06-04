@@ -34,10 +34,10 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name="station_id", referencedColumnName="station_id", nullable=false),
-        @JoinColumn(name="locker_id", referencedColumnName="locker_id", nullable=false)
+        @JoinColumn(name = "station_id", referencedColumnName = "station_id", insertable = false, updatable = false),
+        @JoinColumn(name = "locker_id", referencedColumnName = "locker_id", insertable = false, updatable = false)
     })
-    private Locker locker; //
+    private Locker locker;
 
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "user_id"/*sql*/,nullable = false)

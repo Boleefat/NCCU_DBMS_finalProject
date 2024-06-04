@@ -1,4 +1,5 @@
 
+
 var searchInput = document.getElementById("searchInput");
 var searchDropdown = document.getElementById("searchDropdown");
 
@@ -366,3 +367,4 @@ const choosed = () => {
     const lockerSize= urlParams.get('no');
     const spanElement = document.getElementById('title');
     spanElement.textContent = lockerSize;
+
