@@ -41,7 +41,6 @@ public class ReservationController {
     }
 
     // 利用Reservation_ID 獲取單個 reservation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping("/{reservation_id}")
     public ResponseEntity<Reservation> getReservationByReservationID(@PathVariable("reservation_id") Long reservationID) {
     Optional<Reservation> reservationOptional = reservationService.getReservationByReservationID(reservationID);
@@ -53,7 +52,6 @@ public class ReservationController {
 }
 
     // 更新一個 reservation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PutMapping("/{reservation_id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("reservation_id") Long reservationID, @RequestBody Reservation reservation) {
         Optional<Reservation> updatedReservation = reservationService.updateReservation(reservationID, reservation);
@@ -65,7 +63,6 @@ public class ReservationController {
     }
 
     // 利用Reservation_ID 刪除一個 reservation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @DeleteMapping("/{reservation_id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable("reservation_id") Long reservationID) {
         if (reservationService.deleteReservationByReservationID(reservationID)) {

@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5501")
 @RequestMapping("/api/mrtStation")
 
 public class MrtStationController {
@@ -20,7 +19,6 @@ public class MrtStationController {
     private MrtStationService mrtStationService;
 
     // 新增一個 mrtStation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PostMapping("/")
     public ResponseEntity<MrtStation> createMrtStation(@RequestBody MrtStation mrtStation) {
         MrtStation createdMrtStation = mrtStationService.createMrtStation(mrtStation);
@@ -28,14 +26,12 @@ public class MrtStationController {
     }
 
     // 獲取所有 mrtStation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping
     public List<MrtStation> listAllmrtStation() {
         return mrtStationService.getAllStation();
     }
 
     // 獲取單個 mrtStation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @GetMapping("/{station_id}")
     public ResponseEntity<MrtStation> getStationByStationID(@PathVariable("station_id") Long stationID) {
         Optional<MrtStation> mrtStationOptional = mrtStationService.getStationByStationID(stationID);
@@ -44,7 +40,6 @@ public class MrtStationController {
     }
 
     // 更新一個 mrtStation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PutMapping("/{station_id}")
     public ResponseEntity<MrtStation> updateMrtStation(@PathVariable("station_id") Long stationID, @RequestBody MrtStation mrtStation) {
         Optional<MrtStation> updatedMrtStation = mrtStationService.updateMrtStation(stationID, mrtStation);
@@ -53,7 +48,6 @@ public class MrtStationController {
     }
 
     // 刪除一個 mrtStation
-    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @DeleteMapping("/{station_id}")
     public ResponseEntity<Void> deleteStation(@PathVariable("station_id") Long stationID) {
         if (mrtStationService.deleteStationByStationID(stationID)) {
