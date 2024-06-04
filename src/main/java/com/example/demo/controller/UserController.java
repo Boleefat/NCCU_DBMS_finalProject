@@ -57,6 +57,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(HttpServletRequest request) {
         SecurityContextHolder.getContext().setAuthentication(null);
