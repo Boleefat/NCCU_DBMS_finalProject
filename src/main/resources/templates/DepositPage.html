@@ -21,15 +21,15 @@
     <body>
         
       <div class="back1_deposit"> 
-            <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'" 
+            <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/StationInfo.html'" 
                         type = "button" class="back_deposit" aria-label="Close"style="background-color: transparent;" >
                         <i class="fas fa-chevron-left"></i>Back
             </button>
-            <button  id = "confirm" onclick =  "confirmed()" 
+            <button  id = "confirm" 
                         type = "button" class="confirm_deposit" aria-label="Close"style="background-color: transparent;" >
                         Confirm<i class="fas fa-chevron-right"></i>
             </button>
-            
+            <span id = "title">hi</span>
             <ul class="listmenu">
                 <li class="list-group-item">Date</li>
                 <li class="list-group-item">Start Time</li>
@@ -41,7 +41,7 @@
             <input class="choose_date"id="myDatepicker" data-language='en' >
         <br>
         <br>
-            <div class="amount">
+            <div class="amountDeposit">
                 <select name="name" id="quantity">
                   <option value="First value">1</option>
                   <option value="Second value">2</option>
@@ -50,15 +50,17 @@
                   <option value="Fifth value">5</option>
                 </select>   
             </div>
-            <input type = "text" class="option" id = "textinput">   
-            <div class="k-d-flex k-justify-content-center" style="padding-top: 54px;">
-              <div class="k-w-300">
-                <input id="start"  style="width: 100%;" />
-              </div>
+            <input type = "text" class="optionDeposit" id = "textinput"> 
+            <div class="k-w-300">
+            <input id="start"  style="width: 100%;" />
+            </div>
 
-              <div class="k-w-301">
-                 <input id="end"  />
-              </div>
+            <div class="k-w-301">
+             <input id="end" />
+            </div>
+            </form>
+            
+            
             </div>
         </form>
        
@@ -207,8 +209,53 @@
   
       </span>
       <script>
-     
-        function fetchAllReservations() {
+       
+     document.getElementById('confirm').addEventListener('click', function(event) {
+            var date = document.getElementById('myDatepicker').value;
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+            var amount = document.getElementById('quantity').value;
+           
+            if (!date) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please choose the date you want to deposit'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+
+            if (!start || !end) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please choose the time.'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+            if(!amount){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please enter the amounts of your packages that want to store .'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;
+            }
+            else{
+                Swal.fire({
+        icon: 'success',
+        title: 'RESERVATION CONFIRMED!',
+        html: 'Your reservation no is!<br>Check your reservation status on RESERVATION Page.',
+        willClose: () => {
+            window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'; // 替换为你的目标页面 URL
+        }
+    }); 
+            }
+        });
+        /*function fetchAllReservations() {
         fetch(`${apiBaseUrl}/reservations`)
             .then(response => response.json())
             .then(data => {
@@ -255,7 +302,7 @@
             };
             createReservation(newReservation);
         });
-
+        */
       </script>
 <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
 <script src="../static/scripts.js"></script>

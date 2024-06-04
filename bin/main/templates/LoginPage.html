@@ -21,7 +21,7 @@
                 <span class="Keep">
                     ☐ Keep logged in
                 </span>
-                <button onclick =  "window.location.href = 'http://127.0.0.1:5500/ForgetPage.html' " 
+                <button onclick =  "window.location.href = 'http://127.0.0.1:5501/ForgetPage.html' " 
                         type = "button" class="Forget" aria-label="Close" style="background-color: transparent;">
                             Forget Password
                 </button>
@@ -41,6 +41,11 @@
                         const email = document.getElementById('textinput').value;
                         const password = document.getElementById('passwordinput').value;
 
+                        if (!email || !password) {
+                            alert('Please type Email and password.');
+                            return;
+                        }
+                        
                         fetch('http://localhost:8080/api/user/login', {
                             method: 'POST',
                             headers: {
@@ -52,8 +57,8 @@
                             if (!response.ok) {
                                 console.log(response.status)
                                 if (response.status == 401) {
+                                    alert('Wrong password.');
                                     throw new Error('Unauthorized: Please check your credentials.');
-                                    // 導向到登入頁面或其他處理
                                 } else {
                                     throw new Error('Network response was not ok');
                                 }
