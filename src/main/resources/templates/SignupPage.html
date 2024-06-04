@@ -6,7 +6,7 @@
         <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
         <link href="../css/macmain.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
-
+            <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
         <title>Document</title>
         </head>
 <body>
@@ -27,14 +27,42 @@
     <span class="password" id = "password">
         Password
     </span>
+    <form id = "form">
     <input type = "email" class="input1" id = "emailinput">
-    <input type = "password" class="input2" id = "passinput">               
-    <button id = "sign" onclick = "getvalue('emailinput');getpass('passinput')
-            ;window.location.href = 'http://127.0.0.1:5500/LoginPage.html'" 
+    <input type = "password" class="input2" id = "passinput">  
+    </form>             
+    <button id = "sign" 
             type = "button" class="login_p3"  style="background-color: transparent;" >
                     SIGN UP And LOGIN→   
      </button>  
-     <script>    
+     <script>
+       document.getElementById('sign').addEventListener('click', function(event) {
+            var emailInput = document.getElementById('emailinput').value;
+            var passwordInput = document.getElementById('passinput').value;
+
+            if (!emailInput) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please input your email'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+
+            if (!passwordInput) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Please enter yout password'
+                });
+                event.preventDefault();  // 阻止表單提交
+                return;  // 防止進一步執行
+            }
+            else{
+              window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/LoginPage.html'
+            }
+        }); /*   
      const apiBaseUrl = 'http://localhost:8080';
 
      document.getElementById('sign').addEventListener('click', function(event) {
@@ -57,8 +85,9 @@
                 console.error('Error:', error);
             });
         });
-
+        */
     </script>
     <script src="../static/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 </body>
 </html>

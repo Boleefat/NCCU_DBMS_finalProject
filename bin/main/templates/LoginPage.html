@@ -5,6 +5,7 @@
         <link href="https://fonts.googleapis.com/css?family=Belgrano&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=PT+Serif+Caption&display=swap" rel="stylesheet" />
         <link href="../css/macmain.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<IntegrityCode>" crossorigin="anonymous" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <title>Document</title>
@@ -15,13 +16,13 @@
                         type = "button" class="Signup" aria-label="Close" style="background-color: transparent;">
                     Sign Up
                 </button>
-                <button onclick = "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'"id = "loginbut"type = "button" class="Login1" style="background-color: transparent;">
+                <button id = "loginbut" type = "button" class="Login1" style="background-color: transparent;">
                              Login→
                 </button>
                 <span class="Keep">
                     ☐ Keep logged in
                 </span>
-                <button onclick =  "window.location.href = 'http://127.0.0.1:5500/ForgetPage.html' " 
+                <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/ForgetPage.html' " 
                         type = "button" class="Forget" aria-label="Close" style="background-color: transparent;">
                             Forget Password
                 </button>
@@ -36,6 +37,33 @@
                 </form>
                 
                 <script>
+                    document.getElementById('loginbut').addEventListener('click', function(event) {
+                        var emailInput = document.getElementById('textinput').value;
+                        var passwordInput = document.getElementById('passwordinput').value;
+
+                        if (!emailInput) {
+                            Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please input your email'
+                        });
+                        event.preventDefault();  // 阻止表單提交
+                        return;  // 防止進一步執行
+                    }
+
+                    if (!passwordInput) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: 'Please enter yout password'
+                        });
+                        event.preventDefault();  // 阻止表單提交
+                        return;  // 防止進一步執行
+                    }
+                    else{
+                        window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'
+                    }
+                    });
                  /*   document.getElementById('loginbut').addEventListener('click', function(event) {
                     event.preventDefault();
                     const email = document.getElementById('textinput').value;
@@ -73,5 +101,6 @@
         <div class = "Gray2"></div>
            
         <script src="../static/scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
     </body>
     </html>

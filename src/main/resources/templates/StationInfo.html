@@ -16,38 +16,54 @@
              <!-- 顯示出口和置物櫃數量 -->
              <div class="showlockers" id = "showlocker">
                 <span class="exit-name">Exit 1</span> <br>
-        <button class="lockers">Locker 613</button>
-        <br>
-        <span class="exit-name">Exit 2</span> <br>
-        <button class="lockers">Locker 614</button>
-        <br>
-        <span class="exit-name">Exit 3</span> <br>
-        <button class="lockers">Locker 615</button>
-        <br>
-        <span class="exit-name">Exit 4</span> <br>
-        <button class="lockers">Locker 616</button>
-        <br>
-        <span class="exit-name">Exit 5</span> <br>
-        <button class="lockers">Locker 617</button>
+                <button class="lockers">Locker 613</button>
+                <br>
+                <span class="exit-name">Exit 2</span> <br>
+                <button class="lockers">Locker 614</button>
+                <br>
+                <span class="exit-name">Exit 3</span> <br>
+                <button class="lockers">Locker 615</button>
+                <br>
+                <span class="exit-name">Exit 4</span> <br>
+                <button class="lockers">Locker 616</button>
+                <br>
+                <span class="exit-name">Exit 5</span> <br>
+                <button class="lockers">Locker 617</button>
             </div>
             <!-- 顯示置物櫃尺寸、可選擇數量 -->
             <div class = "lockersDetail" id = "detail">
                 <span class = "size">Size</span>
                 <span class = "availability"> Availability quantity</span>
                 <br>
-                <button class = "lockers" onclick=choosed()> 20'''<span style="margin: 5px 300px;">&nbsp;</span>3</button>
-                <button class = "lockers" onclick=choosed()> 30'''<span style="margin: 5px 300px;">&nbsp;</span>2</button>
+
+                <button class = "lockers"> 20'''<span style="margin: 5px 300px;">&nbsp;</span>3</button>
+                <button class = "lockers"> 30'''<span style="margin: 5px 300px;">&nbsp;</span>2</button>
+            </div>
+            <div class = "lockersDetail2" id = "detail2">
+                
+                <button class = "lockers" onclick=choosed()> 20'''<span style="margin: 5px 300px;">&nbsp;</span>Reserve Available</button>
+                <button class = "lockers" onclick=choosed()> 30'''<span style="margin: 5px 300px;">&nbsp;</span>Reserve Available</button>
             </div>
             <script>
-                function showLocker() {
-            document.getElementById('detail').style.display = 'block';
-            document.getElementById('showlocker').style.display = 'none';
-        }
+               function showLocker(event) {
+    
+                // 如果需要隱藏原來的列表和顯示新的信息
+                document.getElementById('detail').style.display = 'block';
+                document.getElementById('showlocker').style.display = 'none';
+                }
+                function showLocker2() {
+                document.getElementById('detail2').style.display = 'block';
+                document.getElementById('detail').style.display = 'none';
+                }
 
-        const lockerButtons = document.querySelectorAll('.lockers');
-        lockerButtons.forEach(button => {
-            button.addEventListener('click', showLocker);
-        });
+                const lockerButtons = document.querySelectorAll('.lockers');
+                lockerButtons.forEach(button => {
+                button.addEventListener('click', showLocker);
+                });
+                const lockerButtons2 = document.querySelectorAll('.lockersDetail');
+                lockerButtons2.forEach(button => {
+                button.addEventListener('click', showLocker2);
+                });
             </script>
             <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'" 
                         type = "button" class="back_station" aria-label="Close"style="background-color: transparent;" >
