@@ -28,8 +28,8 @@ dependencies {
 
 compileJava {
     options.compilerArgs += ['-parameters']
-    sourceCompatibility = '17.0.10' // Use your project's Java version
-    targetCompatibility = '17.0.10' // Use your project's Java version
+    sourceCompatibility = '17' // Use your project's Java version
+    targetCompatibility = '17' // Use your project's Java version
 }
 
 
