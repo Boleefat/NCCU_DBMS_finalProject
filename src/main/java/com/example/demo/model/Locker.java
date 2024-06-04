@@ -45,7 +45,7 @@ public class Locker {
     public Locker(){
     }
 
-    public Locker(Locker_ID lockerId, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
+    public Locker(Locker_ID locker_Id, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
         this.lockerId = lockerId;
         
         this.size = size;
