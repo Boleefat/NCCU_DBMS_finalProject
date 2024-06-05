@@ -276,10 +276,10 @@ const choosed = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           // 如果用戶點擊 "Deposit Page" 按鈕，執行相應的操作
-          window.location.href = 'http://127.0.0.1:5500/DepositPage.html'; // 導向到 deposit page
+          window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DepositPage.html'; // 導向到 deposit page
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // 如果用戶點擊 "Delivery" 按鈕，執行相應的操作
-          window.location.href = 'http://127.0.0.1:5500/DeliveryPage.html'; // 導向到 delivery page
+          window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DeliveryPage.html'; // 導向到 delivery page
         }
       });
 }
@@ -381,7 +381,7 @@ function verifyEmail() {
     var emailInput = document.getElementById("emailInput");
     var emailValue = emailInput.value.trim();
     if (emailValue === "") {
-        alert("Please input your Email");
+        alert("Please input your E-mail");
     } else {
         getvalue('emailforget');
         window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/LoginPage.html';

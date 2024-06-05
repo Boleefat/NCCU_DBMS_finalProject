@@ -21,7 +21,7 @@
         SIGN UP
     </span>
     <span class="email">
-        E-Mail
+        E-mail
     </span>
     <span class="password">
         Password
@@ -36,6 +36,11 @@
                 const email = document.getElementById('emailinput').value;
                 const password = document.getElementById('passinput').value;
                 console.log("test");
+
+                if (!email || !password) {
+                            alert('Please type E-mail and password.');
+                            return;
+                        }
 
                 fetch('http://localhost:8080/api/user/signUp', {
                     method: 'POST',
@@ -52,7 +57,7 @@
                 })
                 .then(data => {
                     console.log('Success:', data);
-                    window.location.href = 'loginPage.html'; // 導向至登入頁面 
+                    window.location.href = 'LoginPage.html'; // 導向至登入頁面 
                 })
                 .catch((error) => {
                     console.error('Error:', error);
