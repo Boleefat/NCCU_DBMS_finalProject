@@ -344,7 +344,7 @@ const choosed = () => {
         const date = document.getElementById('myDatepicker').value;
         const quantity = document.getElementById('quantity').value;
 
-        fetch('http://your-backend-url/api/data', {
+        fetch('http://localhost:8080/api/reservation/addreservation', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

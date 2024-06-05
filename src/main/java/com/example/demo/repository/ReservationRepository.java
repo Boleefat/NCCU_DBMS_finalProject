@@ -13,4 +13,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Optional<Reservation> findByUser_ID(Long userID);
     @Query(value="SELECT * FROM reservation AS r WHERE r.reservationId = %?1", nativeQuery = true)
     Optional<Reservation> findByReservation_Id(Long reservationID);
+    Optional<Reservation> findTopByUserIdOrderByDepositTimestampDesc(Long userId);
 }

@@ -35,7 +35,7 @@ public class LockerService {
 
     public Optional<Locker> updateLocker(Locker_ID lockerId, Locker newLocker) {
         return lockerRepository.findByLockerId(lockerId).map(locker -> {
-            locker.setLockerPassword(newLocker.getLockerPassword());
+          
             locker.setStatusUsed(newLocker.getStatusUsed());
             locker.setStatusNotUsed(newLocker.getStatusNotUsed());
             locker.setStatusReservedButNotUsed(newLocker.getStatusReservedButNotUsed());

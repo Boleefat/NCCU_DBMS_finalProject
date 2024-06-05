@@ -277,8 +277,9 @@
     }); 
             }
         });
-        /*function fetchAllReservations() {
-        fetch(`${apiBaseUrl}/reservations`)
+        
+        function fetchAllReservations() {
+        fetch(`/api/reservation/addreservation`)
             .then(response => response.json())
             .then(data => {
             console.log('All Reservations:', data);
@@ -288,7 +289,7 @@
     }
 
     function createReservation(reservation) {
-        fetch(`${apiBaseUrl}/reservations`, {
+        fetch(`http://localhost:8080/api/reservation/addreservation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -324,7 +325,7 @@
             };
             createReservation(newReservation);
         });
-        */
+        
       </script>
 <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
 <script src="../static/scripts.js"></script>

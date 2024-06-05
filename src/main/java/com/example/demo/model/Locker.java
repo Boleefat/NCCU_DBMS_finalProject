@@ -24,9 +24,6 @@ public class Locker {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "locker_password", nullable = true)
-    private String lockerPassword;
-
     @Column(name = "payment_method", nullable = false)
     private String paymentMethod;
 
@@ -49,12 +46,10 @@ public class Locker {
     public Locker(){
     }
 
-    public Locker(Locker_ID locker_Id, int size, int price, String lockerPassword,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
+    public Locker(Locker_ID lockerId, int size, int price,Boolean statusUsed, Boolean statusNotUsed, Boolean statusReservedButNotUsed){
         this.lockerId = lockerId;
-        
         this.size = size;
         this.price = price;
-        this.lockerPassword = lockerPassword;
         this.statusUsed = statusUsed;
         this.statusNotUsed = statusNotUsed;
         this.statusReservedButNotUsed = statusReservedButNotUsed;
@@ -90,14 +85,6 @@ public class Locker {
 
     public void setPrice(int price){
         this.price = price;
-    }
-
-    public String getLockerPassword(){
-        return lockerPassword;
-    }
-
-    public void setLockerPassword(String lockerPassword){
-        this.lockerPassword = lockerPassword;
     }
 
     public String getPaymentMethod(){

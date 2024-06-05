@@ -7,11 +7,14 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "reservation")
-public class Reservation {
+public class Reservation {@Column(name = "password", nullable = true)
+    private String password;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reservation_id")
     private Long reservationID;
+    
+    
 
     @Column(name = "deposit_timestamp", nullable = false)
     private Calendar depositTimestamp;
@@ -82,6 +85,14 @@ public class Reservation {
 
     public void setLocker(Locker locker){
         this.locker = locker;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public Calendar getDepositTimestamp(){

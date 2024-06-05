@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Reservation;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import com.example.demo.service.ReservationService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -20,9 +23,34 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    private ReservationService reservationService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @GetMapping("/currentUser")
+    public ResponseEntity<User> getCurrentUser(Principal principal) {
+        String username = principal.getName();
+        Optional<User> userOptional = userService.findByUsername(username);
+        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/latestReservation")
+    public ResponseEntity<Reservation> getCurrentUserLatestReservation(Principal principal) {
+        Long userId = getCurrentUserId(principal); // 从Principal获取用户ID
+        if (userId != null) {
+            Optional<Reservation> latestReservation = reservationService.getLatestReservationByUserId(userId);
+            return latestReservation.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    private Long getCurrentUserId(Principal principal) {
+        // 通过Principal获取当前用户的详细信息
+        String username = principal.getName();
+        Optional<User> userOptional = userService.findByUsername(username);
+        return userOptional.map(User::getUserID).orElse(null);
+    }
 
     //新增一個user
     @CrossOrigin(origins = "http://127.0.0.1:5501")

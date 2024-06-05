@@ -1,18 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
-import com.example.demo.model.Locker;
 import com.example.demo.model.Reservation;
 import com.example.demo.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Calendar;
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class ReservationService {
@@ -20,13 +19,29 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    private static final int PASSWORD_LENGTH = 6;
+    private static final Random RANDOM = new SecureRandom();
+
     public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 
     // 新建一個 reservation
     public Reservation createReservation(Reservation reservation) {
+        // 生成六位數隨機密碼
+        String randomPassword = generateRandomPassword();
+        reservation.setPassword(randomPassword);
+
         return reservationRepository.save(reservation);
+    }
+
+    private String generateRandomPassword() {
+        int password = RANDOM.nextInt(900000) + 100000; // 生成100000到999999之間的隨機數
+        return String.valueOf(password);
+    }
+    
+    public Optional<Reservation> getLatestReservationByUserId(Long userId) {
+        return reservationRepository.findTopByUserIdOrderByDepositTimestampDesc(userId);
     }
 
     // 獲取所有 reservation

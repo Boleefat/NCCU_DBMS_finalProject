@@ -28,10 +28,11 @@ public class ReservationController {
     private ReservationService reservationService;
 
     // 新增一個 reservation 
-    @PostMapping("/")
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
+    @PostMapping("/addreservation")
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         Reservation createdReservation = reservationService.createReservation(reservation);
-        return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
+        return new ResponseEntity<Reservation>(createdReservation, HttpStatus.CREATED);
     }
 
     // 獲取所有 reservations
@@ -49,7 +50,7 @@ public class ReservationController {
     } else {
         return ResponseEntity.notFound().build();
     }
-}
+    }
 
     // 更新一個 reservation
     @PutMapping("/{reservation_id}")
