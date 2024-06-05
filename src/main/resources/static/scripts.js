@@ -366,3 +366,25 @@ const choosed = () => {
     const lockerSize= urlParams.get('no');
     const spanElement = document.getElementById('title');
     spanElement.textContent = lockerSize;
+
+function handleEmailInput() {
+    var emailLabel = document.getElementById("emailLabel");
+    var emailInput = document.getElementById("emailInput");
+    if (emailInput.value !== "") {
+        emailLabel.textContent = "";
+    } else {
+        emailLabel.textContent = "Email";
+    }
+}
+
+function verifyEmail() {
+    var emailInput = document.getElementById("emailInput");
+    var emailValue = emailInput.value.trim();
+    if (emailValue === "") {
+        alert("Please input your Email");
+    } else {
+        getvalue('emailforget');
+        window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/LoginPage.html';
+    }
+}
+    
