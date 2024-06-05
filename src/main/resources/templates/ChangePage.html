@@ -34,6 +34,27 @@
                         type = "button" class="forget_change" aria-label="Close" style="background-color: transparent;">
                     Forget Password
     </button>
+    <script>
+        function submitChangePassword() {
+            const formData = new FormData(document.getElementById('changePasswordForm'));
+            fetch('http://127.0.0.1:8080/api/user/changePassword', {
+                method: 'POST',
+                body: new URLSearchParams(formData),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then(data => alert('Password changed successfully'))
+            .catch(error => alert('Error changing password: ' + error));
+        }
+    </script>
     <script src="../static/scripts.js"></script>
 </body>
 </html>

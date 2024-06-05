@@ -426,6 +426,27 @@ body {
   border-radius: 20px;
   opacity: 0.5;                             
   }
+
+.Change {
+  width: 357px;
+  color: rgba(60,54,54,1);
+  position: absolute;
+  top: 400px;
+  left: 560px;
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 15px;
+  opacity: 1;
+  text-align: right;
+  border: none;
+  z-index: 999; 
+}
+.Change:hover {                      
+  
+  color: var(--bs-gray-800);
+  border-radius: 20px;
+  opacity: 0.5;                             
+}
 /*Signup page*/
 .back {
   width: 292px;
