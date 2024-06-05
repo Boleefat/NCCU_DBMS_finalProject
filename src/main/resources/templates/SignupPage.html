@@ -60,6 +60,7 @@
                     window.location.href = 'LoginPage.html'; // 導向至登入頁面 
                 })
                 .catch((error) => {
+                    alert('This E-mail has been used.');
                     console.error('Error:', error);
                 });
             });
