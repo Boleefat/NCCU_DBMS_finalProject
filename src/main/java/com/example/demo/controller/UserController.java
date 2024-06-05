@@ -27,30 +27,30 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
-    @GetMapping("/currentUser")
-    public ResponseEntity<User> getCurrentUser(Principal principal) {
-        String username = principal.getName();
-        Optional<User> userOptional = userService.findByUsername(username);
-        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // @GetMapping("/currentUser")
+    // public ResponseEntity<User> getCurrentUser(Principal principal) {
+    //     String username = principal.getName();
+    //     Optional<User> userOptional = userService.findByUsername(username);
+    //     return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    // }
 
-    @GetMapping("/latestReservation")
-    public ResponseEntity<Reservation> getCurrentUserLatestReservation(Principal principal) {
-        Long userId = getCurrentUserId(principal); // 从Principal获取用户ID
-        if (userId != null) {
-            Optional<Reservation> latestReservation = reservationService.getLatestReservationByUserId(userId);
-            return latestReservation.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+    // @GetMapping("/latestReservation")
+    // public ResponseEntity<Reservation> getCurrentUserLatestReservation(Principal principal) {
+    //     Long userId = getCurrentUserId(principal); // 从Principal获取用户ID
+    //     if (userId != null) {
+    //         Optional<Reservation> latestReservation = reservationService.getLatestReservationByUserId(userId);
+    //         return latestReservation.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    //     } else {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
 
-    private Long getCurrentUserId(Principal principal) {
-        // 通过Principal获取当前用户的详细信息
-        String username = principal.getName();
-        Optional<User> userOptional = userService.findByUsername(username);
-        return userOptional.map(User::getUserID).orElse(null);
-    }
+    // private Long getCurrentUserId(Principal principal) {
+    //     // 通过Principal获取当前用户的详细信息
+    //     String username = principal.getName();
+    //     Optional<User> userOptional = userService.findByUsername(username);
+    //     return userOptional.map(User::getUserID).orElse(null);
+    // }
 
     //新增一個user
     @CrossOrigin(origins = "http://127.0.0.1:5501")

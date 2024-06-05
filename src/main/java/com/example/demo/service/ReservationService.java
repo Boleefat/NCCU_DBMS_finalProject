@@ -40,9 +40,9 @@ public class ReservationService {
         return String.valueOf(password);
     }
     
-    public Optional<Reservation> getLatestReservationByUserId(Long userId) {
-        return reservationRepository.findTopByUserIdOrderByDepositTimestampDesc(userId);
-    }
+    // public Optional<Reservation> getLatestReservationByUserId(Long userId) {
+    //     return reservationRepository.findTopByUserIdOrderByDepositTimestampDesc(userId);
+    // }
 
     // 獲取所有 reservation
     public List<Reservation> getAllReservation() {

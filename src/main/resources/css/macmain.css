@@ -802,7 +802,7 @@ body {
   width: 350px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 280px;
+  top: 250px; /* 调整标题位置 */
   left: 21.2%;
   font-family: Belgrano;
   font-weight: Regular;
@@ -810,11 +810,12 @@ body {
   opacity: 1;
   text-align: left;
 }
-.currentpass_change{
+
+.email_change {
   width: 292px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 46%;
+  top: 41%; /* 新增电子邮件标签位置 */
   left: 23%;
   font-family: Belgrano;
   font-weight: Regular;
@@ -822,11 +823,29 @@ body {
   opacity: 1;
   text-align: left;
 }
-.newpass_change{
+
+.input_email_change {
+  width: 800px;
+  height: 40px;
+  position: absolute;
+  top: 44%;
+  left: 23%; /* 将直线的左侧边界放置在页面的中心 */
+  transform: translateX(20%);
+  transform: translateY(20%);
+  border-top: solid #090a0a 1px;
+  z-index: 999; 
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+.currentpass_change {
   width: 292px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 58.5%;
+  top: 52%; /* 调整当前密码标签位置 */
   left: 23%;
   font-family: Belgrano;
   font-weight: Regular;
@@ -834,11 +853,58 @@ body {
   opacity: 1;
   text-align: left;
 }
+
+.input1_change{
+  width: 800px;
+  height: 40px;
+  position: absolute;
+  top: 55%;
+  left: 23%; /* 将直线的左侧边界放置在页面的中心 */
+  transform: translateX(20%);
+  transform: translateY(20%);
+  border-top: solid #090a0a 1px;
+  z-index: 999; 
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  padding-top: 5px;
+}
+.input2_change{
+  width: 800px;
+  height: 40px;
+  position: absolute;
+  top: 66%;
+  left: 23%; /* 将直线的左侧边界放置在页面的中心 */
+  transform: translateX(20%);
+  transform: translateY(20%);
+  border-top: solid #090a0a 1px;
+  z-index: 999; 
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  padding-top: 5px;
+}
+.newpass_change {
+  width: 292px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 63%; /* 调整新密码标签位置 */
+  left: 23%;
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+  text-align: left;
+}
+
+
 .login_change{
   width: 287px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 70%;
+  top: 75%;
   left: 54%;
   transform: translateX(25%);
   font-family: Belgrano;
@@ -858,7 +924,7 @@ body {
   width: 357px;
   color: rgba(60,54,54,1);
   position: absolute;
-  top: 60%;
+  top: 64%;
   left: 54%;
   font-family: Belgrano;
   font-weight: Regular;
@@ -874,38 +940,8 @@ body {
   border-radius: 20px;
   opacity: 0.5;                             
   }
-.input1_change{
-  width: 800px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  left: 23%; /* 将直线的左侧边界放置在页面的中心 */
-  transform: translateX(20%);
-  transform: translateY(20%);
-  border-top: solid #090a0a 1px;
-  z-index: 999; 
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 20px;
-  padding-top: 5px;
-}
-.input2_change{
-  width: 800px;
-  height: 40px;
-  position: absolute;
-  top: 62%;
-  left: 23%; /* 将直线的左侧边界放置在页面的中心 */
-  transform: translateX(20%);
-  transform: translateY(20%);
-  border-top: solid #090a0a 1px;
-  z-index: 999; 
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 20px;
-  padding-top: 5px;
-}
+
+
 /*StationInfo Page*/
 .back1_station {
   width: 100%;
@@ -1625,7 +1661,9 @@ position:absolute;
 top:0%;
 
 }
-.lockers {
+.exit-name {
+display: block; /* 确保每个按钮都在新的一行 */
+margin: 5px 0; /* 添加一点间隔 */
 font-family: Belgrano;
 font-weight: Regular;
 border: none; /* 移除边框 */

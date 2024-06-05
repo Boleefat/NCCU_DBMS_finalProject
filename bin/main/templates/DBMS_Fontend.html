@@ -80,15 +80,47 @@
             
             <!-- Reservation info block -->
             <div id="reservationInfo">
-              Reservation Info
-              <div id="reservationDetails">
-                Reservation No. #3476IH<br>
-                Date 2024/05/12<br>
-                Start Time 10:00 a.m.<br>
-                End Time 12:00 p.m.<br>
-                Password ******
+                <h2>Reservation Info</h2>
+                <div id="reservationDetails">
+                  <strong>Reservation No.:</strong> <span id="reservationNo">#3476IH</span><br>
+                  <strong>Date:</strong> <span id="reservationDate">2024/05/12</span><br>
+                  <strong>Start Time:</strong> <span id="startTime">10:00 a.m.</span><br>
+                  <strong>End Time:</strong> <span id="endTime">12:00 p.m.</span><br>
+                  <strong>Password:</strong> <span id="password">******</span>
+                </div>
               </div>
-            </div>
+  
+              <script>
+                    // 获取当前用户信息
+                    fetch('/api/user/currentUser')
+                        .then(response => response.json())
+                        .then(user => {
+                            const userId = user.id; // 假设用户ID存储在id字段
+                            if (userId) {
+                                // 获取用户最新的预订
+                                return fetch(`/api/user/latestReservation`);
+                            } else {
+                                throw new Error('User ID not found in response');
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(latestReservation => {
+                            const reservationId = latestReservation.id;
+                            // 使用获取到的reservation ID获取预订详细信息
+                            return fetch(`/api/reservation/{reservation_id}`);
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // 将获取到的预订资料显示在HTML页面上
+                            document.getElementById('reservationNo').innerText = data.reservation_id;
+                            document.getElementById('reservationDate').innerText = data.date;
+                            document.getElementById('startTime').innerText = data.deposit_timestamp;
+                            document.getElementById('endTime').innerText = data.pick_up_timestamp;
+                            document.getElementById('password').innerText = data.password;
+                        })
+                        .catch(error => console.error('Error fetching reservation details:', error));
+
+              </script>
             <!-- Hotel info block -->
             <div id="hotelInfo">
                 Deliver-to-Hotel
@@ -102,7 +134,7 @@
                     The Okura Prestige Taipei Hotel<br>
                     Sheraton Grand Taipei Hotel<br>
                     W Taipei<br>
-                    Hotel Resonance Taipei<br>
+                    Hotel Resonance<br>
                 </div>
             </div>
             <div id="more"></div>
@@ -166,7 +198,7 @@
                         </svg>
                     </p>
                     <div class="faq-answer" style="display: none;">
-                        <p>This system allows users to deposit and deliver their luggage.</p>
+                        <p>You can click on the station on the homepage map to deposit and deliver your luggage.</p>
                     </div>
                     <p class="faq-question">
                         <strong>2. How to reset my password?</strong>

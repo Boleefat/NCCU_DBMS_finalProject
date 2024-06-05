@@ -10,26 +10,10 @@
     </head>
     <body>
         <div class="back1_station">
-                
             <span class="station_station" id="stationName"></span>
            
              <!-- 顯示出口和置物櫃數量 -->
-            <div class="showlockers" id = "showlocker">
-                <span class="exit-name">Exit 1</span> <br>
-                <button class = "lockers">Locker 613</button>
-                <br>
-                <span class="exit-name">Exit 2</span> <br>
-                <button class="lockers">Locker 614</button>
-                <br>
-                <span class="exit-name">Exit 3</span> <br>
-                <button class="lockers">Locker 615</button>
-                <br>
-                <span class="exit-name">Exit 4</span> <br>
-                <button class="lockers">Locker 616</button>
-                <br>
-                <span class="exit-name">Exit 5</span> <br>
-                <button class="lockers">Locker 617</button>
-            </div>
+            <div class="showlockers" id="showlocker"></div>
             <!-- 顯示置物櫃尺寸、可選擇數量 -->
             <div class = "lockersDetail" id = "detail">
                 <span class = "lockerName" id ="lockerName"></span>
@@ -37,10 +21,9 @@
                 <span class = "size">Size</span>
                 <span class = "availability"> Availability quantity</span>
                 <br>
-                
-                <button class = "lockers2" > 20'''</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">3</button>
+                <button class = "lockers2" > 20“</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">3</button>
                 <br>
-                <button class = "lockers2" > 30'''</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">2</button>
+                <button class = "lockers2" > 30“</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">2</button>
             </div>
               <!-- 顯示置物櫃尺寸、是否可選擇-->
             <div class = "lockersAvail" id = "lockersAvail">
@@ -50,71 +33,79 @@
                 <br>
                 <button class = "lockers3" > 456</button><span style="margin: 5px 300px;">&nbsp;</span><button class = "others">Reserve Available</button>
             </div>
-           
+            
             <script>
-                
-                const lockerButtons = document.querySelectorAll('.lockers');
-                const locker= document.getElementById('lockerName');
-                function showLocker(event) {
-    
-                    // 如果需要隱藏原來的列表和顯示新的信息
-                    document.getElementById('detail').style.display = 'block';
-                    document.getElementById('showlocker').style.display = 'none';
-                }
-                let save = 0;
-                lockerButtons.forEach(button => {
-                    
-                    button.addEventListener('click', function(){
-                       
-                        locker.textContent = button.textContent;
-                       save =  button.textContent;
-                        showLocker();
-                       
-                    });
-                    
-                });
-                function showLocker3() {
-                
-                document.getElementById('lockersAvail').style.display = 'block';
-                document.getElementById('detail').style.display = 'none';
-
-                }
-                const lockerButtons1 = document.querySelectorAll('.lockers2');
-                const locker3 = document.getElementById('total');
-               
-                lockerButtons1.forEach(button => {
-                button.addEventListener('click', function(){
-                    locker3.textContent = save+button.textContent;
-                    
-                    showLocker3();
-                    });
-                    
-                });
-                const lockerButtons2 = document.querySelectorAll('.lockers3');
-                lockerButtons2.forEach(button => {
-                let no = 0;
-                button.addEventListener('click', function(){
-                    num = button.textContent;
-
-                    Swal.fire({
-                    title: 'Deposit Or Delivery?',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Deposit',
-                    cancelButtonText: 'Delivery',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                    // 如果用戶點擊 "Deposit Page" 按鈕，執行相應的操作
-                    window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DepositPage.html'; // 導向到 deposit page
-                    } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    // 如果用戶點擊 "Delivery" 按鈕，執行相應的操作
-                    window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DeliveryPage.html'; // 導向到 delivery page
+                function getQueryVariable(variable) {
+                    var query = window.location.search.substring(1);
+                    var vars = query.split('&');
+                    for (var i = 0; i < vars.length; i++) {
+                        var pair = vars[i].split('=');
+                        if (decodeURIComponent(pair[0]) === variable) {
+                            return decodeURIComponent(pair[1]);
+                        }
                     }
-      });
-                    });
-                    
-                });
+                    return false;
+                }
+            
+                const stationId = getQueryVariable('id');
+                const showlocker = document.getElementById('showlocker');
+                const detail = document.getElementById('detail');
+                const locker = document.getElementById('lockerName');
+                const total = document.getElementById('total');
+                const lockersAvail = document.getElementById('lockersAvail');
+            
+                const stationExits = {
+                    'BL11': ['Exit 2', 'Exit 5'],
+                    'BL12': ['Exit 1', 'Exit 3'],
+                    'BL13': ['Exit 2'],
+                    'BL14': ['Exit 4'],
+                    'BL15': ['Exit 1'],
+                    'BL16': ['Exit 5'],
+                    'BL17': ['Exit 2'],
+                    'BL18': ['Exit 4']
+                };
 
+                if (stationId) {
+                    document.getElementById('stationName').textContent = 'Station ' + stationId;
+                    const exits = stationExits[stationId] || ['Exit 1'];
+                    exits.forEach(exit => {
+                        const button = document.createElement('button');
+                        button.textContent = exit;
+                        button.className = 'exit-name';
+                        button.addEventListener('click', function() {
+                            detail.style.display = 'block';
+                            showlocker.style.display = 'none';
+                            locker.textContent = this.textContent;
+                        });
+                        showlocker.appendChild(button);
+                    });
+                }
+            
+                document.querySelectorAll('.lockers2').forEach(button => {
+                    button.addEventListener('click', function() {
+                        total.textContent = locker.textContent + ' - ' + this.textContent;
+                        lockersAvail.style.display = 'block';
+                        detail.style.display = 'none';
+                    });
+                });
+            
+                document.querySelectorAll('.lockers3').forEach(button => {
+                    button.addEventListener('click', function() {
+                        Swal.fire({
+                            title: 'Deposit Or Delivery?',
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonText: 'Deposit',
+                            cancelButtonText: 'Delivery'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DepositPage.html'; 
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DeliveryPage.html';
+                            }
+                        });
+                    });
+                });
             </script>
             <button onclick =  "window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'" 
                         type = "button" class="back_station" aria-label="Close"style="background-color: transparent;" >
@@ -218,10 +209,10 @@
                 <div id="accountDetail">
                     <ul style="list-style-type: none;">
                         <li class="label">Email</li>
-                        <li class="detail">123@gmail.com</li>
+                        <li class="detail"></li>
                     
                         <li class="label">Password</li>
-                        <li class="detail">12345</li>
+                        <li class="detail"></li>
                     </ul>
                 </div>
             </div>
@@ -263,7 +254,7 @@
                     </svg>
                 </p>
                 <div class="faq-answer" style="display: none;">
-                    <p>This system allows users to manage their tasks efficiently...</p>
+                    <p>You can click on the station on the homepage map to deposit and deliver your luggage.</p>
                 </div>
                 <p class="faq-question">
                     <strong>2. How to reset your password?</strong>
@@ -272,7 +263,7 @@
                     </svg>
                 </p>
                 <div class="faq-answer" style="display: none;">
-                    <p>You can reset your password by going to the settings page...</p>
+                    <p>You can reset your password by going to More → ACCOUNT → Forget Password.</p>
                 </div>
             </div>
             <div id="contactUs" style="display: none;">
@@ -290,8 +281,9 @@
             </div>
     
         </span>
-<script src="../static/stationInfo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+        
+    <script src="../static/stationInfo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
 
 </body>
 </html>

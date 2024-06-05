@@ -267,10 +267,7 @@ for (let i = 11; i <= 18; i++) {
     button.addEventListener('click', function() {
         // 獲取按鈕的 ID
         const buttonID = this.id;
-       
         // 導航到 StationInfo.html 頁面，並將按鈕的 ID 作為參數傳遞
-
-      
         window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/StationInfo.html?id=' + buttonID;
 
     });
