@@ -19,14 +19,19 @@
             FORGET PASSWORD
         </span>
         <span class="email_forget" id="emailLabel">
-            Email
+            E-mail
         </span>
         <input type="email" class="input_forget" id="emailInput" oninput="handleEmailInput()">
         <button onclick=verifyEmail(); window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/LoginPage.html'" 
                 type="button" class="verify_forget" aria-label="Close" style="background-color: transparent;" >
             Send Verification Mail
         </button>   
-        <script src="../static/scripts.js"></script>
+        <script src="../static/scripts.js">
+            if (!email) {
+                            alert('Please input your E-mail.');
+                            return;
+                        }
+        </script>
           
     </body>
 </html>
