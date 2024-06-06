@@ -88,25 +88,32 @@ public class UserController {
     @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PostMapping("/changePassword")
     public ResponseEntity<?> changePassword(
-            @RequestParam String email,
-            @RequestParam String currentPassword,
-            @RequestParam String newPassword) {
-        
-        Optional<User> existingUser = userService.getUserByEmail(email);
-        if (!existingUser.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
+            @RequestParam("email") String email,
+            @RequestParam("currentPassword") String currentPassword,
+            @RequestParam("newPassword") String newPassword) {
+        if (email == null || currentPassword == null || newPassword == null) {
+            return new ResponseEntity<>("Missing parameters", HttpStatus.BAD_REQUEST);
         }
+        try{
+            Optional<User> existingUser = userService.getUserByEmail(email);
+            if (!existingUser.isPresent()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
+            }
 
-        User user = existingUser.get();
-        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password.");
+            User user = existingUser.get();
+            if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password.");
+            }
+
+            // 更新密碼
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userService.updateUser(user);
+
+            return new ResponseEntity<>("Success", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Internal server error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        // 更新密碼
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userService.updateUser(user);
-
-        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
 
