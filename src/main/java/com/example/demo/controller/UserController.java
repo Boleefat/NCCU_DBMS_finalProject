@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Locker_ID;
 import com.example.demo.model.Reservation;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
@@ -124,4 +125,23 @@ public class UserController {
         request.getSession().invalidate();
         return new ResponseEntity<>("User logged out successfully!", HttpStatus.OK);
     }
+
+    
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
+    @DeleteMapping("/deleteAccount")  // 更改为 DELETE 请求，用于删除账户
+    public ResponseEntity<?> deleteAccount(@RequestBody User user) {
+        Optional<User> existingUser = userService.getUserByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            if (passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword())) {
+                userService.deleteUser(existingUser.get());  // 确保传递正确的用户实体
+
+                return new ResponseEntity<>(existingUser.get(), HttpStatus.OK);
+            } else {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password.");
+            }
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found.");
+        }
+    }
+
 }

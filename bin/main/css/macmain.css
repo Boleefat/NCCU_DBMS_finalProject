@@ -271,6 +271,29 @@ body {
   opacity: 0.5;                             
   
 }
+.deleteUser {/*deleteUser*/
+  width: 228px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  
+  top: 71.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+  text-align: center ;
+  border: none;
+  z-index: 999; 
+}
+.deleteUser:hover {                      
+ 
+  color: var(--bs-gray-800);
+  border-radius: 20px;
+  opacity: 0.5;                             
+  
+}
 .Signup {
   width: 228px;
   color: rgba(0,0,0,1);
@@ -1505,7 +1528,7 @@ option {
   color: black;
   
 }
-#accountLink, #historyLink, #faqLink, #contactLink, #logoutLink {
+#accountLink, #historyLink, #faqLink, #contactLink, #logoutLink, #deleteAccount {
   padding-left: 1200px;
   text-decoration: none;
   color: black;

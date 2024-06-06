@@ -852,12 +852,13 @@ nav ul li a:hover {
     color: black;
     
 }
-#accountLink, #historyLink, #faqLink, #contactLink, #logoutLink {
-    padding-left: 1300px;
+#accountLink, #historyLink, #faqLink, #contactLink, #logoutLink, #deleteAccount {
+    padding-left: 1260px;
     text-decoration: none;
     color: black;
     line-height: 80px;
 }
+
 
 /*#logoutLink {
     line-height: 138px;
