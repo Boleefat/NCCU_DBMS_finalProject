@@ -349,6 +349,18 @@ body {
   opacity: 1;
   text-align: left;
 }
+.DELETE_ACCOUNT {
+  width: 292px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 210px;
+  left: 20%;
+  font-family: Belgrano;
+  font-weight: Regular;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
 .v4_68 {
   width: 916px;
   background: url("../images/v4_68.png");

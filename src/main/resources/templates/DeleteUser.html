@@ -10,68 +10,71 @@
         <title>Document</title>
         </head>
     <body>
-        
+        <button onclick="window.location.href = 'http://127.0.0.1:5501/src/main/resources/templates/DBMS_Fontend.html'" 
+            type="button" class="back" style="background-color: transparent;">
+            <i class="fas fa-chevron-left"></i>Back
+        </button>
                
-                <button id = "deleteUserBut" type = "button" class="deleteUser" style="background-color: transparent;">
-                            Delete
-                </button>
-                <div class="name"></div>
-                <div class="v4_70"></div>
-                <span class="Password">
-                    Password
-                </span>
-                <form id = "deleteUserform">
-                    <input type = "email" class="link-top" id = "textinput">   
-                    <input type = "password" class="line" id = "passwordinput">
-                </form>
+        <button id = "deleteUserBut" type = "button" class="deleteUser" style="background-color: transparent;">
+                    Delete
+        </button>
+        <div class="name"></div>
+        <div class="v4_70"></div>
+        <span class="Password">
+            Password
+        </span>
+        <form id = "deleteUserform">
+            <input type = "email" class="link-top" id = "textinput">   
+            <input type = "password" class="line" id = "passwordinput">
+        </form>
+        
+        <script>
+            document.getElementById('deleteUserBut').addEventListener('click', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('textinput').value;
+                const password = document.getElementById('passwordinput').value;
+
+                if (!email || !password) {
+                    alert('Please type E-mail and password.');
+                    return;
+                }
                 
-                <script>
-                    document.getElementById('deleteUserBut').addEventListener('click', function(event) {
-                        event.preventDefault();
-                        const email = document.getElementById('textinput').value;
-                        const password = document.getElementById('passwordinput').value;
-
-                        if (!email || !password) {
-                            alert('Please type E-mail and password.');
-                            return;
+                fetch('http://localhost:8080/api/user/deleteAccount', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email, password: password })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(response.status)
+                        if (response.status == 401) {
+                            alert('Wrong password.');
+                            throw new Error('Unauthorized: Please check your credentials.');
+                        } else {
+                            throw new Error('Network response was not ok');
                         }
-                        
-                        fetch('http://localhost:8080/api/user/deleteAccount', {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ email: email, password: password })
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                console.log(response.status)
-                                if (response.status == 401) {
-                                    alert('Wrong password.');
-                                    throw new Error('Unauthorized: Please check your credentials.');
-                                } else {
-                                    throw new Error('Network response was not ok');
-                                }
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log('Success:', data);
-                            window.location.href = 'LoginPage.html'; // 導向至登入頁面 
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                        });
-                    });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    window.location.href = 'LoginPage.html'; // 導向至登入頁面 
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
 
-                    
-                </script>
-                <span class="Account">
-                    Account
-                </span>
-                <span class="LOGIN_p2">
-                    DELETE ACCOUNT
-                </span>
+            
+        </script>
+        <span class="Account">
+            Account
+        </span>
+        <span class="DELETE_ACCOUNT">
+            DELETE ACCOUNT
+        </span>
         <div class="camera_p2"></div>
         <div class="Locker_p2"></div>
         <div class="Mrt_p2"> </div>

@@ -60,10 +60,20 @@ document.getElementById("searchLink").addEventListener("click", function(event) 
 document.getElementById("searchInput").addEventListener("change", function() {
     var stationDetails = document.getElementById("stationDetails");
     var searchDetails = document.getElementById("searchDetails");
+    var contentMap = {
+        "BL11 Ximen": "Locker location for BL11 Ximen<br>Exit 2<br>Exit 5",
+        "BL12 Taipei Main Station": "Locker location for BL12 Taipei Main Station<br>Exit 1<br>Exit 3",
+        "BL13 Shandao Temple": "Locker location for BL13 Shandao Temple<br>Exit 1<br>Exit 3",
+        "BL14 Zhongxiao Xinsheng": "Locker location for BL14 Zhongxiao Xinsheng<br>Exit 2",
+        "BL15 Zhongxiao Fuxing": "Locker location for BL15 Zhongxiao Fuxing<br>Exit 1",
+        "BL16 Zhongxiao Dunhua": "Locker location for BL16 Zhongxiao Dunhua<br>Exit 5",
+        "BL17 Sun Yat-Sen Memorial Hall": "Locker location for BL17 Sun Yat-Sen Memorial Hall<br>Exit 2",
+        "BL18 Taipei City Hall": "Locker location for BL18 Taipei City Hall<br>Exit 4"
+    };
     // Display additional details when an option is selected
     if (this.value) {
         searchDetails.style.display = "block";
-        stationDetails.textContent = "Information for " + this.value;
+        stationDetails.innerHTML = contentMap[this.value] || "No information available for this station";
     }
 });
 
