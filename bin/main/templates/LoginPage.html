@@ -63,6 +63,9 @@
                                 if (response.status == 401) {
                                     alert('Wrong password.');
                                     throw new Error('Unauthorized: Please check your credentials.');
+                                } else if (response.status == 404){
+                                    alert('Email not found.');
+                                    throw new Error('Network response was not ok');
                                 } else {
                                     throw new Error('Network response was not ok');
                                 }
