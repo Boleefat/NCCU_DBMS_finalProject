@@ -5,9 +5,7 @@ import com.example.demo.model.Reservation;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.service.ReservationService;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.security.Principal;
 import java.util.Optional;
 
@@ -117,7 +114,6 @@ public class UserController {
         }
     }
 
-
     @CrossOrigin(origins = "http://127.0.0.1:5501")
     @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(HttpServletRequest request) {
@@ -128,13 +124,12 @@ public class UserController {
 
     
     @CrossOrigin(origins = "http://127.0.0.1:5501")
-    @DeleteMapping("/deleteAccount")  // 更改为 DELETE 请求，用于删除账户
+    @DeleteMapping("/deleteAccount")
     public ResponseEntity<?> deleteAccount(@RequestBody User user) {
         Optional<User> existingUser = userService.getUserByEmail(user.getEmail());
         if (existingUser.isPresent()) {
             if (passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword())) {
-                userService.deleteUser(existingUser.get());  // 确保传递正确的用户实体
-
+                userService.deleteUser(existingUser.get());
                 return new ResponseEntity<>(existingUser.get(), HttpStatus.OK);
             } else {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password.");

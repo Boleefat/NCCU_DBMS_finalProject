@@ -1,10 +1,8 @@
 package com.example.demo.service;
-
 import com.example.demo.model.Reservation;
 import com.example.demo.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
@@ -12,7 +10,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
 @Service
 public class ReservationService {
 
